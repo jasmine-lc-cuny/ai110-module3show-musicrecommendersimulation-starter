@@ -9,3 +9,11 @@ id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness
 8,Night Drive Loop,Neon Echo,synthwave,moody,0.75,110,0.49,0.73,0.22
 9,Focus Flow,LoRoom,lofi,focused,0.40,80,0.59,0.60,0.78
 10,Rooftop Lights,Indigo Parade,indie pop,happy,0.76,124,0.81,0.82,0.35
+11,Desert Bloom,Sol Mesa,folk,relaxed,0.46,92,0.68,0.45,0.84
+12,Bassline Fever,DJ Circuit,edm,euphoric,0.96,128,0.88,0.94,0.04
+13,Afterglow Arcade,Pixel Hearts,synthwave,happy,0.79,116,0.82,0.86,0.20
+14,Blue Hour Ballad,Marina Vale,r&b,sad,0.38,74,0.32,0.52,0.62
+15,Iron Skyline,North Static,metal,intense,0.98,160,0.36,0.50,0.03
+16,Sunday Vinyl,The Soft Notes,soul,relaxed,0.50,88,0.73,0.63,0.66
+17,Metro Daydream,Kai North,hip hop,focused,0.70,96,0.61,0.84,0.18
+18,Forest Sleep,Cloud Harbor,ambient,calm,0.22,58,0.57,0.30,0.95

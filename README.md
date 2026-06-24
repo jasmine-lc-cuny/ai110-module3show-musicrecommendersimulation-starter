@@ -11,23 +11,48 @@ Your goal is to:
 - Evaluate what your system gets right and wrong
 - Reflect on how this mirrors real world AI recommenders
 
-Replace this paragraph with your own summary of what your version does.
+My version, **VibeFinder 1.0**, is a small content-based recommender. It compares
+a user's preferred genre, mood, energy, valence, danceability, tempo, and
+acousticness to every song in a CSV catalog, then ranks the songs with a
+weighted score and explains why each recommendation was chosen.
 
 ---
 
 ## How The System Works
 
-Explain your design in plain language.
+Real recommendation systems use many signals. Collaborative filtering looks for
+patterns in user behavior, such as likes, skips, playlists, and what similar
+listeners replay. Content-based filtering looks at the item itself, such as a
+song's genre, mood, tempo, energy, or acousticness. This project uses the
+content-based approach: it does not know what other listeners like, so it
+matches song attributes to a single user's taste profile.
 
-Some prompts to answer:
+Each song uses these features: `genre`, `mood`, `energy`, `tempo_bpm`,
+`valence`, `danceability`, and `acousticness`. A user profile stores matching
+targets for those features, such as favorite genre, favorite mood, target
+energy, target valence, target danceability, target tempo, and whether the user
+likes acoustic music.
 
-- What features does each `Song` use in your system
-  - For example: genre, mood, energy, tempo
-- What information does your `UserProfile` store
-- How does your `Recommender` compute a score for each song
-- How do you choose which songs to recommend
+Algorithm recipe:
 
-You can include a simple diagram or bullet list if helpful.
+- `+2.0` for an exact genre match.
+- `+1.5` for an exact mood match.
+- Up to `+1.5` for energy closeness.
+- Up to `+1.0` for valence closeness.
+- Up to `+1.0` for danceability closeness.
+- Up to `+0.75` for tempo closeness.
+- Up to `+0.75` for acousticness closeness.
+- Score every song, sort from highest to lowest, and return the top `k`.
+
+Data flow:
+
+```text
+User Preferences -> score each song in songs.csv -> sort scores -> top recommendations with reasons
+```
+
+Expected bias: because genre and mood receive strong weights, the system can
+over-prioritize familiar categories and miss songs with a similar vibe but a
+different label.
 
 ---
 
