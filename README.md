@@ -1,18 +1,9 @@
-# 🎵 Music Recommender Simulation
+# Music Recommender Simulation
 
 ## Project Summary
 
-In this project you will build and explain a small music recommender system.
-
-Your goal is to:
-
-- Represent songs and a user "taste profile" as data
-- Design a scoring rule that turns that data into recommendations
-- Evaluate what your system gets right and wrong
-- Reflect on how this mirrors real world AI recommenders
-
-My version, **VibeFinder 1.0**, is a small content-based recommender. It compares
-a user's preferred genre, mood, energy, valence, danceability, tempo, and
+**VibeFinder 1.0** is a small content-based music recommender. It compares a
+user's preferred genre, mood, energy, valence, danceability, tempo, and
 acousticness to every song in a CSV catalog, then ranks the songs with a
 weighted score and explains why each recommendation was chosen.
 
@@ -44,8 +35,6 @@ Algorithm recipe:
 - Up to `+0.75` for acousticness closeness.
 - Score every song, sort from highest to lowest, and return the top `k`.
 
-Data flow:
-
 ```text
 User Preferences -> score each song in songs.csv -> sort scores -> top recommendations with reasons
 ```
@@ -58,90 +47,128 @@ different label.
 
 ## Getting Started
 
-### Setup
-
-1. Create a virtual environment (optional but recommended):
-
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate      # Mac or Linux
-   .venv\Scripts\activate         # Windows
-
-2. Install dependencies
+Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Run the app:
+Run the recommender:
 
 ```bash
 python -m src.main
 ```
 
-### Running Tests
-
-Run the starter tests with:
+Run tests:
 
 ```bash
-pytest
+python -m pytest
 ```
-
-You can add more tests in `tests/test_recommender.py`.
 
 ---
 
 ## Sample Recommendation Output
 
-Paste a sample of your recommender's output here as a text block so a reader can see what it produces:
+```text
+Loaded songs: 18
 
-```
-# e.g.:
-# User profile: genre=indie, mood=chill, energy=low
-# Recommendations:
-#   1. ...
-#   2. ...
-#   3. ...
+User profile: High-Energy Pop
+-----------------------------
+1. Sunrise City by Neon Echo [pop / happy] - Score: 8.32
+   Reasons: genre match (+2.00); mood match (+1.50); energy closeness (+1.46); valence closeness (+0.99); danceability closeness (+0.94); tempo_bpm closeness (+0.71); acousticness closeness (+0.73)
+2. Gym Hero by Max Pulse [pop / intense] - Score: 6.64
+   Reasons: genre match (+2.00); different mood (+0.00); energy closeness (+1.38); valence closeness (+0.92); danceability closeness (+0.97); tempo_bpm closeness (+0.70); acousticness closeness (+0.68)
+3. Afterglow Arcade by Pixel Hearts [synthwave / happy] - Score: 6.28
+   Reasons: different genre (+0.00); mood match (+1.50); energy closeness (+1.41); valence closeness (+0.97); danceability closeness (+0.99); tempo_bpm closeness (+0.70); acousticness closeness (+0.71)
 ```
 
-**Screenshot or video** *(optional)*: <!-- Insert a screenshot or demo video link here -->
+## Evaluation Output
+
+```text
+User profile: Chill Lofi
+------------------------
+1. Library Rain by Paper Lanterns [lofi / chill] - Score: 8.38
+   Reasons: genre match (+2.00); mood match (+1.50); energy closeness (+1.50); valence closeness (+0.95); danceability closeness (+0.97); tempo_bpm closeness (+0.71); acousticness closeness (+0.74)
+2. Midnight Coding by LoRoom [lofi / chill] - Score: 8.21
+   Reasons: genre match (+2.00); mood match (+1.50); energy closeness (+1.40); valence closeness (+0.99); danceability closeness (+0.93); tempo_bpm closeness (+0.75); acousticness closeness (+0.65)
+3. Focus Flow by LoRoom [lofi / focused] - Score: 6.77
+   Reasons: genre match (+2.00); different mood (+0.00); energy closeness (+1.42); valence closeness (+0.96); danceability closeness (+0.95); tempo_bpm closeness (+0.74); acousticness closeness (+0.70)
+
+User profile: Deep Intense Rock
+-------------------------------
+1. Storm Runner by Voltline [rock / intense] - Score: 8.32
+   Reasons: genre match (+2.00); mood match (+1.50); energy closeness (+1.44); valence closeness (+0.97); danceability closeness (+0.94); tempo_bpm closeness (+0.74); acousticness closeness (+0.73)
+2. Iron Skyline by North Static [metal / intense] - Score: 6.17
+   Reasons: different genre (+0.00); mood match (+1.50); energy closeness (+1.46); valence closeness (+0.91); danceability closeness (+0.90); tempo_bpm closeness (+0.69); acousticness closeness (+0.71)
+3. Gym Hero by Max Pulse [pop / intense] - Score: 5.74
+   Reasons: different genre (+0.00); mood match (+1.50); energy closeness (+1.47); valence closeness (+0.68); danceability closeness (+0.72); tempo_bpm closeness (+0.64); acousticness closeness (+0.73)
+
+User profile: Conflicted Sad Workout
+------------------------------------
+1. Gym Hero by Max Pulse [pop / intense] - Score: 6.19
+   Reasons: genre match (+2.00); different mood (+0.00); energy closeness (+1.46); valence closeness (+0.48); danceability closeness (+0.92); tempo_bpm closeness (+0.74); acousticness closeness (+0.60)
+2. Sunrise City by Neon Echo [pop / happy] - Score: 6.15
+   Reasons: genre match (+2.00); different mood (+0.00); energy closeness (+1.38); valence closeness (+0.41); danceability closeness (+0.99); tempo_bpm closeness (+0.68); acousticness closeness (+0.70)
+3. Blue Hour Ballad by Marina Vale [r&b / sad] - Score: 4.74
+   Reasons: different genre (+0.00); mood match (+1.50); energy closeness (+0.72); valence closeness (+0.93); danceability closeness (+0.72); tempo_bpm closeness (+0.40); acousticness closeness (+0.47)
+```
 
 ---
 
 ## Experiments You Tried
 
-Use this section to document the experiments you ran. For example:
-
-- What happened when you changed the weight on genre from 2.0 to 0.5
-- What happened when you added tempo or valence to the score
-- How did your system behave for different types of users
+- **Diverse profiles:** High-Energy Pop recommended upbeat pop first, Chill Lofi
+  recommended low-energy acoustic lofi first, and Deep Intense Rock recommended
+  high-energy rock/metal first.
+- **Adversarial profile:** Conflicted Sad Workout asked for `genre=pop` and
+  `mood=sad`. Pop songs still ranked above the sad R&B song, showing that genre
+  and numerical energy/danceability can overpower mood.
+- **Weight sensitivity:** I considered doubling energy and lowering genre, but
+  kept the original weights because the current recipe is easier to explain and
+  shows a useful bias for the model card.
 
 ---
 
 ## Limitations and Risks
 
-Summarize some limitations of your recommender.
+- The catalog only has 18 songs, so the recommendations are very sensitive to
+  which songs happen to be present.
+- The system does not use listening behavior, skips, playlists, lyrics, language,
+  release year, or artist similarity.
+- Genre and mood labels are simplified, which can create filter bubbles.
+- A user with mixed preferences may get songs that match genre and energy while
+  missing the emotional mood they asked for.
 
-Examples:
+---
 
-- It only works on a tiny catalog
-- It does not understand lyrics or language
-- It might over favor one genre or mood
+## Test Results
 
-You will go deeper on this in your model card.
+```text
+============================= test session starts =============================
+platform win32 -- Python 3.14.5, pytest-9.1.0, pluggy-1.6.0
+rootdir: D:\codex\ai110-module3show-musicrecommendersimulation-starter
+plugins: anyio-4.14.0
+collected 6 items
+
+tests\test_recommender.py ......                                         [100%]
+
+============================== 6 passed in 0.02s ==============================
+```
 
 ---
 
 ## Reflection
 
-Read and complete `model_card.md`:
+This project helped me understand that recommendations are not magic; they are
+data transformations. A simple scoring rule can already feel personalized if it
+connects user preferences to song features and explains the match. I also saw
+how bias appears quickly: if the weights overvalue genre, the system can keep a
+listener inside a narrow category even when another song matches their mood.
 
-[**Model Card**](model_card.md)
+AI helped me plan the scoring recipe, implement the CSV loader and recommender,
+and think through edge cases. I still had to review the math and outputs myself,
+especially for the conflicting sad workout profile. That profile showed me why
+model cards matter: a recommender can produce reasonable-looking results while
+still reflecting hidden assumptions in the weights and dataset.
 
-Write 1 to 2 paragraphs here about what you learned:
-
-- about how recommenders turn data into predictions
-- about where bias or unfairness could show up in systems like this
-
-
-
+[Model Card](model_card.md)
