@@ -72,6 +72,7 @@ python -m pytest
 ## Sample Recommendation Output
 
 ```text
+$ python -m src.main
 Loaded songs: 18
 
 User profile: High-Energy Pop
@@ -82,11 +83,11 @@ User profile: High-Energy Pop
    Reasons: genre match (+2.00); different mood (+0.00); energy closeness (+1.38); valence closeness (+0.92); danceability closeness (+0.97); tempo_bpm closeness (+0.70); acousticness closeness (+0.68)
 3. Afterglow Arcade by Pixel Hearts [synthwave / happy] - Score: 6.28
    Reasons: different genre (+0.00); mood match (+1.50); energy closeness (+1.41); valence closeness (+0.97); danceability closeness (+0.99); tempo_bpm closeness (+0.70); acousticness closeness (+0.71)
-```
+4. Rooftop Lights by Indigo Parade [indie pop / happy] - Score: 6.14
+   Reasons: different genre (+0.00); mood match (+1.50); energy closeness (+1.36); valence closeness (+0.96); danceability closeness (+0.97); tempo_bpm closeness (+0.75); acousticness closeness (+0.60)
+5. Bassline Fever by DJ Circuit [edm / euphoric] - Score: 4.61
+   Reasons: different genre (+0.00); different mood (+0.00); energy closeness (+1.33); valence closeness (+0.97); danceability closeness (+0.91); tempo_bpm closeness (+0.72); acousticness closeness (+0.67)
 
-## Evaluation Output
-
-```text
 User profile: Chill Lofi
 ------------------------
 1. Library Rain by Paper Lanterns [lofi / chill] - Score: 8.38
@@ -95,6 +96,10 @@ User profile: Chill Lofi
    Reasons: genre match (+2.00); mood match (+1.50); energy closeness (+1.40); valence closeness (+0.99); danceability closeness (+0.93); tempo_bpm closeness (+0.75); acousticness closeness (+0.65)
 3. Focus Flow by LoRoom [lofi / focused] - Score: 6.77
    Reasons: genre match (+2.00); different mood (+0.00); energy closeness (+1.42); valence closeness (+0.96); danceability closeness (+0.95); tempo_bpm closeness (+0.74); acousticness closeness (+0.70)
+4. Spacewalk Thoughts by Orbit Bloom [ambient / chill] - Score: 5.99
+   Reasons: different genre (+0.00); mood match (+1.50); energy closeness (+1.40); valence closeness (+0.90); danceability closeness (+0.86); tempo_bpm closeness (+0.64); acousticness closeness (+0.70)
+5. Coffee Shop Stories by Slow Stereo [jazz / relaxed] - Score: 4.70
+   Reasons: different genre (+0.00); different mood (+0.00); energy closeness (+1.47); valence closeness (+0.84); danceability closeness (+0.99); tempo_bpm closeness (+0.68); acousticness closeness (+0.72)
 
 User profile: Deep Intense Rock
 -------------------------------
@@ -104,6 +109,10 @@ User profile: Deep Intense Rock
    Reasons: different genre (+0.00); mood match (+1.50); energy closeness (+1.46); valence closeness (+0.91); danceability closeness (+0.90); tempo_bpm closeness (+0.69); acousticness closeness (+0.71)
 3. Gym Hero by Max Pulse [pop / intense] - Score: 5.74
    Reasons: different genre (+0.00); mood match (+1.50); energy closeness (+1.47); valence closeness (+0.68); danceability closeness (+0.72); tempo_bpm closeness (+0.64); acousticness closeness (+0.73)
+4. Night Drive Loop by Neon Echo [synthwave / moody] - Score: 4.17
+   Reasons: different genre (+0.00); different mood (+0.00); energy closeness (+1.20); valence closeness (+0.96); danceability closeness (+0.87); tempo_bpm closeness (+0.50); acousticness closeness (+0.65)
+5. Bassline Fever by DJ Circuit [edm / euphoric] - Score: 4.05
+   Reasons: different genre (+0.00); different mood (+0.00); energy closeness (+1.48); valence closeness (+0.57); danceability closeness (+0.66); tempo_bpm closeness (+0.61); acousticness closeness (+0.72)
 
 User profile: Conflicted Sad Workout
 ------------------------------------
@@ -113,6 +122,25 @@ User profile: Conflicted Sad Workout
    Reasons: genre match (+2.00); different mood (+0.00); energy closeness (+1.38); valence closeness (+0.41); danceability closeness (+0.99); tempo_bpm closeness (+0.68); acousticness closeness (+0.70)
 3. Blue Hour Ballad by Marina Vale [r&b / sad] - Score: 4.74
    Reasons: different genre (+0.00); mood match (+1.50); energy closeness (+0.72); valence closeness (+0.93); danceability closeness (+0.72); tempo_bpm closeness (+0.40); acousticness closeness (+0.47)
+4. Storm Runner by Voltline [rock / intense] - Score: 4.37
+   Reasons: different genre (+0.00); different mood (+0.00); energy closeness (+1.48); valence closeness (+0.77); danceability closeness (+0.86); tempo_bpm closeness (+0.61); acousticness closeness (+0.64)
+5. Night Drive Loop by Neon Echo [synthwave / moody] - Score: 4.32
+   Reasons: different genre (+0.00); different mood (+0.00); energy closeness (+1.27); valence closeness (+0.76); danceability closeness (+0.93); tempo_bpm closeness (+0.62); acousticness closeness (+0.73)
+
+Bonus mode: mood-first
+
+User profile: High-Energy Pop (Mood-First)
+------------------------------------------
+1. Sunrise City by Neon Echo [pop / happy] - Score: 9.07
+   Reasons: genre match (+2.00); mood match (+1.50); energy closeness (+1.46); valence closeness (+0.99); danceability closeness (+0.94); tempo_bpm closeness (+0.71); acousticness closeness (+0.73)
+2. Afterglow Arcade by Pixel Hearts [synthwave / happy] - Score: 7.03
+   Reasons: different genre (+0.00); mood match (+1.50); energy closeness (+1.41); valence closeness (+0.97); danceability closeness (+0.99); tempo_bpm closeness (+0.70); acousticness closeness (+0.71)
+3. Rooftop Lights by Indigo Parade [indie pop / happy] - Score: 6.89
+   Reasons: different genre (+0.00); mood match (+1.50); energy closeness (+1.36); valence closeness (+0.96); danceability closeness (+0.97); tempo_bpm closeness (+0.75); acousticness closeness (+0.60)
+4. Gym Hero by Max Pulse [pop / intense] - Score: 6.64
+   Reasons: genre match (+2.00); different mood (+0.00); energy closeness (+1.38); valence closeness (+0.92); danceability closeness (+0.97); tempo_bpm closeness (+0.70); acousticness closeness (+0.68)
+5. Bassline Fever by DJ Circuit [edm / euphoric] - Score: 4.61
+   Reasons: different genre (+0.00); different mood (+0.00); energy closeness (+1.33); valence closeness (+0.97); danceability closeness (+0.91); tempo_bpm closeness (+0.72); acousticness closeness (+0.67)
 ```
 
 ---
