@@ -45,12 +45,12 @@ PROFILES = {
 }
 
 
-def print_recommendations(profile_name, user_prefs, songs, k=5):
+def print_recommendations(profile_name, user_prefs, songs, k=5, scoring_mode="balanced"):
     """Print a formatted recommendation list for one profile."""
     print(f"\nUser profile: {profile_name}")
     print("-" * (14 + len(profile_name)))
 
-    recommendations = recommend_songs(user_prefs, songs, k=k)
+    recommendations = recommend_songs(user_prefs, songs, k=k, scoring_mode=scoring_mode)
     for index, (song, score, explanation) in enumerate(recommendations, start=1):
         print(
             f"{index}. {song['title']} by {song['artist']} "
@@ -65,7 +65,10 @@ def main() -> None:
     print(f"Loaded songs: {len(songs)}")
 
     for profile_name, user_prefs in PROFILES.items():
-        print_recommendations(profile_name, user_prefs, songs, k=5)
+        print_recommendations(profile_name, user_prefs, songs, k=5, scoring_mode="balanced")
+
+    print("\nBonus mode: mood-first")
+    print_recommendations("High-Energy Pop (Mood-First)", PROFILES["High-Energy Pop"], songs, k=5, scoring_mode="mood-first")
 
 
 if __name__ == "__main__":

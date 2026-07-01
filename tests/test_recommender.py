@@ -107,6 +107,90 @@ def test_score_song_returns_score_and_reasons():
     assert "mood match (+1.50)" in reasons
 
 
+def test_score_song_supports_mood_first_mode():
+    song = {
+        "id": 1,
+        "title": "Sunrise City",
+        "artist": "Neon Echo",
+        "genre": "rock",
+        "mood": "happy",
+        "energy": 0.82,
+        "tempo_bpm": 118.0,
+        "valence": 0.84,
+        "danceability": 0.79,
+        "acousticness": 0.18,
+    }
+    prefs = {
+        "genre": "pop",
+        "mood": "happy",
+        "energy": 0.80,
+        "tempo_bpm": 120.0,
+        "valence": 0.80,
+        "danceability": 0.80,
+        "acousticness": 0.20,
+    }
+
+    balanced_score, _ = score_song(prefs, song)
+    mood_first_score, _ = score_song(prefs, song, scoring_mode="mood-first")
+
+    assert mood_first_score > balanced_score
+
+
+def test_recommend_songs_can_penalize_same_artist_duplicates():
+    songs = [
+        {
+            "id": 1,
+            "title": "First Hit",
+            "artist": "Artist A",
+            "genre": "pop",
+            "mood": "happy",
+            "energy": 0.80,
+            "tempo_bpm": 120.0,
+            "valence": 0.80,
+            "danceability": 0.80,
+            "acousticness": 0.20,
+        },
+        {
+            "id": 2,
+            "title": "Second Hit",
+            "artist": "Artist A",
+            "genre": "pop",
+            "mood": "happy",
+            "energy": 0.80,
+            "tempo_bpm": 120.0,
+            "valence": 0.80,
+            "danceability": 0.80,
+            "acousticness": 0.20,
+        },
+        {
+            "id": 3,
+            "title": "Different Artist Song",
+            "artist": "Artist B",
+            "genre": "pop",
+            "mood": "happy",
+            "energy": 0.70,
+            "tempo_bpm": 118.0,
+            "valence": 0.75,
+            "danceability": 0.77,
+            "acousticness": 0.25,
+        },
+    ]
+    prefs = {
+        "genre": "pop",
+        "mood": "happy",
+        "energy": 0.80,
+        "tempo_bpm": 120.0,
+        "valence": 0.80,
+        "danceability": 0.80,
+        "acousticness": 0.20,
+    }
+
+    results = recommend_songs(prefs, songs, k=2, diversity_penalty=True)
+
+    assert results[0][0]["artist"] == "Artist A"
+    assert results[1][0]["artist"] == "Artist B"
+
+
 def test_recommend_songs_returns_top_k_sorted():
     songs = load_songs("data/songs.csv")
     prefs = {

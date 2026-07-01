@@ -5,7 +5,9 @@
 **VibeFinder 1.0** is a small content-based music recommender. It compares a
 user's preferred genre, mood, energy, valence, danceability, tempo, and
 acousticness to every song in a CSV catalog, then ranks the songs with a
-weighted score and explains why each recommendation was chosen.
+weighted score and explains why each recommendation was chosen. The project
+also includes bonus functionality for a mood-first scoring mode and a diversity
+penalty that helps avoid repeating the same artist too often in the top results.
 
 ---
 

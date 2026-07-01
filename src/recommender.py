@@ -112,7 +112,11 @@ def _closeness_points(value: float, target: float, max_points: float, scale: flo
     return max(0.0, max_points * (1.0 - gap))
 
 
-def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, List[str]]:
+def score_song(
+    user_prefs: Dict,
+    song: Dict,
+    scoring_mode: str = "balanced",
+) -> Tuple[float, List[str]]:
     """Score a song against preferences and return reasons."""
     score = 0.0
     reasons = []
@@ -128,6 +132,9 @@ def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, List[str]]:
         reasons.append("mood match (+1.50)")
     else:
         reasons.append("different mood (+0.00)")
+
+    if scoring_mode == "mood-first":
+        score += 0.75 if song["mood"].lower() == user_prefs.get("mood", "").lower() else 0.0
 
     numeric_specs = [
         ("energy", 1.5, 1.0),
@@ -147,12 +154,33 @@ def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, List[str]]:
     return round(score, 4), reasons
 
 
-def recommend_songs(user_prefs: Dict, songs: List[Dict], k: int = 5) -> List[Tuple[Dict, float, str]]:
+def recommend_songs(
+    user_prefs: Dict,
+    songs: List[Dict],
+    k: int = 5,
+    scoring_mode: str = "balanced",
+    diversity_penalty: bool = False,
+) -> List[Tuple[Dict, float, str]]:
     """Score every song and return the top k ranked recommendations."""
     scored = []
 
     for song in songs:
-        score, reasons = score_song(user_prefs, song)
+        score, reasons = score_song(user_prefs, song, scoring_mode=scoring_mode)
         scored.append((song, score, "; ".join(reasons)))
 
-    return sorted(scored, key=lambda item: item[1], reverse=True)[:k]
+    ranked = sorted(scored, key=lambda item: item[1], reverse=True)
+    if not diversity_penalty:
+        return ranked[:k]
+
+    final_results = []
+    seen_artists = set()
+    for song, score, explanation in ranked:
+        adjusted_score = score
+        if song["artist"] in seen_artists:
+            adjusted_score -= 0.5
+        if adjusted_score < 0:
+            adjusted_score = 0.0
+        final_results.append((song, adjusted_score, explanation))
+        seen_artists.add(song["artist"])
+
+    return sorted(final_results, key=lambda item: item[1], reverse=True)[:k]

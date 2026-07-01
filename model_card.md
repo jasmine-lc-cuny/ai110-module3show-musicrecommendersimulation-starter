@@ -46,6 +46,9 @@ happy mood, high energy, and danceability. The Chill Lofi profile recommended
 `Library Rain` and `Midnight Coding`, which feels reasonable for a quiet focus
 playlist. The Deep Intense Rock profile correctly put `Storm Runner` first and
 then moved toward intense metal/pop tracks because those shared energy and mood.
+I also added a mood-first scoring mode and a simple diversity penalty to make
+recommendations feel less repetitive and to show how alternative ranking logic
+can change the output.
 
 ---
 
@@ -77,7 +80,7 @@ scoring explanations, sorted top-k output, and expected edge-case behavior.
 ## 8. Future Work
 
 - Add user feedback such as likes, skips, saves, and replay count.
-- Add a diversity penalty so the top results do not cluster around one genre.
+- Expand the diversity penalty so the top results do not cluster around one genre or artist.
 - Add more songs and richer labels such as decade, language, popularity, and lyrical theme.
 - Let users choose scoring modes such as Genre-First, Mood-First, or Energy-Focused.
 - Improve explanations so they are shorter and easier to read.
