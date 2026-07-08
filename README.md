@@ -10,6 +10,17 @@ This project uses a content-based recommender. Each Song contains features such 
 
 The Recommender computes a score for each song by giving points for a genre match and a mood match, then adding extra points based on how closely the song’s numeric features match the user’s target values. Songs that are closer to the user’s taste receive higher scores. To choose which songs to recommend, the system ranks all songs by score and returns the top 𝑘 results. It can also apply a diversity penalty to reduce repeated artists in the final recommendation list.
 
+Finalized Algorithm Recipe:
+
+- `+2.0` for an exact genre match.
+- `+1.5` for an exact mood match.
+- Up to `+1.5` for energy closeness.
+- Up to `+1.0` for valence closeness.
+- Up to `+1.0` for danceability closeness.
+- Up to `+0.75` for tempo closeness.
+- Up to `+0.75` for acousticness closeness.
+- Score every song, sort from highest to lowest, and return the top `k`.
+
 A simple workflow looks like this:
 
 - Load songs from data/songs.csv
@@ -150,6 +161,42 @@ Some experiments I tried with the recommender include:
 - Testing different user profiles such as high-energy pop, chill lofi, and deep intense rock
 - Comparing the default balanced scoring mode with a mood-first mode
 - Trying a diversity penalty to reduce repeated artists in the final recommendations
+
+**Weight-shift experiment:** I temporarily halved the genre weight (`+2.0` to
+`+1.0`) and doubled the energy weight (`+1.5` to `+3.0`), then reran the
+`Conflicted Sad Workout` profile (`genre=pop`, `mood=sad`, `energy=0.90`) to see
+if the change helped or hurt.
+
+Before (original weights):
+
+```text
+User profile: Conflicted Sad Workout
+------------------------------------
+1. Gym Hero by Max Pulse [pop / intense] - Score: 6.19
+2. Sunrise City by Neon Echo [pop / happy] - Score: 6.15
+3. Blue Hour Ballad by Marina Vale [r&b / sad] - Score: 4.74
+```
+
+After (genre halved, energy doubled):
+
+```text
+User profile: Conflicted Sad Workout
+------------------------------------
+1. Gym Hero by Max Pulse [pop / intense] - Score: 6.65
+2. Sunrise City by Neon Echo [pop / happy] - Score: 6.53
+3. Storm Runner by Voltline [rock / intense] - Score: 5.85
+```
+
+The math stayed valid (scores and ordering still computed correctly), but the
+change made recommendations *worse*, not more accurate. Lowering the genre
+weight didn't let the sad-mood song (`Blue Hour Ballad`) rise into the top 3 —
+instead, doubling energy pulled in another high-energy, non-sad track (`Storm
+Runner`) and pushed the sad song down further. This shows the mood mismatch
+problem isn't caused by genre being "too strong" relative to mood; it's that no
+single numeric feature (energy, danceability, tempo) reliably stands in for
+mood, so amplifying any of them just reinforces the same energy-driven bias
+instead of fixing it. I reverted the weights back to the original recipe after
+this test.
 
 ---
 

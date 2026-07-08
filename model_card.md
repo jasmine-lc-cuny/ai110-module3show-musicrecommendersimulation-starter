@@ -75,6 +75,14 @@ Workout: the sad R&B song appeared third because pop genre and workout-style
 energy had more influence than mood. I also ran pytest to verify CSV loading,
 scoring explanations, sorted top-k output, and expected edge-case behavior.
 
+I also ran a weight-shift experiment on Conflicted Sad Workout: halving the
+genre weight and doubling the energy weight. The sad song did not move up —
+instead another high-energy, non-sad track outranked it, and the sad song fell
+further down. That told me the mood-mismatch problem isn't really "genre is too
+strong"; it's that no numeric feature substitutes for mood, so boosting any of
+them just reinforces the same energy-driven bias. See the README's
+"Experiments You Tried" section for the full before/after output.
+
 ---
 
 ## 8. Future Work
