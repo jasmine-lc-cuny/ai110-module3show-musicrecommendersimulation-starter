@@ -54,8 +54,10 @@ pip install -r requirements.txt
 python -m src.main
 ```
 
-Or run the Streamlit app (adds interactive controls, a live feedback loop, and
-a "Bias Evaluator" tab with the diversity report and charts):
+Or run the Streamlit app (adds interactive controls, a live feedback loop, a
+"Bias Evaluator" tab with the diversity report and charts, and an "Analyze a
+Song" tab where you can type in a real song's stats and score it with the
+same algorithm):
 
 ```bash
 python -m streamlit run app.py

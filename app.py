@@ -7,7 +7,30 @@ from src.recommender import (
     load_listening_history,
     load_songs,
     recommend_songs,
+    score_song,
 )
+
+
+def draw_gauge(label, percent_value):
+    """Render a small Tunebat-style circular gauge for a 0-100 value."""
+    value = max(0, min(100, round(percent_value)))
+    st.markdown(
+        f"""
+        <div style="text-align:center; display:inline-block; margin:10px; min-width:88px;">
+            <div style="width:80px; height:80px; border-radius:50%;
+                        background:conic-gradient(#4664ff {value}%, #e5e8ef 0);
+                        display:flex; align-items:center; justify-content:center; margin:0 auto;">
+                <div style="width:64px; height:64px; background:white; border-radius:50%;
+                            display:flex; align-items:center; justify-content:center;
+                            font-weight:700; font-size:15px; color:#162033;">
+                    {value}
+                </div>
+            </div>
+            <p style="margin-top:6px; font-size:12px; color:#5b6472;">{label}</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 st.set_page_config(page_title="Music Recommender Simulation", page_icon="🎵")
 st.title("Music Recommender Simulation")
@@ -60,7 +83,7 @@ prefs = (
     else base_prefs
 )
 
-tab_recommend, tab_evaluate = st.tabs(["Recommender", "Bias Evaluator"])
+tab_recommend, tab_evaluate, tab_analyze = st.tabs(["Recommender", "Bias Evaluator", "Analyze a Song"])
 
 with tab_recommend:
     if st.session_state.feedback:
@@ -130,3 +153,60 @@ with tab_evaluate:
             top1_rows = report["top1_counts"].most_common(5)
             if top1_rows:
                 st.table(pd.DataFrame(top1_rows, columns=["Most frequent #1 song", "Times"]))
+
+with tab_analyze:
+    st.subheader("Analyze a Real Song")
+    st.write(
+        "Look up a real song's stats on a site like Tunebat or GetSongBPM, then "
+        "type them in here to see its Tunebat-style profile and score it against "
+        "your current sidebar preferences using the exact same algorithm as the "
+        "Recommender tab. No API calls, no external data — just your own scoring recipe."
+    )
+
+    name_col, artist_col = st.columns(2)
+    song_title = name_col.text_input("Song title", value="Hotel California")
+    song_artist = artist_col.text_input("Artist", value="Eagles")
+
+    genre_col, mood_col = st.columns(2)
+    analyzed_genre = genre_col.text_input("Genre", value="rock")
+    analyzed_mood = mood_col.text_input("Mood", value="chill")
+
+    st.caption("Enter each value 0-100, the same scale Tunebat/GetSongBPM display on-screen.")
+    gauge_cols = st.columns(4)
+    analyzed_energy = gauge_cols[0].number_input("Energy", 0, 100, 51)
+    analyzed_happiness = gauge_cols[1].number_input("Happiness (valence)", 0, 100, 25)
+    analyzed_danceability = gauge_cols[2].number_input("Danceability", 0, 100, 58)
+    analyzed_acousticness = gauge_cols[3].number_input("Acousticness", 0, 100, 1)
+    analyzed_tempo = st.number_input("Tempo (BPM)", 40, 220, 75)
+
+    if st.button("Score this song"):
+        st.markdown("**Audio profile**")
+        gauge_display_cols = st.columns(4)
+        with gauge_display_cols[0]:
+            draw_gauge("Energy", analyzed_energy)
+        with gauge_display_cols[1]:
+            draw_gauge("Happiness", analyzed_happiness)
+        with gauge_display_cols[2]:
+            draw_gauge("Danceability", analyzed_danceability)
+        with gauge_display_cols[3]:
+            draw_gauge("Acousticness", analyzed_acousticness)
+
+        analyzed_song = {
+            "id": -1,
+            "title": song_title,
+            "artist": song_artist,
+            "genre": analyzed_genre,
+            "mood": analyzed_mood,
+            "energy": analyzed_energy / 100,
+            "valence": analyzed_happiness / 100,
+            "danceability": analyzed_danceability / 100,
+            "acousticness": analyzed_acousticness / 100,
+            "tempo_bpm": float(analyzed_tempo),
+        }
+
+        analyzed_score, analyzed_reasons = score_song(prefs, analyzed_song, scoring_mode=scoring_mode)
+
+        st.markdown("**Score against your current sidebar profile**")
+        st.metric(f"{song_title} by {song_artist}", f"{analyzed_score:.2f}")
+        for reason in analyzed_reasons:
+            st.write(f"- {reason}")
