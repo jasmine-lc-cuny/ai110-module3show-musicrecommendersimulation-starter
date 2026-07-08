@@ -7,11 +7,13 @@ st.title("Music Recommender Simulation")
 st.write("Explore how a simple content-based recommender ranks songs from a CSV catalog.")
 
 songs = load_songs("data/songs.csv")
+genres = sorted({song["genre"] for song in songs})
+moods = sorted({song["mood"] for song in songs})
 
 with st.sidebar:
     st.header("User Profile")
-    genre = st.text_input("Favorite genre", "pop")
-    mood = st.text_input("Favorite mood", "happy")
+    genre = st.selectbox("Favorite genre", genres, index=genres.index("pop") if "pop" in genres else 0)
+    mood = st.selectbox("Favorite mood", moods, index=moods.index("happy") if "happy" in moods else 0)
     energy = st.slider("Target energy", 0.0, 1.0, 0.8, 0.01)
     valence = st.slider("Target valence", 0.0, 1.0, 0.8, 0.01)
     danceability = st.slider("Target danceability", 0.0, 1.0, 0.8, 0.01)
