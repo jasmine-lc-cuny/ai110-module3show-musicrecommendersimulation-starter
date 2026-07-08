@@ -315,6 +315,29 @@ def test_recommend_songs_exploration_swaps_in_different_genre():
     assert "exploration pick" in with_exploration[1][2]
 
 
+def test_exploration_still_swaps_when_natural_last_slot_is_already_diverse():
+    """Regression test: exploration must not be a no-op just because the
+    natural k-th song already happens to be a different genre."""
+    songs = load_songs("data/songs.csv")
+    prefs = {
+        "genre": "pop",
+        "mood": "happy",
+        "energy": 0.8,
+        "tempo_bpm": 120.0,
+        "valence": 0.8,
+        "danceability": 0.8,
+        "acousticness": 0.2,
+    }
+
+    normal = recommend_songs(prefs, songs, k=5)
+    with_exploration = recommend_songs(prefs, songs, k=5, exploration=True)
+
+    assert normal[-1][0]["genre"] != "pop"  # the natural last slot is already diverse
+    assert with_exploration[-1][0]["title"] != normal[-1][0]["title"]
+    assert with_exploration[-1][0]["genre"] != "pop"
+    assert "exploration pick" in with_exploration[-1][2]
+
+
 def test_load_listening_history_groups_song_ids_by_user():
     history = load_listening_history("data/listening_history.csv")
 

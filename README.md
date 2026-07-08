@@ -218,6 +218,8 @@ instead of filling every slot with the closest possible match, one slot is
 deliberately used for discovery.
 
 ```text
+Balanced (no exploration), slot 5: Bassline Fever by DJ Circuit [edm / euphoric] - Score: 4.61
+
 Bonus mode: exploration slot (reserves one discovery pick)
 
 User profile: High-Energy Pop (Exploration)
@@ -226,16 +228,22 @@ User profile: High-Energy Pop (Exploration)
 2. Gym Hero by Max Pulse [pop / intense] - Score: 6.64
 3. Afterglow Arcade by Pixel Hearts [synthwave / happy] - Score: 6.28
 4. Rooftop Lights by Indigo Parade [indie pop / happy] - Score: 6.14
-5. Bassline Fever by DJ Circuit [edm / euphoric] - Score: 4.61
+5. Metro Daydream by Kai North [hip hop / focused] - Score: 4.33
    Reasons: ...; exploration pick: different genre, reserved discovery slot
 ```
 
-For this particular profile, slot 5 already happened to be a different genre,
-so the list looks unchanged — but with a smaller `k`, the effect is obvious.
-Asking for just the top 2 songs normally returns two pop tracks (`Sunrise
-City`, `Gym Hero`); with exploration on, the second slot is swapped for
-`Afterglow Arcade` (synthwave) instead, deliberately trading a slightly lower
-score for genre variety.
+Early on, this had a bug: it searched for *any* different-genre song not
+already in the first `k-1` slots, and the natural 5th-place pick
+(`Bassline Fever`, edm) already qualified — so the "exploration" slot ended up
+showing the exact same song the balanced scorer would have picked anyway,
+making the toggle look like it did nothing. Collaborative filtering had the
+same "no visible change" problem for a different reason: for this dataset it
+boosts scores roughly proportionally, so it rarely reorders the top 5. Fixed
+by making exploration search strictly *past* the natural top-`k` cutoff, so
+it always swaps in a song (here, `Metro Daydream`, hip hop) that would not
+already be on the list — a real trade of a lower score for genre variety, and
+now visibly different from both plain balanced and from collaborative
+filtering.
 
 ## Extra Enhancement: Feedback Loop
 

@@ -296,18 +296,20 @@ def _reserve_exploration_slot(
 
     This reserves one recommendation slot for a song outside the user's usual
     genre instead of always filling every slot with the single highest-scoring
-    match, as a small counter to filter-bubble bias.
+    match, as a small counter to filter-bubble bias. The replacement is always
+    pulled from *beyond* the natural top-k cutoff, so this is a genuine
+    discovery pick rather than a song that would already be in the list.
     """
     if k <= 0 or not ranked:
         return ranked[:k]
 
     top = list(ranked[: k - 1])
-    chosen_ids = {song["id"] for song, _score, _explanation in top}
     favorite_genre = favorite_genre.lower()
 
-    for song, score, explanation in ranked:
-        if song["id"] in chosen_ids:
-            continue
+    # Search strictly past the natural top-k cutoff so the discovery pick is
+    # always a song that would NOT already be in the list, even if the
+    # natural k-th song happens to be a different genre already.
+    for song, score, explanation in ranked[k:]:
         if song["genre"].lower() != favorite_genre:
             discovery_explanation = explanation + "; exploration pick: different genre, reserved discovery slot"
             top.append((song, score, discovery_explanation))
