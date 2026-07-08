@@ -197,13 +197,13 @@ def score_song(
         score += 2.0
         reasons.append("genre match (+2.00)")
     else:
-        reasons.append("different genre (+0.00)")
+        reasons.append("different genre (+0.00, missed +2.00)")
 
     if song["mood"].lower() == user_prefs.get("mood", "").lower():
         score += 1.5
         reasons.append("mood match (+1.50)")
     else:
-        reasons.append("different mood (+0.00)")
+        reasons.append("different mood (+0.00, missed +1.50)")
 
     if scoring_mode == "mood-first":
         score += 0.75 if song["mood"].lower() == user_prefs.get("mood", "").lower() else 0.0
@@ -221,7 +221,10 @@ def score_song(
             continue
         points = _closeness_points(float(song[field]), float(user_prefs[field]), max_points, scale)
         score += points
-        reasons.append(f"{field} closeness (+{points:.2f})")
+        reason = f"{field} closeness (+{points:.2f})"
+        if points < 0.3 * max_points:
+            reason += " - far from target"
+        reasons.append(reason)
 
     if collaborative_points:
         points = collaborative_points.get(song["id"], 0.0)
@@ -232,6 +235,87 @@ def score_song(
     return round(score, 4), reasons
 
 
+FEEDBACK_DIRECTIONS = {"like": 1.0, "save": 1.5, "skip": -1.0}
+NUMERIC_TARGET_FIELDS = ["energy", "valence", "danceability", "tempo_bpm", "acousticness"]
+
+
+def apply_feedback(
+    user_prefs: Dict,
+    songs: List[Dict],
+    feedback: Dict[int, str],
+    learning_rate: float = 0.3,
+) -> Dict:
+    """Nudge numeric preference targets using like/save/skip feedback on past results.
+
+    Liked and saved songs pull the targets toward that song's own numeric
+    features; skipped songs push the targets away. This is a small stand-in
+    for the "learn from user feedback" step a real recommender would do.
+    """
+    songs_by_id = {song["id"]: song for song in songs}
+    updated_prefs = dict(user_prefs)
+
+    for song_id, action in feedback.items():
+        direction = FEEDBACK_DIRECTIONS.get(action)
+        song = songs_by_id.get(song_id)
+        if direction is None or song is None:
+            continue
+
+        for field in NUMERIC_TARGET_FIELDS:
+            if field not in updated_prefs:
+                continue
+            current = float(updated_prefs[field])
+            step = learning_rate * direction * (float(song[field]) - current)
+            updated_prefs[field] = current + step
+
+    return updated_prefs
+
+
+def _apply_diversity_penalty(
+    ranked: List[Tuple[Dict, float, str]]
+) -> List[Tuple[Dict, float, str]]:
+    """Lower the score of songs whose artist already appeared higher in the list."""
+    adjusted = []
+    seen_artists = set()
+
+    for song, score, explanation in ranked:
+        adjusted_score = score
+        if song["artist"] in seen_artists:
+            adjusted_score = max(0.0, adjusted_score - 0.5)
+        adjusted.append((song, adjusted_score, explanation))
+        seen_artists.add(song["artist"])
+
+    return sorted(adjusted, key=lambda item: item[1], reverse=True)
+
+
+def _reserve_exploration_slot(
+    ranked: List[Tuple[Dict, float, str]],
+    k: int,
+    favorite_genre: str,
+) -> List[Tuple[Dict, float, str]]:
+    """Swap the last slot for a plausible, different-genre discovery pick.
+
+    This reserves one recommendation slot for a song outside the user's usual
+    genre instead of always filling every slot with the single highest-scoring
+    match, as a small counter to filter-bubble bias.
+    """
+    if k <= 0 or not ranked:
+        return ranked[:k]
+
+    top = list(ranked[: k - 1])
+    chosen_ids = {song["id"] for song, _score, _explanation in top}
+    favorite_genre = favorite_genre.lower()
+
+    for song, score, explanation in ranked:
+        if song["id"] in chosen_ids:
+            continue
+        if song["genre"].lower() != favorite_genre:
+            discovery_explanation = explanation + "; exploration pick: different genre, reserved discovery slot"
+            top.append((song, score, discovery_explanation))
+            return top
+
+    return ranked[:k]
+
+
 def recommend_songs(
     user_prefs: Dict,
     songs: List[Dict],
@@ -240,6 +324,7 @@ def recommend_songs(
     diversity_penalty: bool = False,
     history: Dict[int, List[int]] = None,
     use_collaborative: bool = False,
+    exploration: bool = False,
 ) -> List[Tuple[Dict, float, str]]:
     """Score every song and return the top k ranked recommendations."""
     collaborative_points: Dict[int, float] = {}
@@ -263,18 +348,11 @@ def recommend_songs(
         scored.append((song, score, "; ".join(reasons)))
 
     ranked = sorted(scored, key=lambda item: item[1], reverse=True)
-    if not diversity_penalty:
-        return ranked[:k]
 
-    final_results = []
-    seen_artists = set()
-    for song, score, explanation in ranked:
-        adjusted_score = score
-        if song["artist"] in seen_artists:
-            adjusted_score -= 0.5
-        if adjusted_score < 0:
-            adjusted_score = 0.0
-        final_results.append((song, adjusted_score, explanation))
-        seen_artists.add(song["artist"])
+    if diversity_penalty:
+        ranked = _apply_diversity_penalty(ranked)
 
-    return sorted(final_results, key=lambda item: item[1], reverse=True)[:k]
+    if exploration:
+        return _reserve_exploration_slot(ranked, k, user_prefs.get("genre", ""))
+
+    return ranked[:k]

@@ -66,3 +66,27 @@ I asked it to (1) add a real collaborative-filtering signal blended into the exi
 **What did I verify or fix manually?**
 
 I ran `python -m src.main` and `python -m src.evaluate` myself and read the actual numbers before writing anything in the model card. The result actually surprised me: I expected collaborative filtering to reduce the filter-bubble problem, but the HHI concentration score went *up* (0.103 to 0.126) once CF was on, because only 40 simulated users meant a couple of songs got disproportionately popular. I made the agent keep that honest result in the model card instead of a more flattering made-up one, since it's a more interesting and true finding about small-scale collaborative filtering. I also spot-checked that the diversity penalty and CF settings don't change the core assignment's original 8 required tests.
+
+---
+
+## Going Beyond, Round 2: Feedback Loop, "Why Not?" Explanations, Exploration Mode, Evaluator Dashboard
+
+> A different AI tool I was using for a second opinion suggested four more ideas after reviewing the project: a feedback loop, richer "why not" explanations, an evaluator dashboard tab in Streamlit, and a "surprise me" exploration mode. It also flagged that my README's pasted test output said "8 items" when the project actually had 14 tests by then, and that a Future Work bullet about scoring modes was already done. I asked Claude Code to implement all of it.
+
+**What task did I give the agent?**
+
+Implement all five suggestions: (1) fix the stale docs, (2) add missed-points detail to score reasons, (3) a feedback loop that nudges numeric targets from like/save/skip actions, (4) an exploration mode that reserves a discovery slot, and (5) a second Streamlit tab that visualizes the diversity/bias report I already had in `src/evaluate.py`.
+
+**What did the agent generate or change?**
+
+- Docs: fixed the stale "collected 8 items" pytest snippet in `README.md` and reworded the model card's Future Work bullet that claimed scoring modes weren't done yet.
+- `score_song()`: mismatched genre/mood reasons now say `missed +2.00` / `missed +1.50`; numeric closeness reasons below 30% of their max points get a `- far from target` note.
+- `apply_feedback()`: nudges the profile's numeric targets toward liked/saved songs and away from skipped ones (exponential-moving-average style update).
+- `_apply_diversity_penalty()` / `_reserve_exploration_slot()`: refactored the old inline diversity-penalty logic into a helper, then added an exploration mode that swaps the last slot for a different-genre pick.
+- `app.py`: added `st.tabs` with a "Bias Evaluator" tab (runs `src.evaluate.run_diversity_report` for balanced / diversity-penalty / collaborative-filtering configs and shows HHI + bar charts + top-#1 tables via pandas), plus 👍/⏭/⭐ feedback buttons under each recommendation using `st.session_state`, plus an exploration checkbox.
+- `src/main.py`: new "Bonus mode: exploration slot" and "Bonus mode: feedback loop" demo blocks.
+- 6 new tests in `tests/test_recommender.py`.
+
+**What did I verify or fix manually?**
+
+I deliberately picked demo scenarios that show a real effect instead of a no-op. For exploration mode, the default High-Energy Pop top-5 already contains a non-pop song in slot 5, so nothing visibly changes there — I tested with `k=2` instead, where it visibly swaps `Gym Hero` for `Afterglow Arcade`. For the feedback loop, my first test profile (High-Energy Pop, skip/like) didn't reorder anything because the gap between songs was too large for a numeric nudge to close — so I picked a profile where two songs were only 0.17 points apart (Chill Lofi) and confirmed the skip/save feedback actually flipped their rank. I also ran `python app.py` directly (bare Streamlit mode) and re-ran the dashboard's pandas/report logic standalone to confirm there were no runtime errors before trusting the "boots cleanly" claim, and ran the full pytest suite (18 tests) after each change.

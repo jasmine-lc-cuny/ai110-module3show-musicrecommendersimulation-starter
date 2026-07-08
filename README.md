@@ -48,10 +48,17 @@ source .venv/bin/activate      # Mac or Linux
 pip install -r requirements.txt
 ```
 
-3. Run the app:
+3. Run the CLI:
 
 ```bash
 python -m src.main
+```
+
+Or run the Streamlit app (adds interactive controls, a live feedback loop, and
+a "Bias Evaluator" tab with the diversity report and charts):
+
+```bash
+python -m streamlit run app.py
 ```
 
 ### Running Tests
@@ -60,20 +67,18 @@ Run the starter tests with:
 ```bash
 pytest
 ```
-starter (main) $ pytest
-========================= test session starts ============================
-platform linux -- Python 3.12.1, pytest-9.1.1, pluggy-1.6.0
-rootdir: /workspaces/ai110-module3show-musicrecommendersimulation-starter
+$ pytest
+============================= test session starts =============================
+platform win32 -- Python 3.14.5, pytest-9.1.0, pluggy-1.6.0
+rootdir: D:\codex\ai110-module3show-musicrecommendersimulation-starter
 configfile: pytest.ini
-plugins: cov-7.1.0, anyio-4.14.1
-collected 8 items                                                                  
+plugins: anyio-4.14.0
+collected 14 items
 
-tests/test_recommender.py ........                                           [100%]
+tests/test_evaluate.py ...                                               [ 21%]
+tests/test_recommender.py ...........                                    [100%]
 
-============================ 8 passed in 0.03s ============================
-
-
-You can add more tests in tests/test_recommender.py.
+============================== 14 passed in 0.02s ==============================
 
 ---
 
@@ -88,13 +93,13 @@ User profile: High-Energy Pop
 1. Sunrise City by Neon Echo [pop / happy] - Score: 8.32
    Reasons: genre match (+2.00); mood match (+1.50); energy closeness (+1.46); valence closeness (+0.99); danceability closeness (+0.94); tempo_bpm closeness (+0.71); acousticness closeness (+0.73)
 2. Gym Hero by Max Pulse [pop / intense] - Score: 6.64
-   Reasons: genre match (+2.00); different mood (+0.00); energy closeness (+1.38); valence closeness (+0.92); danceability closeness (+0.97); tempo_bpm closeness (+0.70); acousticness closeness (+0.68)
+   Reasons: genre match (+2.00); different mood (+0.00, missed +1.50); energy closeness (+1.38); valence closeness (+0.92); danceability closeness (+0.97); tempo_bpm closeness (+0.70); acousticness closeness (+0.68)
 3. Afterglow Arcade by Pixel Hearts [synthwave / happy] - Score: 6.28
-   Reasons: different genre (+0.00); mood match (+1.50); energy closeness (+1.41); valence closeness (+0.97); danceability closeness (+0.99); tempo_bpm closeness (+0.70); acousticness closeness (+0.71)
+   Reasons: different genre (+0.00, missed +2.00); mood match (+1.50); energy closeness (+1.41); valence closeness (+0.97); danceability closeness (+0.99); tempo_bpm closeness (+0.70); acousticness closeness (+0.71)
 4. Rooftop Lights by Indigo Parade [indie pop / happy] - Score: 6.14
-   Reasons: different genre (+0.00); mood match (+1.50); energy closeness (+1.36); valence closeness (+0.96); danceability closeness (+0.97); tempo_bpm closeness (+0.75); acousticness closeness (+0.60)
+   Reasons: different genre (+0.00, missed +2.00); mood match (+1.50); energy closeness (+1.36); valence closeness (+0.96); danceability closeness (+0.97); tempo_bpm closeness (+0.75); acousticness closeness (+0.60)
 5. Bassline Fever by DJ Circuit [edm / euphoric] - Score: 4.61
-   Reasons: different genre (+0.00); different mood (+0.00); energy closeness (+1.33); valence closeness (+0.97); danceability closeness (+0.91); tempo_bpm closeness (+0.72); acousticness closeness (+0.67)
+   Reasons: different genre (+0.00, missed +2.00); different mood (+0.00, missed +1.50); energy closeness (+1.33); valence closeness (+0.97); danceability closeness (+0.91); tempo_bpm closeness (+0.72); acousticness closeness (+0.67)
 
 User profile: Chill Lofi
 ------------------------
@@ -103,37 +108,37 @@ User profile: Chill Lofi
 2. Midnight Coding by LoRoom [lofi / chill] - Score: 8.21
    Reasons: genre match (+2.00); mood match (+1.50); energy closeness (+1.40); valence closeness (+0.99); danceability closeness (+0.93); tempo_bpm closeness (+0.75); acousticness closeness (+0.65)
 3. Focus Flow by LoRoom [lofi / focused] - Score: 6.77
-   Reasons: genre match (+2.00); different mood (+0.00); energy closeness (+1.42); valence closeness (+0.96); danceability closeness (+0.95); tempo_bpm closeness (+0.74); acousticness closeness (+0.70)
+   Reasons: genre match (+2.00); different mood (+0.00, missed +1.50); energy closeness (+1.42); valence closeness (+0.96); danceability closeness (+0.95); tempo_bpm closeness (+0.74); acousticness closeness (+0.70)
 4. Spacewalk Thoughts by Orbit Bloom [ambient / chill] - Score: 5.99
-   Reasons: different genre (+0.00); mood match (+1.50); energy closeness (+1.40); valence closeness (+0.90); danceability closeness (+0.86); tempo_bpm closeness (+0.64); acousticness closeness (+0.70)
+   Reasons: different genre (+0.00, missed +2.00); mood match (+1.50); energy closeness (+1.40); valence closeness (+0.90); danceability closeness (+0.86); tempo_bpm closeness (+0.64); acousticness closeness (+0.70)
 5. Coffee Shop Stories by Slow Stereo [jazz / relaxed] - Score: 4.70
-   Reasons: different genre (+0.00); different mood (+0.00); energy closeness (+1.47); valence closeness (+0.84); danceability closeness (+0.99); tempo_bpm closeness (+0.68); acousticness closeness (+0.72)
+   Reasons: different genre (+0.00, missed +2.00); different mood (+0.00, missed +1.50); energy closeness (+1.47); valence closeness (+0.84); danceability closeness (+0.99); tempo_bpm closeness (+0.68); acousticness closeness (+0.72)
 
 User profile: Deep Intense Rock
 -------------------------------
 1. Storm Runner by Voltline [rock / intense] - Score: 8.32
    Reasons: genre match (+2.00); mood match (+1.50); energy closeness (+1.44); valence closeness (+0.97); danceability closeness (+0.94); tempo_bpm closeness (+0.74); acousticness closeness (+0.73)
 2. Iron Skyline by North Static [metal / intense] - Score: 6.17
-   Reasons: different genre (+0.00); mood match (+1.50); energy closeness (+1.46); valence closeness (+0.91); danceability closeness (+0.90); tempo_bpm closeness (+0.69); acousticness closeness (+0.71)
+   Reasons: different genre (+0.00, missed +2.00); mood match (+1.50); energy closeness (+1.46); valence closeness (+0.91); danceability closeness (+0.90); tempo_bpm closeness (+0.69); acousticness closeness (+0.71)
 3. Gym Hero by Max Pulse [pop / intense] - Score: 5.74
-   Reasons: different genre (+0.00); mood match (+1.50); energy closeness (+1.47); valence closeness (+0.68); danceability closeness (+0.72); tempo_bpm closeness (+0.64); acousticness closeness (+0.73)
+   Reasons: different genre (+0.00, missed +2.00); mood match (+1.50); energy closeness (+1.47); valence closeness (+0.68); danceability closeness (+0.72); tempo_bpm closeness (+0.64); acousticness closeness (+0.73)
 4. Night Drive Loop by Neon Echo [synthwave / moody] - Score: 4.17
-   Reasons: different genre (+0.00); different mood (+0.00); energy closeness (+1.20); valence closeness (+0.96); danceability closeness (+0.87); tempo_bpm closeness (+0.50); acousticness closeness (+0.65)
+   Reasons: different genre (+0.00, missed +2.00); different mood (+0.00, missed +1.50); energy closeness (+1.20); valence closeness (+0.96); danceability closeness (+0.87); tempo_bpm closeness (+0.50); acousticness closeness (+0.65)
 5. Bassline Fever by DJ Circuit [edm / euphoric] - Score: 4.05
-   Reasons: different genre (+0.00); different mood (+0.00); energy closeness (+1.48); valence closeness (+0.57); danceability closeness (+0.66); tempo_bpm closeness (+0.61); acousticness closeness (+0.72)
+   Reasons: different genre (+0.00, missed +2.00); different mood (+0.00, missed +1.50); energy closeness (+1.48); valence closeness (+0.57); danceability closeness (+0.66); tempo_bpm closeness (+0.61); acousticness closeness (+0.72)
 
 User profile: Conflicted Sad Workout
 ------------------------------------
 1. Gym Hero by Max Pulse [pop / intense] - Score: 6.19
-   Reasons: genre match (+2.00); different mood (+0.00); energy closeness (+1.46); valence closeness (+0.48); danceability closeness (+0.92); tempo_bpm closeness (+0.74); acousticness closeness (+0.60)
+   Reasons: genre match (+2.00); different mood (+0.00, missed +1.50); energy closeness (+1.46); valence closeness (+0.48); danceability closeness (+0.92); tempo_bpm closeness (+0.74); acousticness closeness (+0.60)
 2. Sunrise City by Neon Echo [pop / happy] - Score: 6.15
-   Reasons: genre match (+2.00); different mood (+0.00); energy closeness (+1.38); valence closeness (+0.41); danceability closeness (+0.99); tempo_bpm closeness (+0.68); acousticness closeness (+0.70)
+   Reasons: genre match (+2.00); different mood (+0.00, missed +1.50); energy closeness (+1.38); valence closeness (+0.41); danceability closeness (+0.99); tempo_bpm closeness (+0.68); acousticness closeness (+0.70)
 3. Blue Hour Ballad by Marina Vale [r&b / sad] - Score: 4.74
-   Reasons: different genre (+0.00); mood match (+1.50); energy closeness (+0.72); valence closeness (+0.93); danceability closeness (+0.72); tempo_bpm closeness (+0.40); acousticness closeness (+0.47)
+   Reasons: different genre (+0.00, missed +2.00); mood match (+1.50); energy closeness (+0.72); valence closeness (+0.93); danceability closeness (+0.72); tempo_bpm closeness (+0.40); acousticness closeness (+0.47)
 4. Storm Runner by Voltline [rock / intense] - Score: 4.37
-   Reasons: different genre (+0.00); different mood (+0.00); energy closeness (+1.48); valence closeness (+0.77); danceability closeness (+0.86); tempo_bpm closeness (+0.61); acousticness closeness (+0.64)
+   Reasons: different genre (+0.00, missed +2.00); different mood (+0.00, missed +1.50); energy closeness (+1.48); valence closeness (+0.77); danceability closeness (+0.86); tempo_bpm closeness (+0.61); acousticness closeness (+0.64)
 5. Night Drive Loop by Neon Echo [synthwave / moody] - Score: 4.32
-   Reasons: different genre (+0.00); different mood (+0.00); energy closeness (+1.27); valence closeness (+0.76); danceability closeness (+0.93); tempo_bpm closeness (+0.62); acousticness closeness (+0.73)
+   Reasons: different genre (+0.00, missed +2.00); different mood (+0.00, missed +1.50); energy closeness (+1.27); valence closeness (+0.76); danceability closeness (+0.93); tempo_bpm closeness (+0.62); acousticness closeness (+0.73)
 
 Bonus mode: mood-first
 
@@ -142,13 +147,13 @@ User profile: High-Energy Pop (Mood-First)
 1. Sunrise City by Neon Echo [pop / happy] - Score: 9.07
    Reasons: genre match (+2.00); mood match (+1.50); energy closeness (+1.46); valence closeness (+0.99); danceability closeness (+0.94); tempo_bpm closeness (+0.71); acousticness closeness (+0.73)
 2. Afterglow Arcade by Pixel Hearts [synthwave / happy] - Score: 7.03
-   Reasons: different genre (+0.00); mood match (+1.50); energy closeness (+1.41); valence closeness (+0.97); danceability closeness (+0.99); tempo_bpm closeness (+0.70); acousticness closeness (+0.71)
+   Reasons: different genre (+0.00, missed +2.00); mood match (+1.50); energy closeness (+1.41); valence closeness (+0.97); danceability closeness (+0.99); tempo_bpm closeness (+0.70); acousticness closeness (+0.71)
 3. Rooftop Lights by Indigo Parade [indie pop / happy] - Score: 6.89
-   Reasons: different genre (+0.00); mood match (+1.50); energy closeness (+1.36); valence closeness (+0.96); danceability closeness (+0.97); tempo_bpm closeness (+0.75); acousticness closeness (+0.60)
+   Reasons: different genre (+0.00, missed +2.00); mood match (+1.50); energy closeness (+1.36); valence closeness (+0.96); danceability closeness (+0.97); tempo_bpm closeness (+0.75); acousticness closeness (+0.60)
 4. Gym Hero by Max Pulse [pop / intense] - Score: 6.64
-   Reasons: genre match (+2.00); different mood (+0.00); energy closeness (+1.38); valence closeness (+0.92); danceability closeness (+0.97); tempo_bpm closeness (+0.70); acousticness closeness (+0.68)
+   Reasons: genre match (+2.00); different mood (+0.00, missed +1.50); energy closeness (+1.38); valence closeness (+0.92); danceability closeness (+0.97); tempo_bpm closeness (+0.70); acousticness closeness (+0.68)
 5. Bassline Fever by DJ Circuit [edm / euphoric] - Score: 4.61
-   Reasons: different genre (+0.00); different mood (+0.00); energy closeness (+1.33); valence closeness (+0.97); danceability closeness (+0.91); tempo_bpm closeness (+0.72); acousticness closeness (+0.67)
+   Reasons: different genre (+0.00, missed +2.00); different mood (+0.00, missed +1.50); energy closeness (+1.33); valence closeness (+0.97); danceability closeness (+0.91); tempo_bpm closeness (+0.72); acousticness closeness (+0.67)
 
 **Screenshot or video** *(optional)*:
 
@@ -178,13 +183,13 @@ User profile: High-Energy Pop (Collaborative)
 1. Sunrise City by Neon Echo [pop / happy] - Score: 9.82
    Reasons: genre match (+2.00); mood match (+1.50); energy closeness (+1.46); valence closeness (+0.99); danceability closeness (+0.94); tempo_bpm closeness (+0.71); acousticness closeness (+0.73); liked by similar listeners (+1.50)
 2. Gym Hero by Max Pulse [pop / intense] - Score: 7.70
-   Reasons: genre match (+2.00); different mood (+0.00); energy closeness (+1.38); valence closeness (+0.92); danceability closeness (+0.97); tempo_bpm closeness (+0.70); acousticness closeness (+0.68); liked by similar listeners (+1.05)
+   Reasons: genre match (+2.00); different mood (+0.00, missed +1.50); energy closeness (+1.38); valence closeness (+0.92); danceability closeness (+0.97); tempo_bpm closeness (+0.70); acousticness closeness (+0.68); liked by similar listeners (+1.05)
 3. Afterglow Arcade by Pixel Hearts [synthwave / happy] - Score: 7.33
-   Reasons: different genre (+0.00); mood match (+1.50); energy closeness (+1.41); valence closeness (+0.97); danceability closeness (+0.99); tempo_bpm closeness (+0.70); acousticness closeness (+0.71); liked by similar listeners (+1.05)
+   Reasons: different genre (+0.00, missed +2.00); mood match (+1.50); energy closeness (+1.41); valence closeness (+0.97); danceability closeness (+0.99); tempo_bpm closeness (+0.70); acousticness closeness (+0.71); liked by similar listeners (+1.05)
 4. Rooftop Lights by Indigo Parade [indie pop / happy] - Score: 6.97
-   Reasons: different genre (+0.00); mood match (+1.50); energy closeness (+1.36); valence closeness (+0.96); danceability closeness (+0.97); tempo_bpm closeness (+0.75); acousticness closeness (+0.60); liked by similar listeners (+0.82)
+   Reasons: different genre (+0.00, missed +2.00); mood match (+1.50); energy closeness (+1.36); valence closeness (+0.96); danceability closeness (+0.97); tempo_bpm closeness (+0.75); acousticness closeness (+0.60); liked by similar listeners (+0.82)
 5. Storm Runner by Voltline [rock / intense] - Score: 4.96
-   Reasons: different genre (+0.00); different mood (+0.00); energy closeness (+1.41); valence closeness (+0.63); danceability closeness (+0.81); tempo_bpm closeness (+0.57); acousticness closeness (+0.71); liked by similar listeners (+0.82)
+   Reasons: different genre (+0.00, missed +2.00); different mood (+0.00, missed +1.50); energy closeness (+1.41); valence closeness (+0.63); danceability closeness (+0.81); tempo_bpm closeness (+0.57); acousticness closeness (+0.71); liked by similar listeners (+0.82)
 ```
 
 Notice rank 5: `Storm Runner` is rock/intense — it never appears in the
@@ -193,6 +198,77 @@ simulated listeners who share this profile's pop/happy taste also happened to
 like it. That's the one thing collaborative filtering can do that pure
 content-based scoring cannot: surface a song with none of the "right"
 attributes on paper.
+
+## Extra Enhancement: "Why Not?" Explanations
+
+Reasons used to just say `different genre (+0.00)`, which tells you a song
+lost points but not how many. Reasons now say `different genre (+0.00,
+missed +2.00)` / `different mood (+0.00, missed +1.50)`, and any numeric
+feature that scored below 30% of its max points gets a `- far from target`
+note. This makes it possible to answer "why didn't this song rank higher?"
+directly from the reasons list instead of doing the subtraction yourself.
+
+## Extra Enhancement: "Surprise Me" Exploration Mode
+
+Enable with `exploration=True` (CLI: "Bonus mode: exploration slot" below;
+Streamlit: check "Reserve a 'surprise me' discovery slot"). It reserves the
+last recommendation slot for the highest-scoring song that is still outside
+the user's favorite genre, as a small counter to the filter-bubble problem —
+instead of filling every slot with the closest possible match, one slot is
+deliberately used for discovery.
+
+```text
+Bonus mode: exploration slot (reserves one discovery pick)
+
+User profile: High-Energy Pop (Exploration)
+-------------------------------------------
+1. Sunrise City by Neon Echo [pop / happy] - Score: 8.32
+2. Gym Hero by Max Pulse [pop / intense] - Score: 6.64
+3. Afterglow Arcade by Pixel Hearts [synthwave / happy] - Score: 6.28
+4. Rooftop Lights by Indigo Parade [indie pop / happy] - Score: 6.14
+5. Bassline Fever by DJ Circuit [edm / euphoric] - Score: 4.61
+   Reasons: ...; exploration pick: different genre, reserved discovery slot
+```
+
+For this particular profile, slot 5 already happened to be a different genre,
+so the list looks unchanged — but with a smaller `k`, the effect is obvious.
+Asking for just the top 2 songs normally returns two pop tracks (`Sunrise
+City`, `Gym Hero`); with exploration on, the second slot is swapped for
+`Afterglow Arcade` (synthwave) instead, deliberately trading a slightly lower
+score for genre variety.
+
+## Extra Enhancement: Feedback Loop
+
+The model card used to say the system "cannot learn from user feedback."
+`apply_feedback()` in `src/recommender.py` is a small step toward fixing that:
+mark a past recommendation as `like`, `save`, or `skip`, and it nudges the
+profile's numeric targets (energy, valence, danceability, tempo, acousticness)
+toward songs you liked/saved and away from songs you skipped, so the *next*
+recommendation call reflects that feedback. In the CLI this runs automatically;
+in Streamlit, click 👍/⏭/⭐ under any result and the list re-ranks live.
+
+```text
+Bonus mode: feedback loop (skip Library Rain, save Midnight Coding)
+
+User profile: Chill Lofi (Before Feedback)
+------------------------------------------
+1. Library Rain by Paper Lanterns [lofi / chill] - Score: 8.38
+2. Midnight Coding by LoRoom [lofi / chill] - Score: 8.21
+3. Focus Flow by LoRoom [lofi / focused] - Score: 6.77
+
+User profile: Chill Lofi (After Feedback)
+-----------------------------------------
+1. Midnight Coding by LoRoom [lofi / chill] - Score: 8.32
+2. Library Rain by Paper Lanterns [lofi / chill] - Score: 8.30
+3. Focus Flow by LoRoom [lofi / focused] - Score: 6.89
+```
+
+Skipping `Library Rain` and saving `Midnight Coding` was enough to flip their
+order, because they started only 0.17 points apart. This also shows the
+feedback loop's real limit: it only nudges numeric targets, not the genre/mood
+match bonus, so it can reorder close-scoring songs but can't override a strong
+genre/mood match with a handful of clicks — a small, honest example of how
+much weight the genre/mood bonus really carries in this recipe.
 
 ## Extra Enhancement: Quantified Diversity / Bias Report
 
@@ -292,6 +368,7 @@ Some limitations of this recommender are:
 - It can over-prioritize one genre or mood when the weights are strong
 - It may produce narrow or repetitive recommendations for some users
 - With a small simulated user base, collaborative filtering can amplify popularity bias instead of adding diversity (see the quantified report above)
+- The feedback loop only nudges numeric targets (energy, valence, danceability, tempo, acousticness); it cannot override a strong genre/mood match with a few likes/skips, so its "learning" is limited
 
 You will go deeper on this in the model card.
 

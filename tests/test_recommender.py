@@ -2,6 +2,7 @@ from src.recommender import (
     Recommender,
     Song,
     UserProfile,
+    apply_feedback,
     collaborative_scores,
     load_listening_history,
     load_songs,
@@ -229,6 +230,89 @@ def test_conflicting_profile_can_prioritize_genre_over_mood():
     results = recommend_songs(prefs, songs, k=1)
 
     assert results[0][0]["genre"] == "pop"
+
+
+def test_score_song_explains_missed_genre_and_mood_points():
+    song = {
+        "id": 1,
+        "title": "Off Target",
+        "artist": "Someone",
+        "genre": "jazz",
+        "mood": "sad",
+        "energy": 0.10,
+        "tempo_bpm": 60.0,
+        "valence": 0.10,
+        "danceability": 0.10,
+        "acousticness": 0.10,
+    }
+    prefs = {
+        "genre": "pop",
+        "mood": "happy",
+        "energy": 0.90,
+        "tempo_bpm": 130.0,
+        "valence": 0.90,
+        "danceability": 0.90,
+        "acousticness": 0.90,
+    }
+
+    _score, reasons = score_song(prefs, song)
+
+    assert "different genre (+0.00, missed +2.00)" in reasons
+    assert "different mood (+0.00, missed +1.50)" in reasons
+    assert any("far from target" in reason for reason in reasons)
+
+
+def test_apply_feedback_can_reorder_close_scoring_songs():
+    songs = load_songs("data/songs.csv")
+    prefs = {
+        "genre": "lofi",
+        "mood": "chill",
+        "energy": 0.35,
+        "tempo_bpm": 78.0,
+        "valence": 0.55,
+        "danceability": 0.55,
+        "acousticness": 0.85,
+    }
+
+    before = recommend_songs(prefs, songs, k=1)
+    assert before[0][0]["title"] == "Library Rain"
+
+    feedback = {4: "skip", 2: "save"}  # 4 = Library Rain, 2 = Midnight Coding
+    adjusted_prefs = apply_feedback(prefs, songs, feedback)
+
+    after = recommend_songs(adjusted_prefs, songs, k=1)
+    assert after[0][0]["title"] == "Midnight Coding"
+
+
+def test_apply_feedback_ignores_unknown_song_ids_and_actions():
+    songs = load_songs("data/songs.csv")
+    prefs = {"genre": "pop", "mood": "happy", "energy": 0.5}
+
+    unchanged = apply_feedback(prefs, songs, {9999: "like", 1: "maybe"})
+
+    assert unchanged == prefs
+
+
+def test_recommend_songs_exploration_swaps_in_different_genre():
+    songs = load_songs("data/songs.csv")
+    prefs = {
+        "genre": "pop",
+        "mood": "happy",
+        "energy": 0.85,
+        "tempo_bpm": 124.0,
+        "valence": 0.85,
+        "danceability": 0.85,
+        "acousticness": 0.15,
+    }
+
+    normal = recommend_songs(prefs, songs, k=2)
+    with_exploration = recommend_songs(prefs, songs, k=2, exploration=True)
+
+    assert normal[0][0]["genre"] == "pop"
+    assert normal[1][0]["genre"] == "pop"
+    assert with_exploration[0][0]["title"] == normal[0][0]["title"]
+    assert with_exploration[1][0]["genre"] != "pop"
+    assert "exploration pick" in with_exploration[1][2]
 
 
 def test_load_listening_history_groups_song_ids_by_user():

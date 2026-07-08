@@ -2,7 +2,7 @@
 Command line runner for the Music Recommender Simulation.
 """
 
-from .recommender import load_songs, load_listening_history, recommend_songs
+from .recommender import apply_feedback, load_songs, load_listening_history, recommend_songs
 
 
 PROFILES = {
@@ -80,6 +80,34 @@ def main() -> None:
         scoring_mode="balanced",
         history=history,
         use_collaborative=True,
+    )
+
+    print("\nBonus mode: exploration slot (reserves one discovery pick)")
+    print_recommendations(
+        "High-Energy Pop (Exploration)",
+        PROFILES["High-Energy Pop"],
+        songs,
+        k=5,
+        scoring_mode="balanced",
+        exploration=True,
+    )
+
+    print("\nBonus mode: feedback loop (skip Library Rain, save Midnight Coding)")
+    print_recommendations(
+        "Chill Lofi (Before Feedback)",
+        PROFILES["Chill Lofi"],
+        songs,
+        k=3,
+        scoring_mode="balanced",
+    )
+    feedback = {4: "skip", 2: "save"}  # 4 = Library Rain, 2 = Midnight Coding
+    adjusted_prefs = apply_feedback(PROFILES["Chill Lofi"], songs, feedback)
+    print_recommendations(
+        "Chill Lofi (After Feedback)",
+        adjusted_prefs,
+        songs,
+        k=3,
+        scoring_mode="balanced",
     )
 
 
