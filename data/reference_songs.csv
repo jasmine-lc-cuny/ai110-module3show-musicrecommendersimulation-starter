@@ -1,0 +1,27 @@
+genre,title,artist,mood,energy,valence,danceability,acousticness,tempo_bpm
+pop,Blinding Lights,The Weeknd,energetic,80,33,51,0,171
+pop,Uptown Funk,Mark Ronson ft. Bruno Mars,happy,87,93,86,0,115
+rock,Hotel California,Eagles,chill,51,25,58,1,75
+rock,Sweet Child O' Mine,Guns N' Roses,intense,78,60,46,2,125
+lofi,Aruarian Dance,Nujabes,chill,25,50,50,70,88
+lofi,Snowman,WYS,chill,30,45,55,60,80
+ambient,Weightless,Marconi Union,calm,10,30,20,70,60
+ambient,An Ending (Ascent),Brian Eno,calm,8,35,15,60,65
+jazz,Take Five,Dave Brubeck Quartet,relaxed,45,55,60,85,176
+jazz,So What,Miles Davis,relaxed,35,45,45,80,136
+synthwave,Midnight City,M83,moody,75,55,65,5,105
+synthwave,Nightcall,Kavinsky,moody,60,35,60,5,130
+folk,The Sound of Silence,Simon & Garfunkel,sad,25,20,35,75,106
+folk,Blowin' in the Wind,Bob Dylan,relaxed,30,50,40,80,105
+edm,Levels,Avicii,euphoric,90,75,70,2,126
+edm,Titanium,David Guetta ft. Sia,euphoric,82,55,60,3,126
+r&b,Adorn,Miguel,sad,45,40,55,20,100
+r&b,Location,Khalid,chill,55,45,70,10,96
+metal,Master of Puppets,Metallica,intense,97,30,40,0,220
+metal,Enter Sandman,Metallica,intense,90,35,45,0,123
+soul,Ain't No Sunshine,Bill Withers,sad,35,25,50,40,106
+soul,Respect,Aretha Franklin,happy,75,85,75,15,115
+hip hop,Lose Yourself,Eminem,intense,85,45,65,5,86
+hip hop,HUMBLE.,Kendrick Lamar,intense,62,42,82,10,150
+indie pop,Electric Feel,MGMT,chill,65,60,68,10,111
+indie pop,Dog Days Are Over,Florence + The Machine,happy,78,70,55,20,149

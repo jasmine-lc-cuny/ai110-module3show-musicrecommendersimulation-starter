@@ -56,8 +56,9 @@ python -m src.main
 
 Or run the Streamlit app (adds interactive controls, a live feedback loop, a
 "Bias Evaluator" tab with the diversity report and charts, and an "Analyze a
-Song" tab where you can type in a real song's stats and score it with the
-same algorithm):
+Song" tab where you pick a genre and a real, well-known song from a small
+curated list — its stats auto-fill — or type in your own, then score it with
+the same algorithm):
 
 ```bash
 python -m streamlit run app.py

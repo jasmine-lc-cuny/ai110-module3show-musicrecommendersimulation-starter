@@ -1,3 +1,5 @@
+import csv
+
 import pandas as pd
 import streamlit as st
 
@@ -9,6 +11,26 @@ from src.recommender import (
     recommend_songs,
     score_song,
 )
+
+
+def load_reference_songs(csv_path):
+    """Load the curated list of real, well-known songs used by the Analyze tab."""
+    with open(csv_path, newline="", encoding="utf-8") as csv_file:
+        reader = csv.DictReader(csv_file)
+        return [
+            {
+                "genre": row["genre"],
+                "title": row["title"],
+                "artist": row["artist"],
+                "mood": row["mood"],
+                "energy": int(row["energy"]),
+                "valence": int(row["valence"]),
+                "danceability": int(row["danceability"]),
+                "acousticness": int(row["acousticness"]),
+                "tempo_bpm": int(row["tempo_bpm"]),
+            }
+            for row in reader
+        ]
 
 
 def draw_gauge(label, percent_value):
@@ -38,8 +60,10 @@ st.write("Explore how a simple content-based recommender ranks songs from a CSV 
 
 songs = load_songs("data/songs.csv")
 history = load_listening_history("data/listening_history.csv")
+reference_songs = load_reference_songs("data/reference_songs.csv")
 genres = sorted({song["genre"] for song in songs})
 moods = sorted({song["mood"] for song in songs})
+reference_genres = sorted({song["genre"] for song in reference_songs})
 
 if "feedback" not in st.session_state:
     st.session_state.feedback = {}
@@ -157,27 +181,55 @@ with tab_evaluate:
 with tab_analyze:
     st.subheader("Analyze a Real Song")
     st.write(
-        "Look up a real song's stats on a site like Tunebat or GetSongBPM, then "
-        "type them in here to see its Tunebat-style profile and score it against "
-        "your current sidebar preferences using the exact same algorithm as the "
-        "Recommender tab. No API calls, no external data — just your own scoring recipe."
+        "Pick a genre, then a real, well-known song in that genre — its stats "
+        "auto-fill below (a small curated list, not a live lookup). Edit any "
+        "value, or search a site like Tunebat/GetSongBPM yourself and type in a "
+        "different song's numbers. Either way, it scores against your current "
+        "sidebar preferences using the exact same algorithm as the Recommender tab. "
+        "No API calls, no external data fetched live."
+    )
+
+    analyzed_genre = st.selectbox("Genre", reference_genres, key="analyze_genre_choice")
+    matching_songs = [song for song in reference_songs if song["genre"] == analyzed_genre]
+    song_choice_key = f"analyze_song_choice_{analyzed_genre}"
+    custom_option = "Custom (type your own)"
+    song_options = [custom_option] + [f"{song['title']} — {song['artist']}" for song in matching_songs]
+
+    def _apply_reference_song(matching_songs=matching_songs, song_choice_key=song_choice_key, custom_option=custom_option):
+        choice = st.session_state[song_choice_key]
+        if choice == custom_option:
+            return
+        selected = next(
+            song for song in matching_songs if f"{song['title']} — {song['artist']}" == choice
+        )
+        st.session_state.analyze_title = selected["title"]
+        st.session_state.analyze_artist = selected["artist"]
+        st.session_state.analyze_mood = selected["mood"]
+        st.session_state.analyze_energy = selected["energy"]
+        st.session_state.analyze_happiness = selected["valence"]
+        st.session_state.analyze_danceability = selected["danceability"]
+        st.session_state.analyze_acousticness = selected["acousticness"]
+        st.session_state.analyze_tempo = selected["tempo_bpm"]
+
+    st.selectbox(
+        "Pick a real song in this genre",
+        song_options,
+        key=song_choice_key,
+        on_change=_apply_reference_song,
     )
 
     name_col, artist_col = st.columns(2)
-    song_title = name_col.text_input("Song title", value="Hotel California")
-    song_artist = artist_col.text_input("Artist", value="Eagles")
+    song_title = name_col.text_input("Song title", value="Hotel California", key="analyze_title")
+    song_artist = artist_col.text_input("Artist", value="Eagles", key="analyze_artist")
+    analyzed_mood = st.text_input("Mood", value="chill", key="analyze_mood")
 
-    genre_col, mood_col = st.columns(2)
-    analyzed_genre = genre_col.text_input("Genre", value="rock")
-    analyzed_mood = mood_col.text_input("Mood", value="chill")
-
-    st.caption("Enter each value 0-100, the same scale Tunebat/GetSongBPM display on-screen.")
+    st.caption("Values are 0-100, the same scale Tunebat/GetSongBPM display on-screen.")
     gauge_cols = st.columns(4)
-    analyzed_energy = gauge_cols[0].number_input("Energy", 0, 100, 51)
-    analyzed_happiness = gauge_cols[1].number_input("Happiness (valence)", 0, 100, 25)
-    analyzed_danceability = gauge_cols[2].number_input("Danceability", 0, 100, 58)
-    analyzed_acousticness = gauge_cols[3].number_input("Acousticness", 0, 100, 1)
-    analyzed_tempo = st.number_input("Tempo (BPM)", 40, 220, 75)
+    analyzed_energy = gauge_cols[0].number_input("Energy", 0, 100, 51, key="analyze_energy")
+    analyzed_happiness = gauge_cols[1].number_input("Happiness (valence)", 0, 100, 25, key="analyze_happiness")
+    analyzed_danceability = gauge_cols[2].number_input("Danceability", 0, 100, 58, key="analyze_danceability")
+    analyzed_acousticness = gauge_cols[3].number_input("Acousticness", 0, 100, 1, key="analyze_acousticness")
+    analyzed_tempo = st.number_input("Tempo (BPM)", 40, 220, 75, key="analyze_tempo")
 
     if st.button("Score this song"):
         st.markdown("**Audio profile**")
