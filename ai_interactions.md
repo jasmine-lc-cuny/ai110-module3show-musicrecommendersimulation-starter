@@ -44,3 +44,25 @@ Copilot helped me compare a more complex Strategy-based design with a simpler wr
 **How does the pattern appear in your final code?**
 
 The functional scoring helpers in [src/recommender.py](src/recommender.py) handle the main logic, while the Recommender class provides a clean object-oriented wrapper for tests and reuse. That keeps the implementation modular without overcomplicating the project.
+
+---
+
+## Going Beyond: Collaborative Filtering + Quantified Bias Report
+
+> After finishing the core assignment, CodePath said I had room to go further, so I asked Claude Code to help me close a gap I noticed: the whole project explains collaborative filtering vs. content-based filtering in Phase 1, but the actual code only ever implements content-based filtering.
+
+**What task did I give the agent?**
+
+I asked it to (1) add a real collaborative-filtering signal blended into the existing content-based score, using a simulated "other listeners" dataset since I don't have real user behavior data, and (2) replace my anecdotal bias claims in the model card with an actual measured diversity metric across many profiles, not just the four I hand-picked.
+
+**What did the agent generate or change?**
+
+- `scripts/generate_listening_history.py`: a seeded, reproducible generator that creates `data/listening_history.csv` (203 simulated like-events from 40 fake users, clustered loosely by genre/mood so the data has realistic structure).
+- `load_listening_history`, `_find_similar_users`, and `collaborative_scores` in [src/recommender.py](src/recommender.py): find simulated users who share the active profile's favorite genre/mood, then boost songs those users liked.
+- `use_collaborative` / `history` parameters threaded through `score_song` and `recommend_songs`, wired into both `src/main.py` (a new "Bonus mode: collaborative filtering" block) and `app.py` (a new checkbox).
+- [src/evaluate.py](src/evaluate.py): generates 60 reproducible synthetic profiles, runs them through the recommender, and computes a Herfindahl-Hirschman genre-concentration score plus which songs land at #1 most often, for balanced / diversity-penalty / collaborative-filtering configurations.
+- New tests in `tests/test_recommender.py` and a new `tests/test_evaluate.py`.
+
+**What did I verify or fix manually?**
+
+I ran `python -m src.main` and `python -m src.evaluate` myself and read the actual numbers before writing anything in the model card. The result actually surprised me: I expected collaborative filtering to reduce the filter-bubble problem, but the HHI concentration score went *up* (0.103 to 0.126) once CF was on, because only 40 simulated users meant a couple of songs got disproportionately popular. I made the agent keep that honest result in the model card instead of a more flattering made-up one, since it's a more interesting and true finding about small-scale collaborative filtering. I also spot-checked that the diversity penalty and CF settings don't change the core assignment's original 8 required tests.

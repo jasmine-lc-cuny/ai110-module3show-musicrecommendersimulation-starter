@@ -2,7 +2,7 @@
 Command line runner for the Music Recommender Simulation.
 """
 
-from .recommender import load_songs, recommend_songs
+from .recommender import load_songs, load_listening_history, recommend_songs
 
 
 PROFILES = {
@@ -45,12 +45,12 @@ PROFILES = {
 }
 
 
-def print_recommendations(profile_name, user_prefs, songs, k=5, scoring_mode="balanced"):
+def print_recommendations(profile_name, user_prefs, songs, k=5, scoring_mode="balanced", **recommend_kwargs):
     """Print a formatted recommendation list for one profile."""
     print(f"\nUser profile: {profile_name}")
     print("-" * (14 + len(profile_name)))
 
-    recommendations = recommend_songs(user_prefs, songs, k=k, scoring_mode=scoring_mode)
+    recommendations = recommend_songs(user_prefs, songs, k=k, scoring_mode=scoring_mode, **recommend_kwargs)
     for index, (song, score, explanation) in enumerate(recommendations, start=1):
         print(
             f"{index}. {song['title']} by {song['artist']} "
@@ -62,6 +62,7 @@ def print_recommendations(profile_name, user_prefs, songs, k=5, scoring_mode="ba
 def main() -> None:
     """Load songs and print recommendations for several taste profiles."""
     songs = load_songs("data/songs.csv")
+    history = load_listening_history("data/listening_history.csv")
     print(f"Loaded songs: {len(songs)}")
 
     for profile_name, user_prefs in PROFILES.items():
@@ -69,6 +70,17 @@ def main() -> None:
 
     print("\nBonus mode: mood-first")
     print_recommendations("High-Energy Pop (Mood-First)", PROFILES["High-Energy Pop"], songs, k=5, scoring_mode="mood-first")
+
+    print("\nBonus mode: collaborative filtering (simulated listeners)")
+    print_recommendations(
+        "High-Energy Pop (Collaborative)",
+        PROFILES["High-Energy Pop"],
+        songs,
+        k=5,
+        scoring_mode="balanced",
+        history=history,
+        use_collaborative=True,
+    )
 
 
 if __name__ == "__main__":

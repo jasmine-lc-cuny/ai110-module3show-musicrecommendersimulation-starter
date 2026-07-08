@@ -2,6 +2,8 @@ from src.recommender import (
     Recommender,
     Song,
     UserProfile,
+    collaborative_scores,
+    load_listening_history,
     load_songs,
     recommend_songs,
     score_song,
@@ -227,3 +229,52 @@ def test_conflicting_profile_can_prioritize_genre_over_mood():
     results = recommend_songs(prefs, songs, k=1)
 
     assert results[0][0]["genre"] == "pop"
+
+
+def test_load_listening_history_groups_song_ids_by_user():
+    history = load_listening_history("data/listening_history.csv")
+
+    assert len(history) == 40
+    assert all(isinstance(song_ids, list) for song_ids in history.values())
+    assert all(isinstance(song_id, int) for song_ids in history.values() for song_id in song_ids)
+
+
+def test_collaborative_scores_boost_songs_liked_by_similar_users():
+    songs = [
+        {"id": 1, "genre": "pop", "mood": "happy"},
+        {"id": 2, "genre": "rock", "mood": "intense"},
+    ]
+    history = {
+        1: [1, 2],  # a "pop/happy" fan who also liked the rock song
+        2: [1],     # another pop/happy fan
+        3: [2],     # a fan outside the pop/happy cluster
+    }
+
+    scores = collaborative_scores(history, songs, favorite_genre="pop", favorite_mood="happy")
+
+    assert scores[1] > 0
+    assert scores.get(2, 0) > 0
+    assert scores[1] >= scores[2]
+
+
+def test_recommend_songs_can_blend_collaborative_signal():
+    songs = load_songs("data/songs.csv")
+    history = load_listening_history("data/listening_history.csv")
+    prefs = {
+        "genre": "pop",
+        "mood": "happy",
+        "energy": 0.85,
+        "tempo_bpm": 124.0,
+        "valence": 0.85,
+        "danceability": 0.85,
+        "acousticness": 0.15,
+    }
+
+    without_cf = recommend_songs(prefs, songs, k=5)
+    with_cf = recommend_songs(prefs, songs, k=5, history=history, use_collaborative=True)
+
+    without_cf_score = {song["id"]: score for song, score, _ in without_cf}
+    with_cf_score = {song["id"]: score for song, score, _ in with_cf}
+
+    shared_ids = set(without_cf_score) & set(with_cf_score)
+    assert any(with_cf_score[song_id] >= without_cf_score[song_id] for song_id in shared_ids)

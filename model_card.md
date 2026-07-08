@@ -25,6 +25,12 @@ tempo, and acousticness. After every song receives a score, the recommender sort
 the songs from highest to lowest and returns the top results with explanation
 reasons.
 
+As an optional extra, the model can also blend in a simple collaborative
+signal: it looks at a simulated group of 40 "other listeners" and boosts songs
+that listeners who share the user's favorite genre or mood also liked, even if
+that song's own genre doesn't match. This is content-based filtering and
+collaborative filtering working together instead of content-based alone.
+
 ---
 
 ## 4. Data
@@ -35,6 +41,12 @@ song has a title, artist, genre, mood, energy, tempo, valence, danceability, and
 acousticness. I added 8 songs beyond the starter catalog to make the simulation
 less narrow. The data is still tiny and manually labeled, so it does not capture
 lyrics, real listener behavior, subgenres, culture, language, or artist history.
+
+I also generated `data/listening_history.csv`: 203 simulated "like" events from
+40 fake users (via `scripts/generate_listening_history.py`, seeded for
+reproducibility), used only by the optional collaborative filtering feature.
+This is synthetic data, not real listener behavior, so any pattern it produces
+reflects the generator's assumptions, not real music fans.
 
 ---
 
@@ -62,6 +74,22 @@ mood. That happened because genre, energy, danceability, and tempo outweighed
 mood. The system also cannot learn from user feedback, so it has no way to know
 if a surprising recommendation was actually good.
 
+I measured this instead of just describing it. `src/evaluate.py` runs 60
+random synthetic profiles through the recommender and computes a genre
+concentration score (HHI, 0 = diverse, 1 = one genre). The balanced scorer
+alone measured 0.103. Turning on the diversity penalty barely changed that
+(0.098), because that penalty only removes duplicate artists within one
+profile's own top 5 — it does nothing about which genres dominate across many
+different profiles. Turning on collaborative filtering made concentration
+*worse* (0.126): with only 40 simulated listeners, two songs (`Sunrise City`,
+`Library Rain`) got liked disproportionately often, so the CF signal
+amplified their popularity across unrelated profiles instead of adding
+variety. That's a small-scale version of the "rich-get-richer" popularity bias
+real collaborative-filtering systems are criticized for — it shows that adding
+"what other users liked" as a signal isn't automatically a fix for a filter
+bubble; with a small enough user base, it can create its own bubble around
+whichever songs got an early lead in popularity.
+
 ---
 
 ## 7. Evaluation
@@ -83,12 +111,20 @@ strong"; it's that no numeric feature substitutes for mood, so boosting any of
 them just reinforces the same energy-driven bias. See the README's
 "Experiments You Tried" section for the full before/after output.
 
+Beyond individual profiles, I ran a batch evaluation (`python -m src.evaluate`)
+across 60 randomly generated profiles to see how the system behaves in
+aggregate, not just on the four hand-picked examples. That's what produced the
+HHI concentration numbers above and confirmed that collaborative filtering
+needs a much bigger simulated user base before it would actually reduce bias
+instead of amplifying it.
+
 ---
 
 ## 8. Future Work
 
-- Add user feedback such as likes, skips, saves, and replay count.
-- Expand the diversity penalty so the top results do not cluster around one genre or artist.
+- Replace the simulated listening history with real (or a much larger simulated) user base so collaborative filtering adds diversity instead of amplifying a couple of popular songs.
+- Add real user feedback such as likes, skips, saves, and replay count.
+- Expand the diversity penalty so it also considers cross-profile genre concentration, not just per-profile artist repeats.
 - Add more songs and richer labels such as decade, language, popularity, and lyrical theme.
 - Let users choose scoring modes such as Genre-First, Mood-First, or Energy-Focused.
 - Improve explanations so they are shorter and easier to read.

@@ -1,12 +1,13 @@
 import streamlit as st
 
-from src.recommender import load_songs, recommend_songs
+from src.recommender import load_songs, load_listening_history, recommend_songs
 
 st.set_page_config(page_title="Music Recommender Simulation", page_icon="🎵")
 st.title("Music Recommender Simulation")
 st.write("Explore how a simple content-based recommender ranks songs from a CSV catalog.")
 
 songs = load_songs("data/songs.csv")
+history = load_listening_history("data/listening_history.csv")
 genres = sorted({song["genre"] for song in songs})
 moods = sorted({song["mood"] for song in songs})
 
@@ -22,6 +23,10 @@ with st.sidebar:
     k = st.slider("Number of recommendations", 3, 10, 5, 1)
     scoring_mode = st.selectbox("Scoring mode", ["balanced", "mood-first"])
     diversity_penalty = st.checkbox("Use diversity penalty")
+    use_collaborative = st.checkbox(
+        "Use collaborative filtering (simulated listeners)",
+        help="Boosts songs that simulated users with similar taste liked, even if their genre doesn't match yours.",
+    )
 
 prefs = {
     "genre": genre,
@@ -39,6 +44,8 @@ results = recommend_songs(
     k=k,
     scoring_mode=scoring_mode,
     diversity_penalty=diversity_penalty,
+    history=history,
+    use_collaborative=use_collaborative,
 )
 
 st.subheader("Top Recommendations")
