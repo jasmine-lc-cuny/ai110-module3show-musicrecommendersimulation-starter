@@ -6,11 +6,8 @@ from typing import Dict, List
 
 from .recommender import recommend_songs
 
-GENRES = [
-    "pop", "lofi", "rock", "ambient", "jazz", "synthwave", "folk",
-    "edm", "r&b", "metal", "soul", "hip hop", "indie pop",
-]
-MOODS = ["happy", "chill", "intense", "relaxed", "moody", "focused", "euphoric", "sad", "calm"]
+GENRES = ["codepath", "40's", "50's", "60's", "70's", "80's"]
+MOODS = ["happy", "chill", "intense", "relaxed", "moody", "focused", "euphoric", "sad", "calm", "energetic"]
 
 
 def generate_synthetic_profiles(num_profiles: int = 60, seed: int = 7) -> List[Dict]:

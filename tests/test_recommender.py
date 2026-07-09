@@ -74,7 +74,7 @@ def test_explain_recommendation_returns_non_empty_string():
 def test_load_songs_converts_numeric_fields():
     songs = load_songs("data/songs.csv")
 
-    assert len(songs) == 18
+    assert len(songs) == 713
     assert isinstance(songs[0]["id"], int)
     assert isinstance(songs[0]["energy"], float)
     assert isinstance(songs[0]["tempo_bpm"], float)
@@ -197,7 +197,7 @@ def test_recommend_songs_can_penalize_same_artist_duplicates():
 def test_recommend_songs_returns_top_k_sorted():
     songs = load_songs("data/songs.csv")
     prefs = {
-        "genre": "lofi",
+        "genre": "codepath",
         "mood": "chill",
         "energy": 0.35,
         "tempo_bpm": 78.0,
@@ -211,14 +211,14 @@ def test_recommend_songs_returns_top_k_sorted():
 
     assert len(results) == 3
     assert scores == sorted(scores, reverse=True)
-    assert results[0][0]["genre"] == "lofi"
+    assert results[0][0]["genre"] == "codepath"
     assert results[0][0]["mood"] == "chill"
 
 
 def test_conflicting_profile_can_prioritize_genre_over_mood():
     songs = load_songs("data/songs.csv")
     prefs = {
-        "genre": "pop",
+        "genre": "codepath",
         "mood": "sad",
         "energy": 0.90,
         "tempo_bpm": 130.0,
@@ -229,7 +229,7 @@ def test_conflicting_profile_can_prioritize_genre_over_mood():
 
     results = recommend_songs(prefs, songs, k=1)
 
-    assert results[0][0]["genre"] == "pop"
+    assert results[0][0]["genre"] == "codepath"
 
 
 def test_score_song_explains_missed_genre_and_mood_points():
@@ -296,7 +296,7 @@ def test_apply_feedback_ignores_unknown_song_ids_and_actions():
 def test_recommend_songs_exploration_swaps_in_different_genre():
     songs = load_songs("data/songs.csv")
     prefs = {
-        "genre": "pop",
+        "genre": "codepath",
         "mood": "happy",
         "energy": 0.85,
         "tempo_bpm": 124.0,
@@ -308,17 +308,34 @@ def test_recommend_songs_exploration_swaps_in_different_genre():
     normal = recommend_songs(prefs, songs, k=2)
     with_exploration = recommend_songs(prefs, songs, k=2, exploration=True)
 
-    assert normal[0][0]["genre"] == "pop"
-    assert normal[1][0]["genre"] == "pop"
+    assert normal[0][0]["genre"] == "codepath"
+    assert normal[1][0]["genre"] == "codepath"
     assert with_exploration[0][0]["title"] == normal[0][0]["title"]
-    assert with_exploration[1][0]["genre"] != "pop"
+    assert with_exploration[1][0]["genre"] != "codepath"
     assert "exploration pick" in with_exploration[1][2]
 
 
 def test_exploration_still_swaps_when_natural_last_slot_is_already_diverse():
     """Regression test: exploration must not be a no-op just because the
-    natural k-th song already happens to be a different genre."""
-    songs = load_songs("data/songs.csv")
+    natural k-th song already happens to be a different genre.
+
+    Uses a small synthetic catalog (rather than data/songs.csv) so this stays
+    reproducible regardless of what real songs happen to be in the catalog:
+    songs 1 and 2 are a clean pop/happy match, song 3 is a different genre
+    that would naturally land in the k=3 slot anyway, and song 4 is a
+    different genre again but only reachable if exploration searches past
+    the natural top-k cutoff instead of reusing whatever is already there.
+    """
+    songs = [
+        {"id": 1, "title": "A", "artist": "Artist", "genre": "pop", "mood": "happy",
+         "energy": 0.8, "tempo_bpm": 120.0, "valence": 0.8, "danceability": 0.8, "acousticness": 0.2},
+        {"id": 2, "title": "B", "artist": "Artist", "genre": "pop", "mood": "happy",
+         "energy": 0.79, "tempo_bpm": 119.0, "valence": 0.79, "danceability": 0.79, "acousticness": 0.21},
+        {"id": 3, "title": "C", "artist": "Artist", "genre": "rock", "mood": "happy",
+         "energy": 0.78, "tempo_bpm": 118.0, "valence": 0.78, "danceability": 0.78, "acousticness": 0.22},
+        {"id": 4, "title": "D", "artist": "Artist", "genre": "jazz", "mood": "happy",
+         "energy": 0.5, "tempo_bpm": 100.0, "valence": 0.5, "danceability": 0.5, "acousticness": 0.5},
+    ]
     prefs = {
         "genre": "pop",
         "mood": "happy",
@@ -329,11 +346,12 @@ def test_exploration_still_swaps_when_natural_last_slot_is_already_diverse():
         "acousticness": 0.2,
     }
 
-    normal = recommend_songs(prefs, songs, k=5)
-    with_exploration = recommend_songs(prefs, songs, k=5, exploration=True)
+    normal = recommend_songs(prefs, songs, k=3)
+    with_exploration = recommend_songs(prefs, songs, k=3, exploration=True)
 
-    assert normal[-1][0]["genre"] != "pop"  # the natural last slot is already diverse
+    assert normal[-1][0]["genre"] != "pop"  # the natural last slot (song C) is already diverse
     assert with_exploration[-1][0]["title"] != normal[-1][0]["title"]
+    assert with_exploration[-1][0]["title"] == "D"
     assert with_exploration[-1][0]["genre"] != "pop"
     assert "exploration pick" in with_exploration[-1][2]
 

@@ -44,116 +44,157 @@ song scored well, but why it didn't score better.
 
 ## 4. Data
 
-The catalog has 18 songs in `data/songs.csv`. The dataset includes pop, lofi,
-rock, ambient, jazz, synthwave, folk, EDM, R&B, metal, soul, and hip hop. Each
-song has a title, artist, genre, mood, energy, tempo, valence, danceability, and
-acousticness. I added 8 songs beyond the starter catalog to make the simulation
-less narrow. The data is still tiny and manually labeled, so it does not capture
-lyrics, real listener behavior, subgenres, culture, language, or artist history.
+The catalog has 713 songs in `data/songs.csv`, in two very different parts:
+
+- **18 "codepath" songs**: the original fictional demo catalog I built and
+  hand-labeled in Phases 2-3 (genre, mood, energy, tempo, valence,
+  danceability, acousticness all set by hand). I relabeled all of their
+  `genre` values to a single tag, `codepath`, so this original simulation
+  catalog reads as its own distinct category rather than mixing with real
+  genre labels.
+- **695 real, well-known songs from the 1940s-1980s**: imported from an
+  external chart-hits dataset (title, artist, release year, BPM, energy,
+  valence, danceability, acousticness, popularity). I repurposed the `genre`
+  field to mean *decade* for these songs (`40's`, `50's`, `60's`, `70's`,
+  `80's`) instead of a musical style, matching the decade labels the source
+  data was already organized by. The decades are very unevenly sized: only 4
+  songs from the `40's`, versus 371 from the `80's` — a real, unplanned class
+  imbalance that turned out to matter a lot (see Limitations).
+
+The source dataset has no `mood` column, but mood is worth 1.5 points in my
+scoring recipe, so I derived one per song from its energy and valence (e.g.
+high energy + high valence → `euphoric`; low + low → `sad`; mid-range →
+`chill`/`relaxed`/`energetic`). That means every real song's mood is a
+computed label, not something a person tagged — a limitation, not a
+measurement.
 
 I also generated `data/listening_history.csv`: 203 simulated "like" events from
 40 fake users (via `scripts/generate_listening_history.py`, seeded for
 reproducibility), used only by the optional collaborative filtering feature.
-This is synthetic data, not real listener behavior, so any pattern it produces
-reflects the generator's assumptions, not real music fans.
+This only covers the 18 `codepath` songs (it predates the real-song import),
+so collaborative filtering can only ever boost one of those 18, never a real
+song. This is synthetic data either way, not real listener behavior, so any
+pattern it produces reflects the generator's assumptions, not real music fans.
 
 ---
 
 ## 5. Strengths
 
-The system works well when a user profile has consistent preferences. The
-High-Energy Pop profile recommended `Sunrise City` first because it matched pop,
-happy mood, high energy, and danceability. The Chill Lofi profile recommended
-`Library Rain` and `Midnight Coding`, which feels reasonable for a quiet focus
-playlist. The Deep Intense Rock profile correctly put `Storm Runner` first and
-then moved toward intense metal/pop tracks because those shared energy and mood.
-I also added a mood-first scoring mode and a simple diversity penalty to make
-recommendations feel less repetitive and to show how alternative ranking logic
-can change the output.
+The system works well when a user profile has consistent preferences and the
+requested decade has enough songs to choose from. The "Codepath Originals"
+profile (genre `codepath`, mood `happy`) correctly put `Sunrise City` first
+because it matched genre, mood, energy, and danceability. The "80's Dance
+Floor" profile (genre `80's`, mood `euphoric`) pulled real, era-appropriate
+picks like *(I've Had) The Time of My Life* and *You Make My Dreams (Come
+True)* — reasonable results for a large, well-covered decade. The "70's Deep
+Rock" profile surfaced real high-energy 70's tracks (Queen, Bruce Springsteen,
+Talking Heads) that plausibly fit an "intense rock" request. I also added a
+mood-first scoring mode, a diversity penalty, an exploration mode, and a
+feedback loop to make recommendations feel less repetitive and to show how
+alternative ranking logic can change the output.
 
 ---
 
 ## 6. Limitations and Bias
 
-The biggest limitation is that genre and mood labels are simple and powerful.
-This can create a filter bubble where songs outside the user's favorite genre
-have trouble ranking highly. In the Conflicted Sad Workout profile, pop songs
-ranked above `Blue Hour Ballad` even though that song matched the requested sad
-mood. That happened because genre, energy, danceability, and tempo outweighed
-mood.
+**A tiny "genre" gets starved out, even when explicitly requested.** The
+`40's` decade only has 4 songs, all with low energy (0.17-0.42) and calm
+moods. I tested a "Starved 40's Workout" profile — explicitly requesting
+genre `40's` but with high-energy, intense-mood targets (a workout playlist
+from the 1940s, essentially a contradiction the dataset can't satisfy). Not
+one actual `40's` song made the top 5. Every result came from `80's` or
+`codepath` instead, because their sheer numbers (371 and 18 candidates with a
+wide range of energy levels) meant *something* would out-score a low-energy,
+niche-mood match every time. This is a direct, measured example of a real
+recommender problem: catalog imbalance can make a whole category functionally
+invisible, no matter what the user explicitly asks for, once a strong numeric
+mismatch is added to the mix.
 
 I added a small feedback loop (`apply_feedback()`) so the system isn't
 completely static, but it's a limited fix: it only nudges the numeric targets
 (energy, valence, danceability, tempo, acousticness), not the genre/mood match
-bonus. Testing it on the Chill Lofi profile, skipping `Library Rain` and
+bonus. Testing it on a codepath chill profile, skipping `Library Rain` and
 saving `Midnight Coding` was enough to flip their order — but only because
 they started just 0.17 points apart. A feedback loop can't override a strong
 genre/mood match with a handful of clicks; it can only re-sort songs that were
 already close. That's a useful, honest limit to know about a "learns from
-feedback" feature: it learns, but not enough to fix the genre/mood bias above.
+feedback" feature: it learns, but not enough to fix the catalog-imbalance bias
+above.
 
-I measured this instead of just describing it. `src/evaluate.py` runs 60
-random synthetic profiles through the recommender and computes a genre
-concentration score (HHI, 0 = diverse, 1 = one genre). The balanced scorer
-alone measured 0.103. Turning on the diversity penalty barely changed that
-(0.098), because that penalty only removes duplicate artists within one
-profile's own top 5 — it does nothing about which genres dominate across many
-different profiles. Turning on collaborative filtering made concentration
-*worse* (0.126): with only 40 simulated listeners, two songs (`Sunrise City`,
-`Library Rain`) got liked disproportionately often, so the CF signal
-amplified their popularity across unrelated profiles instead of adding
-variety. That's a small-scale version of the "rich-get-richer" popularity bias
-real collaborative-filtering systems are criticized for — it shows that adding
-"what other users liked" as a signal isn't automatically a fix for a filter
-bubble; with a small enough user base, it can create its own bubble around
-whichever songs got an early lead in popularity.
+I measured concentration instead of just describing it. `src/evaluate.py` runs
+60 random synthetic profiles through the recommender and computes a genre
+concentration score (HHI, 0 = diverse, 1 = one genre) — genre here means the
+new vocabulary (`codepath` plus the five decades). The balanced scorer alone
+measured 0.186. Turning on the diversity penalty barely changed that (0.187),
+because that penalty only removes duplicate artists within one profile's own
+top 5 — it does nothing about which genres dominate across many different
+profiles. Turning on collaborative filtering made concentration *worse*
+(0.214): the `codepath` share of all recommended slots jumped from 22% to 34%,
+because CF can only ever boost one of the 18 `codepath` songs (the simulated
+listening history predates the real-song import), so it systematically pulls
+weight toward that one small pool regardless of what decade the profile asked
+for. Across every configuration, `40's` stayed the smallest share of results
+(6.7-7.7%) despite being requestable like any other genre — the same
+starvation problem showing up in aggregate, not just in one hand-picked
+profile. That's a small-scale version of the "rich-get-richer" popularity bias
+real collaborative-filtering systems are criticized for, plus a reminder that
+adding "what other users liked" as a signal isn't automatically a fix for a
+filter bubble — with an unevenly sized catalog, it can make the imbalance
+worse.
 
 ---
 
 ## 7. Evaluation
 
-I tested four profiles: High-Energy Pop, Chill Lofi, Deep Intense Rock, and
-Conflicted Sad Workout. High-Energy Pop favored pop/happy/high-danceability
-songs, while Chill Lofi shifted toward acoustic low-energy tracks. Deep Intense
-Rock shifted toward rock and metal, which made sense because those songs had
-high energy and intense mood labels. The surprising result was Conflicted Sad
-Workout: the sad R&B song appeared third because pop genre and workout-style
-energy had more influence than mood. I also ran pytest to verify CSV loading,
-scoring explanations, sorted top-k output, and expected edge-case behavior.
+I tested four profiles: "Codepath Originals" (genre `codepath`), "80's Dance
+Floor" (genre `80's`, mood `euphoric`), "70's Deep Rock" (genre `70's`, mood
+`intense`), and "Starved 40's Workout" (genre `40's`, mood `intense`, but
+40's-inappropriate high-energy targets). The first three behaved sensibly:
+each pulled genre-and-mood-appropriate songs, real or codepath. The fourth was
+the interesting one — see Limitations for why not a single `40's` song made
+the cut.
 
-I also ran a weight-shift experiment on Conflicted Sad Workout: halving the
-genre weight and doubling the energy weight. The sad song did not move up —
-instead another high-energy, non-sad track outranked it, and the sad song fell
-further down. That told me the mood-mismatch problem isn't really "genre is too
-strong"; it's that no numeric feature substitutes for mood, so boosting any of
-them just reinforces the same energy-driven bias. See the README's
-"Experiments You Tried" section for the full before/after output.
+I also re-ran the weight-shift experiment (halving the genre weight, doubling
+the energy weight) on the Starved 40's Workout profile. Before: top 3 were
+`How Will I Know` (80's), `Storm Runner` (codepath), `We Didn't Start the
+Fire` (80's). After the shift: `How Will I Know` and `Storm Runner` still led,
+but `We Didn't Start the Fire` dropped out of the top 3, replaced by another
+codepath song, `Gym Hero`. Lowering the genre weight didn't help a single
+`40's` song crack the list — it just changed which non-`40's` songs won. Same
+conclusion as before: no numeric feature substitutes for what's actually
+missing (enough `40's` candidates that also fit the energy target), so
+reweighting just reshuffles which other genre dominates.
 
 Beyond individual profiles, I ran a batch evaluation (`python -m src.evaluate`)
-across 60 randomly generated profiles to see how the system behaves in
-aggregate, not just on the four hand-picked examples. That's what produced the
-HHI concentration numbers above and confirmed that collaborative filtering
-needs a much bigger simulated user base before it would actually reduce bias
-instead of amplifying it.
+across 60 randomly generated profiles (now drawn from the `codepath` +
+5-decade vocabulary) to see how the system behaves in aggregate, not just on
+the four hand-picked examples. That's what produced the HHI concentration
+numbers above and confirmed that collaborative filtering, scoped to only the
+18 `codepath` songs, systematically favors that pool over every decade,
+including the ones explicitly requested — and that `40's` stays the smallest
+share of recommendations under every configuration.
 
-I also specifically tested the two newest features. For exploration mode, I
-compared `k=2` results for High-Energy Pop with and without it: normally both
-slots are pop songs (`Sunrise City`, `Gym Hero`); with exploration on, the
-second slot swaps to `Afterglow Arcade` (synthwave) — confirming it actually
-trades score for genre variety instead of silently doing nothing. For the
-feedback loop, see the Limitations section above: it reordered two close-
-scoring lofi songs but, as expected, couldn't dislodge a strong genre/mood
-match in the High-Energy Pop profile with the same size nudge.
+I also specifically tested the two newest features against the new catalog.
+For exploration mode, I compared `k=2` results for Codepath Originals with and
+without it: normally both slots are codepath songs (`Sunrise City`, `Afterglow
+Arcade`); with exploration on, the last slot force-swaps to a real decade
+song — confirming it still trades score for genre variety instead of silently
+doing nothing, even against a 713-song catalog. For the feedback loop, see the
+Limitations section above: it reordered two close-scoring codepath songs but,
+as expected, couldn't dislodge a strong genre/mood match with the same size
+nudge.
 
 ---
 
 ## 8. Future Work
 
-- Replace the simulated listening history with real (or a much larger simulated) user base so collaborative filtering adds diversity instead of amplifying a couple of popular songs.
+- Rebalance or resample the decade catalog (or add a small-genre boost) so `40's` and other under-represented decades aren't structurally invisible.
+- Extend `data/listening_history.csv` to cover real songs, not just the 18 `codepath` songs, so collaborative filtering can actually surface real-song discoveries instead of only ever boosting the same small pool.
+- Get real, human-labeled mood tags for the 695 imported songs instead of a derived energy/valence heuristic.
 - Let the feedback loop also shift genre/mood preference over time (e.g., after enough likes for a different genre, treat it as a second favorite genre), not just the numeric targets, so it can eventually overcome a strong initial genre/mood match.
 - Track replay count and use it as its own signal, not just like/save/skip.
 - Expand the diversity penalty so it also considers cross-profile genre concentration, not just per-profile artist repeats.
-- Add more songs and richer labels such as decade, language, popularity, and lyrical theme.
+- Add richer labels such as language, popularity, and lyrical theme to the real-song catalog.
 - Add more scoring modes beyond Balanced and Mood-First, such as Genre-First or Energy-Focused.
 - Improve explanations so they are shorter and easier to read.
 
@@ -162,10 +203,17 @@ match in the High-Energy Pop profile with the same size nudge.
 ## 9. Personal Reflection
 
 My biggest learning moment was seeing how quickly simple weights create a
-recommendation "personality." The model felt smart when it picked lofi songs for
-a chill profile, but the conflicting profile showed that it was only following
-the rules I gave it. AI helped me brainstorm the scoring recipe and structure
-the code, but I had to double-check whether the outputs actually made musical
-sense. If I extended this project, I would try a diversity penalty and multiple
-scoring modes so users could escape the filter bubble created by one fixed
-recipe.
+recommendation "personality." The model felt smart when it picked lofi-style
+codepath songs for a chill profile, but the conflicting profiles showed it was
+only following the rules I gave it. Importing 695 real songs and relabeling
+genre as decade was the biggest surprise of the whole project: I expected more
+data to make the system feel richer, but instead it exposed a sharper bias
+than anything in the original 18-song catalog — a tiny decade like the `40's`
+can be requested by name and still get completely crowded out, just because
+there are only 4 of them next to 371 `80's` songs. AI helped me brainstorm the
+scoring recipe, structure the code, and design the data import, but I had to
+double-check every claim against real output — especially the mood labels,
+since those are a heuristic I invented, not something anyone actually tagged.
+If I extended this project, I would fix the catalog imbalance itself before
+adding more ranking logic, since no amount of clever scoring can recommend
+songs that are barely represented in the data to begin with.

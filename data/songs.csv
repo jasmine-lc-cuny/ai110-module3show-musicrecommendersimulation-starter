@@ -1,19 +1,714 @@
 id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness
-1,Sunrise City,Neon Echo,pop,happy,0.82,118,0.84,0.79,0.18
-2,Midnight Coding,LoRoom,lofi,chill,0.42,78,0.56,0.62,0.71
-3,Storm Runner,Voltline,rock,intense,0.91,152,0.48,0.66,0.10
-4,Library Rain,Paper Lanterns,lofi,chill,0.35,72,0.60,0.58,0.86
-5,Gym Hero,Max Pulse,pop,intense,0.93,132,0.77,0.88,0.05
-6,Spacewalk Thoughts,Orbit Bloom,ambient,chill,0.28,60,0.65,0.41,0.92
-7,Coffee Shop Stories,Slow Stereo,jazz,relaxed,0.37,90,0.71,0.54,0.89
-8,Night Drive Loop,Neon Echo,synthwave,moody,0.75,110,0.49,0.73,0.22
-9,Focus Flow,LoRoom,lofi,focused,0.40,80,0.59,0.60,0.78
-10,Rooftop Lights,Indigo Parade,indie pop,happy,0.76,124,0.81,0.82,0.35
-11,Desert Bloom,Sol Mesa,folk,relaxed,0.46,92,0.68,0.45,0.84
-12,Bassline Fever,DJ Circuit,edm,euphoric,0.96,128,0.88,0.94,0.04
-13,Afterglow Arcade,Pixel Hearts,synthwave,happy,0.79,116,0.82,0.86,0.20
-14,Blue Hour Ballad,Marina Vale,r&b,sad,0.38,74,0.32,0.52,0.62
-15,Iron Skyline,North Static,metal,intense,0.98,160,0.36,0.50,0.03
-16,Sunday Vinyl,The Soft Notes,soul,relaxed,0.50,88,0.73,0.63,0.66
-17,Metro Daydream,Kai North,hip hop,focused,0.70,96,0.61,0.84,0.18
-18,Forest Sleep,Cloud Harbor,ambient,calm,0.22,58,0.57,0.30,0.95
+1,Sunrise City,Neon Echo,codepath,happy,0.82,118,0.84,0.79,0.18
+2,Midnight Coding,LoRoom,codepath,chill,0.42,78,0.56,0.62,0.71
+3,Storm Runner,Voltline,codepath,intense,0.91,152,0.48,0.66,0.10
+4,Library Rain,Paper Lanterns,codepath,chill,0.35,72,0.60,0.58,0.86
+5,Gym Hero,Max Pulse,codepath,intense,0.93,132,0.77,0.88,0.05
+6,Spacewalk Thoughts,Orbit Bloom,codepath,chill,0.28,60,0.65,0.41,0.92
+7,Coffee Shop Stories,Slow Stereo,codepath,relaxed,0.37,90,0.71,0.54,0.89
+8,Night Drive Loop,Neon Echo,codepath,moody,0.75,110,0.49,0.73,0.22
+9,Focus Flow,LoRoom,codepath,focused,0.40,80,0.59,0.60,0.78
+10,Rooftop Lights,Indigo Parade,codepath,happy,0.76,124,0.81,0.82,0.35
+11,Desert Bloom,Sol Mesa,codepath,relaxed,0.46,92,0.68,0.45,0.84
+12,Bassline Fever,DJ Circuit,codepath,euphoric,0.96,128,0.88,0.94,0.04
+13,Afterglow Arcade,Pixel Hearts,codepath,happy,0.79,116,0.82,0.86,0.20
+14,Blue Hour Ballad,Marina Vale,codepath,sad,0.38,74,0.32,0.52,0.62
+15,Iron Skyline,North Static,codepath,intense,0.98,160,0.36,0.50,0.03
+16,Sunday Vinyl,The Soft Notes,codepath,relaxed,0.50,88,0.73,0.63,0.66
+17,Metro Daydream,Kai North,codepath,focused,0.70,96,0.61,0.84,0.18
+18,Forest Sleep,Cloud Harbor,codepath,calm,0.22,58,0.57,0.30,0.95
+19,Lovesick Blues - Show 9,Hank Williams,40's,happy,0.35,134,0.68,0.69,0.96
+20,Move It On Over,Hank Williams,40's,happy,0.42,83,0.9,0.74,0.93
+21,Introduction,Hank Williams,40's,happy,0.17,61,0.77,0.71,0.97
+22,I Saw The Light,"Hank Williams, Drifting Cowboys",40's,chill,0.27,205,0.48,0.35,0.95
+23,"Shake, Rattle And Roll",Bill Haley & His Comets,50's,euphoric,0.79,168,0.84,0.66,0.21
+24,(We're Gonna) Rock Around The Clock,Bill Haley & His Comets,50's,euphoric,0.86,91,0.78,0.81,0.21
+25,My Special Angel,Bobby Helms,50's,chill,0.29,79,0.38,0.48,0.82
+26,It's So Easy,Buddy Holly & The Crickets,50's,happy,0.48,136,0.9,0.62,0.08
+27,Not Fade Away,Buddy Holly & The Crickets,50's,happy,0.48,96,0.92,0.8,0.84
+28,Oh Boy!,"Buddy Holly, The Crickets",50's,happy,0.56,97,0.88,0.53,0.75
+29,Stupid Cupid,Connie Francis,50's,euphoric,0.79,136,0.97,0.61,0.73
+30,All Shook Up,Elvis Presley,50's,happy,0.47,74,0.95,0.62,0.88
+31,KIss Of Fire,Georgia Gibbs,50's,happy,0.35,107,0.73,0.52,0.93
+32,Seven Lonely Days,Georgia Gibbs,50's,happy,0.3,145,0.78,0.74,0.85
+33,"Hey, Good Lookin'",Hank Williams,50's,happy,0.37,141,0.91,0.79,0.8
+34,Jambalaya (On The Bayou),Hank Williams,50's,happy,0.29,164,0.89,0.53,0.71
+35,Settin' The Woods On Fire,Hank Williams,50's,happy,0.3,162,0.95,0.74,0.83
+36,"Cold, Cold Heart",Hank Williams,50's,chill,0.16,113,0.52,0.57,0.9
+37,My Heart Would Know,"Hank Williams, Drifting Cowboys",50's,happy,0.24,122,0.66,0.67,0.61
+38,Reet Petite,Jackie Wilson,50's,euphoric,0.66,84,0.87,0.66,0.45
+39,Lonely Teardrops,Jackie Wilson,50's,happy,0.48,137,0.84,0.52,0.41
+40,A Kiss To Build A Dream On - Single Version,Louis Armstrong,50's,chill,0.08,88,0.36,0.72,0.78
+41,The World Is Getting Smaller,Mark Dinning,50's,chill,0.33,122,0.57,0.6,0.92
+42,Tennessee Waltz,Patti Page,50's,chill,0.12,87,0.35,0.37,0.97
+43,Old Cape Cod,Patti Page,50's,sad,0.16,104,0.23,0.32,0.71
+44,All I Have to Do Is Dream,The Everly Brothers,50's,relaxed,0.46,96,0.53,0.53,0.84
+45,Smoke Gets In Your Eyes,The Platters,50's,sad,0.3,171,0.28,0.2,0.92
+46,Only You (And You Alone),The Platters,50's,sad,0.31,80,0.34,0.34,0.94
+47,Don't Rain On My Parade - Soundtrack Version,Barbra Streisand,60's,relaxed,0.36,127,0.61,0.56,0.62
+48,Sunny,Bobby Hebb,60's,happy,0.34,128,0.67,0.71,0.93
+49,I'm Sorry,Brenda Lee,60's,sad,0.22,102,0.3,0.56,0.87
+50,Runaway,Del Shannon,60's,happy,0.53,79,0.73,0.59,0.15
+51,This Bitter Earth / On The Nature Of Daylight,Dinah Washington (Clyde Otis Max Richter),60's,sad,0.3,79,0.04,0.09,0.18
+52,Take Another Little Piece of My Heart,Dusty Springfield,60's,euphoric,0.72,79,0.75,0.5,0.0
+53,Can't Help Falling in Love,Elvis Presley,60's,sad,0.29,100,0.34,0.4,0.94
+54,(Marie's The Name) His Latest Flame,Elvis Presley,60's,euphoric,0.92,105,0.89,0.66,0.56
+55,Rescue Me,Fontella Bass,60's,happy,0.54,123,0.96,0.68,0.67
+56,Everybody's Talkin',Harry Nilsson,60's,relaxed,0.37,128,0.63,0.5,0.46
+57,There's a Kind of Hush,Herman's Hermits,60's,relaxed,0.55,128,0.61,0.58,0.09
+58,(Your Love Keeps Lifting Me) Higher & Higher,Jackie Wilson,60's,euphoric,0.68,96,0.94,0.63,0.32
+59,I Get The Sweetest Feeling,Jackie Wilson,60's,happy,0.48,124,0.75,0.68,0.78
+60,Your Love Is Lifting Me (Higher and Higher),Jackie Wilson,60's,euphoric,0.94,95,0.84,0.64,0.05
+61,Papa's Got A Brand New Bag,James Brown,60's,happy,0.54,128,0.93,0.74,0.29
+62,I Got You (I Feel Good),James Brown & The Famous Flames,60's,happy,0.49,143,0.74,0.6,0.31
+63,"It's A Man's, Man's, Man's World",James Brown & The Famous Flames,60's,chill,0.24,81,0.57,0.54,0.69
+64,Both Sides Now,Joni Mitchell,60's,sad,0.14,77,0.13,0.19,0.87
+65,Shotgun,Jr. Walker & The All Stars,60's,energetic,0.68,121,0.63,0.75,0.16
+66,It's My Party,Lesley Gore,60's,happy,0.5,128,0.96,0.69,0.37
+67,It's My Party - Single Version,Lesley Gore,60's,euphoric,0.71,129,0.96,0.68,0.38
+68,The Locomotion,Little Eva,60's,euphoric,0.78,129,0.74,0.63,0.71
+69,The Loco-Motion,Little Eva,60's,euphoric,0.92,130,0.87,0.62,0.88
+70,What A Wonderful World,Louis Armstrong,60's,sad,0.17,77,0.2,0.27,0.73
+71,Do Wah Diddy Diddy - 2007 Remaster,Manfred Mann,60's,happy,0.58,125,0.94,0.66,0.28
+72,Do Wah Diddy Diddy,Manfred Mann,60's,happy,0.56,125,0.96,0.66,0.26
+73,Dancing In The Street,Martha Reeves & The Vandellas,60's,sad,0.57,126,0.3,0.56,0.01
+74,(Love Is Like A) Heat Wave,Martha Reeves & The Vandellas,60's,euphoric,0.62,167,0.76,0.51,0.51
+75,Nowhere To Run,Martha Reeves & The Vandellas,60's,euphoric,0.82,129,0.88,0.61,0.1
+76,Jimmy Mack,Martha Reeves & The Vandellas,60's,happy,0.52,127,0.69,0.7,0.77
+77,(Love Is Like A) Heat Wave - Single Version,Martha Reeves & The Vandellas,60's,euphoric,0.85,83,0.82,0.51,0.48
+78,I Heard It Through The Grapevine,Marvin Gaye,60's,relaxed,0.36,117,0.62,0.71,0.27
+79,It Takes Two,"Marvin Gaye, Kim Weston",60's,happy,0.48,151,0.81,0.52,0.21
+80,Ain't No Mountain High Enough,"Marvin Gaye, Tammi Terrell",60's,euphoric,0.6,130,0.8,0.66,0.43
+81,You're All I Need To Get By,"Marvin Gaye, Tammi Terrell",60's,sad,0.45,98,0.17,0.51,0.14
+82,Ain't Nothing Like The Real Thing,"Marvin Gaye, Tammi Terrell",60's,happy,0.52,93,0.77,0.61,0.04
+83,My Guy,Mary Wells,60's,happy,0.58,127,0.91,0.69,0.56
+84,Devil with the Blue Dress On / Good Golly Miss Molly (Medley),Mitch Ryder and The Detroit Wheels,60's,euphoric,0.84,79,0.74,0.54,0.25
+85,Sugar Town,Nancy Sinatra,60's,relaxed,0.45,108,0.63,0.73,0.63
+86,Sweet Caroline,Neil Diamond,60's,chill,0.13,63,0.62,0.53,0.62
+87,Breaking Up Is Hard to Do,Neil Sedaka,60's,euphoric,0.8,116,0.97,0.74,0.7
+88,Good Morning Starshine,Oliver,60's,happy,0.54,125,0.86,0.69,0.39
+89,(Sittin' On) the Dock of the Bay - Mono,Otis Redding,60's,relaxed,0.37,104,0.53,0.77,0.68
+90,Stand by Me,Otis Redding,60's,happy,0.46,112,0.93,0.88,0.28
+91,Try a Little Tenderness,Otis Redding,60's,sad,0.13,103,0.07,0.59,0.19
+92,When a Man Loves a Woman,Percy Sledge,60's,sad,0.15,97,0.21,0.52,0.13
+93,Downtown,Petula Clark,60's,energetic,0.69,117,0.6,0.48,0.78
+94,"Oh, Pretty Woman",Roy Orbison,60's,euphoric,0.6,127,0.96,0.62,0.71
+95,Soul Man,Sam & Dave,60's,happy,0.41,112,0.82,0.79,0.26
+96,"Hold On, I'm Comin'",Sam & Dave,60's,happy,0.34,107,0.91,0.8,0.2
+97,"Hold on, I'm Comin' - Re-Recorded",Sam & Dave,60's,euphoric,0.72,131,0.94,0.75,0.03
+98,Venus,Shocking Blue,60's,euphoric,0.76,128,0.96,0.69,0.46
+99,Mrs. Robinson - From  The Graduate  Soundtrack,Simon & Garfunkel,60's,happy,0.46,92,0.81,0.61,0.71
+100,The Sound of Silence - Acoustic Version,Simon & Garfunkel,60's,sad,0.22,107,0.33,0.53,0.84
+101,Bookends Theme - Reprise,Simon & Garfunkel,60's,chill,0.1,138,0.5,0.47,0.91
+102,Everyday People,Sly & The Family Stone,60's,euphoric,0.62,115,0.77,0.81,0.25
+103,The Tracks Of My Tears,Smokey Robinson & The Miracles,60's,happy,0.33,97,0.73,0.5,0.7
+104,You've Really Got A Hold On Me - Alternate Stereo Mix,Smokey Robinson & The Miracles,60's,happy,0.38,118,0.68,0.64,0.13
+105,I Got You Babe,Sonny & Cher,60's,energetic,0.8,111,0.6,0.63,0.14
+106,For Once In My Life,Stevie Wonder,60's,happy,0.52,110,0.85,0.52,0.2
+107,Aquarius/Let The Sunshine In (The Flesh Failures) - From the Musical  Hair,The 5th Dimension,60's,energetic,0.74,118,0.51,0.29,0.45
+108,"Up, Up and Away",The 5th Dimension,60's,relaxed,0.36,108,0.52,0.39,0.6
+109,My Boyfriend's Back,The Angels,60's,euphoric,0.89,135,0.95,0.68,0.63
+110,"Sugar, Sugar",The Archies,60's,euphoric,0.72,123,0.97,0.74,0.79
+111,Windy - Remastered Version,The Association,60's,euphoric,0.68,133,0.9,0.68,0.36
+112,Never My Love - Remastered Version,The Association,60's,relaxed,0.43,96,0.61,0.44,0.17
+113,Cherish,The Association,60's,relaxed,0.54,110,0.6,0.51,0.78
+114,Then I Kissed Her - Remastered 2001,The Beach Boys,60's,euphoric,0.71,127,0.74,0.58,0.17
+115,California Girls - Remix/Remastered 2001,The Beach Boys,60's,euphoric,0.62,117,0.71,0.5,0.47
+116,Good Vibrations - Remastered 2001,The Beach Boys,60's,relaxed,0.47,133,0.39,0.4,0.33
+117,Wouldn't It Be Nice,The Beach Boys,60's,euphoric,0.63,125,0.72,0.39,0.72
+118,Don't Worry Baby - Remastered 2001,The Beach Boys,60's,happy,0.47,121,0.85,0.49,0.07
+119,No Reply - Remastered 2009,The Beatles,60's,happy,0.59,124,0.87,0.72,0.67
+120,Come Together - Remastered 2009,The Beatles,60's,sad,0.38,165,0.19,0.53,0.03
+121,Turn! Turn! Turn! (To Everything There Is a Season),The Byrds,60's,euphoric,0.82,125,0.76,0.45,0.14
+122,Mr. Tambourine Man,The Byrds,60's,relaxed,0.47,120,0.64,0.46,0.51
+123,Cool Jerk,The Capitols,60's,happy,0.57,84,0.76,0.7,0.34
+124,"The Rain, The Park & Other Things - Single Version",The Cowsills,60's,energetic,0.71,132,0.61,0.37,0.7
+125,The Rain The Park And Other Things,The Cowsills,60's,euphoric,0.66,132,0.69,0.38,0.81
+126,Chapel of Love,The Dixie Cups,60's,happy,0.35,125,0.79,0.59,0.73
+127,Under the Boardwalk,The Drifters,60's,happy,0.23,124,0.78,0.75,0.91
+128,Build Me Up Buttercup,The Foundations,60's,happy,0.51,134,0.86,0.66,0.32
+129,Baby Now That I've Found You,The Foundations,60's,happy,0.41,119,0.93,0.7,0.52
+130,Bus Stop,The Hollies,60's,euphoric,0.66,136,0.74,0.6,0.13
+131,This Old Heart Of Mine (Is Weak For You),The Isley Brothers,60's,happy,0.59,130,0.95,0.63,0.35
+132,Twist And Shout,The Isley Brothers,60's,euphoric,0.81,123,0.96,0.77,0.65
+133,I Want You Back,The Jackson 5,60's,happy,0.54,197,0.89,0.47,0.31
+134,Do You Believe in Magic?,The Lovin' Spoonful,60's,euphoric,0.74,139,0.76,0.55,0.21
+135,California Dreamin' - Single Version,The Mamas & The Papas,60's,energetic,0.61,112,0.64,0.55,0.35
+136,Dream A Little Dream Of Me,The Mamas & The Papas,60's,chill,0.31,93,0.35,0.41,0.79
+137,"Monday, Monday - Single Version",The Mamas & The Papas,60's,happy,0.46,110,0.71,0.49,0.74
+138,Please Mr. Postman - Single Version / Mono,The Marvelettes,60's,euphoric,0.78,122,0.97,0.79,0.73
+139,I'm a Believer - 2006 Remaster,The Monkees,60's,euphoric,0.78,80,0.96,0.53,0.71
+140,Daydream Believer,The Monkees,60's,happy,0.49,126,0.65,0.51,0.26
+141,You've Lost That Lovin' Feelin' - Single Version,The Righteous Brothers,60's,chill,0.31,95,0.38,0.37,0.52
+142,Unchained Melody,The Righteous Brothers,60's,sad,0.21,99,0.29,0.34,0.4
+143,"Paint It, Black",The Rolling Stones,60's,energetic,0.8,159,0.61,0.46,0.05
+144,(I Can't Get No) Satisfaction - Mono,The Rolling Stones,60's,euphoric,0.86,136,0.93,0.72,0.04
+145,Sympathy For The Devil - 50th Anniversary Edition,The Rolling Stones,60's,euphoric,0.8,125,0.9,0.61,0.13
+146,Be My Baby,The Ronettes,60's,euphoric,0.77,130,0.8,0.51,0.17
+147,Guantanamera,The Sandpipers,60's,happy,0.28,207,0.67,0.32,0.81
+148,Will You Love Me Tomorrow,The Shirelles,60's,relaxed,0.38,136,0.46,0.55,0.31
+149,Mama Said,The Shirelles,60's,euphoric,0.65,141,0.89,0.65,0.33
+150,Baby It's You,The Shirelles,60's,relaxed,0.36,114,0.61,0.67,0.29
+151,Gimme Some Lovin' - Single Mix,The Spencer Davis Group,60's,energetic,0.69,147,0.53,0.49,0.01
+152,Baby Love,The Supremes,60's,energetic,0.61,136,0.48,0.53,0.35
+153,Come See About Me,The Supremes,60's,energetic,0.62,127,0.63,0.72,0.31
+154,Stop! In The Name Of Love,The Supremes,60's,energetic,0.62,116,0.54,0.61,0.79
+155,Back In My Arms Again,The Supremes,60's,energetic,0.69,122,0.45,0.68,0.2
+156,I Hear A Symphony,The Supremes,60's,sad,0.57,71,0.29,0.56,0.47
+157,My World Is Empty Without You,The Supremes,60's,euphoric,0.74,89,0.85,0.45,0.24
+158,You Can't Hurry Love,The Supremes,60's,energetic,0.83,194,0.63,0.47,0.76
+159,You Keep Me Hangin' On,The Supremes,60's,euphoric,0.64,128,0.79,0.68,0.5
+160,Where Did Our Love Go,The Supremes,60's,happy,0.49,135,0.85,0.57,0.79
+161,Come See About Me - Stereo Version,The Supremes,60's,euphoric,0.64,126,0.86,0.73,0.68
+162,My Girl - A Cappella (Excerpt),The Temptations,60's,relaxed,0.46,105,0.57,0.58,0.77
+163,Ain't Too Proud To Beg,The Temptations,60's,euphoric,0.66,118,0.93,0.76,0.55
+164,Get Ready,The Temptations,60's,euphoric,0.74,133,0.88,0.59,0.4
+165,The Way You Do The Things You Do,The Temptations,60's,euphoric,0.7,124,0.74,0.62,0.16
+166,I Can't Get Next To You,The Temptations,60's,euphoric,0.69,109,0.7,0.69,0.57
+167,My Girl,The Temptations,60's,happy,0.55,104,0.72,0.59,0.67
+168,Love Is All Around,The Troggs,60's,happy,0.49,99,0.69,0.46,0.43
+169,Happy Together,The Turtles,60's,happy,0.42,120,0.65,0.61,0.64
+170,The Sun Ain't Gonna Shine Anymore,The Walker Brothers,60's,energetic,0.68,111,0.43,0.38,0.22
+171,Happy Jack,The Who,60's,happy,0.57,129,0.96,0.56,0.03
+172,Happy Jack - Single Version / Mono,The Who,60's,euphoric,0.73,130,0.95,0.58,0.11
+173,Good Lovin' - Single Version,The Young Rascals,60's,happy,0.51,196,0.82,0.25,0.0
+174,Time of the Season,The Zombies,60's,euphoric,0.69,117,0.7,0.54,0.14
+175,Delilah,Tom Jones,60's,happy,0.48,96,0.79,0.53,0.61
+176,What's New Pussycat?,Tom Jones,60's,relaxed,0.45,184,0.57,0.39,0.75
+177,It's Not Unusual,Tom Jones,60's,euphoric,0.72,93,0.91,0.48,0.6
+178,Mony Mony,Tommy James & The Shondells,60's,euphoric,0.83,131,0.81,0.59,0.32
+179,I Think We're Alone Now - Single Version,Tommy James & The Shondells,60's,happy,0.42,132,0.72,0.78,0.07
+180,Brown Eyed Girl,Van Morrison,60's,happy,0.58,151,0.91,0.49,0.19
+181,Land of 1000 Dances,Wilson Pickett,60's,happy,0.59,87,0.77,0.62,0.01
+182,I'm Not In Love,10cc,70's,sad,0.52,134,0.16,0.4,0.69
+183,The Things We Do For Love,10cc,70's,happy,0.53,107,0.78,0.64,0.16
+184,Rubber Bullets,10cc,70's,energetic,0.88,149,0.47,0.55,0.04
+185,Take A Chance On Me,ABBA,70's,euphoric,0.68,107,0.92,0.68,0.16
+186,Dancing Queen,ABBA,70's,euphoric,0.88,101,0.75,0.54,0.38
+187,A Horse with No Name,"America, George Martin",70's,happy,0.51,123,0.83,0.65,0.69
+188,You Ain't Seen Nothing Yet,Bachman-Turner Overdrive,70's,euphoric,0.86,92,0.69,0.69,0.1
+189,The Way We Were,Barbra Streisand,70's,sad,0.32,138,0.17,0.26,0.89
+190,Boogie Woogie Bugle Boy,Bette Midler,70's,euphoric,0.65,98,0.83,0.66,0.66
+191,Lovely Day,Bill Withers,70's,euphoric,0.87,107,0.82,0.41,0.2
+192,Piano Man,Billy Joel,70's,relaxed,0.48,179,0.41,0.33,0.62
+193,Vienna,Billy Joel,70's,sad,0.5,125,0.31,0.53,0.66
+194,My Life,Billy Joel,70's,euphoric,0.65,131,0.8,0.74,0.11
+195,Everybody Loves You Now,Billy Joel,70's,energetic,0.73,125,0.5,0.63,0.01
+196,The Entertainer,Billy Joel,70's,euphoric,0.78,133,0.92,0.6,0.0
+197,Root Beer Rag,Billy Joel,70's,euphoric,0.63,142,0.78,0.55,0.03
+198,She's Always a Woman,Billy Joel,70's,relaxed,0.53,97,0.39,0.74,0.46
+199,Just the Way You Are,Billy Joel,70's,euphoric,0.87,158,0.96,0.77,0.06
+200,Only the Good Die Young,Billy Joel,70's,energetic,0.6,111,0.47,0.61,0.15
+201,Movin' Out (Anthony's Song),Billy Joel,70's,energetic,0.84,100,0.63,0.57,0.02
+202,Love Really Hurts Without You,Billy Ocean,70's,euphoric,0.69,132,0.92,0.83,0.15
+203,Heart Of Glass - Special Mix,Blondie,70's,sad,0.48,156,0.19,0.41,0.16
+204,Hooked On A Feeling,BjÃ¶rn,70's,euphoric,0.65,110,0.76,0.69,0.01
+205,Born to Run,Bruce Springsteen,70's,energetic,0.94,146,0.61,0.27,0.01
+206,Love Will Keep Us Together,Captain & Tennille,70's,euphoric,0.79,130,0.93,0.62,0.35
+207,Do That To Me One More Time,Captain & Tennille,70's,relaxed,0.52,90,0.51,0.73,0.56
+208,You're So Vain,Carly Simon,70's,euphoric,0.68,106,0.67,0.66,0.15
+209,Nobody Does It Better,Carly Simon,70's,sad,0.4,135,0.34,0.37,0.7
+210,You Belong to Me,Carly Simon,70's,euphoric,0.66,109,0.86,0.64,0.26
+211,Where You Lead I Will Follow,Carole King,70's,euphoric,0.74,107,0.7,0.73,0.36
+212,It's Too Late,Carole King,70's,happy,0.44,208,0.81,0.45,0.49
+213,You've Got a Friend,Carole King,70's,chill,0.26,169,0.46,0.47,0.88
+214,I Feel the Earth Move,Carole King,70's,relaxed,0.58,120,0.64,0.71,0.65
+215,So Far Away,Carole King,70's,chill,0.17,144,0.36,0.49,0.9
+216,Jazzman,Carole King,70's,euphoric,0.66,118,0.81,0.58,0.23
+217,Been to Canaan,Carole King,70's,relaxed,0.43,128,0.52,0.53,0.89
+218,Please Mr. Postman,Carpenters,70's,happy,0.55,133,0.96,0.66,0.14
+219,Top Of The World,Carpenters,70's,happy,0.34,184,0.69,0.38,0.81
+220,I'll Never Fall In Love Again,Carpenters,70's,chill,0.31,141,0.61,0.5,0.83
+221,"Gypsys, Tramps & Thieves",Cher,70's,euphoric,0.66,170,0.76,0.51,0.44
+222,If You Leave Me Now,Chicago,70's,sad,0.56,104,0.28,0.43,0.02
+223,Brick House,Commodores,70's,energetic,0.78,108,0.63,0.83,0.07
+224,Easy,Commodores,70's,sad,0.48,132,0.31,0.58,0.2
+225,All Kinds Of Everything,Dana,70's,happy,0.5,103,0.67,0.54,0.82
+226,Fairytale,Dana,70's,euphoric,0.74,107,0.8,0.61,0.01
+227,Rich Girl,Daryl Hall & John Oates,70's,euphoric,0.64,168,0.82,0.6,0.5
+228,Sultans of Swing,Dire Straits,70's,euphoric,0.81,143,0.9,0.71,0.04
+229,Here You Come Again,Dolly Parton,70's,relaxed,0.51,106,0.55,0.59,0.65
+230,Jolene,Dolly Parton,70's,happy,0.54,111,0.81,0.67,0.57
+231,Hot Stuff,Donna Summer,70's,euphoric,0.74,120,0.97,0.82,0.01
+232,Hot Stuff - 12  Version,Donna Summer,70's,euphoric,0.89,120,0.97,0.8,0.0
+233,Bad Girls,Donna Summer,70's,euphoric,0.7,121,0.97,0.86,0.0
+234,Hotel California - 2013 Remaster,Eagles,70's,relaxed,0.51,147,0.61,0.58,0.01
+235,Mr. Blue Sky,Electric Light Orchestra,70's,chill,0.34,178,0.48,0.39,0.65
+236,Crocodile Rock,Elton John,70's,euphoric,0.8,150,0.97,0.62,0.03
+237,Don't Go Breaking My Heart,"Elton John, Kiki Dee",70's,euphoric,0.86,131,0.78,0.74,0.18
+238,Burning Love,Elvis Presley,70's,euphoric,0.75,144,0.97,0.66,0.1
+239,Go Your Own Way - 2004 Remaster,Fleetwood Mac,70's,euphoric,0.95,135,0.8,0.58,0.02
+240,The Chain - 2004 Remaster,Fleetwood Mac,70's,energetic,0.67,152,0.48,0.55,0.01
+241,Cars,Gary Numan,70's,euphoric,0.83,163,0.95,0.55,0.13
+242,My Sweet Lord - Remastered 2014,George Harrison,70's,energetic,0.7,121,0.58,0.54,0.1
+243,If You Could Read My Mind,Gordon Lightfoot,70's,sad,0.24,123,0.22,0.61,0.75
+244,Cat's in the Cradle,Harry Chapin,70's,relaxed,0.58,78,0.51,0.49,0.23
+245,Magic Man,Heart,70's,happy,0.44,104,0.73,0.44,0.16
+246,Barracuda,Heart,70's,euphoric,0.69,137,0.67,0.55,0.02
+247,You Sexy Thing,Hot Chocolate,70's,euphoric,0.73,106,0.96,0.79,0.52
+248,Get Up Offa That Thing,James Brown,70's,euphoric,0.63,118,0.78,0.88,0.34
+249,Your Smiling Face,James Taylor,70's,relaxed,0.51,89,0.61,0.68,0.15
+250,Fire and Rain - 2019 Remaster,James Taylor,70's,sad,0.27,76,0.34,0.6,0.77
+251,How Sweet It Is (To Be Loved By You) - 2019 Remaster,James Taylor,70's,euphoric,0.63,109,0.82,0.76,0.34
+252,You've Got a Friend - 2019 Remaster,James Taylor,70's,chill,0.2,92,0.48,0.69,0.8
+253,I Got a Name - Stereo Version,Jim Croce,70's,euphoric,0.65,87,0.66,0.55,0.81
+254,Time In A Bottle,Jim Croce,70's,chill,0.26,134,0.64,0.54,0.85
+255,"You're The One That I Want - From ""Grease""","John Travolta, Olivia Newton-John",70's,euphoric,0.61,107,0.82,0.76,0.28
+256,"Summer Nights - From ""Grease""","John Travolta, Olivia Newton-John",70's,energetic,0.66,124,0.61,0.75,0.62
+257,Big Yellow Taxi,Joni Mitchell,70's,happy,0.47,86,0.97,0.61,0.59
+258,A Case of You,Joni Mitchell,70's,happy,0.2,101,0.68,0.69,0.9
+259,The Circle Game,Joni Mitchell,70's,sad,0.2,118,0.33,0.6,0.95
+260,Woodstock,Joni Mitchell,70's,sad,0.09,107,0.21,0.33,0.99
+261,Wuthering Heights,Kate Bush,70's,energetic,0.72,136,0.52,0.54,0.55
+262,Boogie Shoes - 2004 Remaster,KC & The Sunshine Band,70's,euphoric,0.8,120,0.97,0.93,0.5
+263,Dancing in the Moonlight,King Harvest,70's,happy,0.44,136,0.77,0.66,0.74
+264,Jungle Boogie,Kool & The Gang,70's,euphoric,0.85,107,0.72,0.81,0.12
+265,You Make Me Feel Like Dancing - Remastered,Leo Sayer,70's,happy,0.55,96,0.84,0.77,0.07
+266,Moonlighting - Remastered,Leo Sayer,70's,euphoric,0.6,128,0.96,0.82,0.26
+267,When I Need You - Remastered,Leo Sayer,70's,sad,0.2,110,0.16,0.59,0.72
+268,Brandy (You're a Fine Girl),Looking Glass,70's,euphoric,0.63,125,0.83,0.72,0.4
+269,You'll Never Find Another Love Like Mine,Lou Rawls,70's,euphoric,0.72,111,0.93,0.69,0.15
+270,Night Boat to Cairo,Madness,70's,euphoric,0.76,115,0.96,0.71,0.08
+271,What's Going On,Marvin Gaye,70's,euphoric,0.73,103,0.74,0.43,0.31
+272,Let's Get It On,Marvin Gaye,70's,energetic,0.61,169,0.63,0.55,0.04
+273,Got To Give It Up - Pt. 1,Marvin Gaye,70's,euphoric,0.85,123,0.89,0.85,0.23
+274,Inner City Blues (Make Me Wanna Holler),Marvin Gaye,70's,relaxed,0.52,94,0.62,0.64,0.83
+275,Mercy Mercy Me (The Ecology),Marvin Gaye,70's,energetic,0.71,93,0.53,0.49,0.41
+276,Rock with You - Single Version,Michael Jackson,70's,euphoric,0.7,115,0.84,0.8,0.06
+277,Off the Wall,Michael Jackson,70's,euphoric,0.6,119,0.92,0.83,0.18
+278,Don't Stop 'Til You Get Enough,Michael Jackson,70's,euphoric,0.82,119,0.95,0.88,0.13
+279,Don't Stop 'Til You Get Enough - 2003 Edit,Michael Jackson,70's,euphoric,0.95,119,0.94,0.87,0.05
+280,This Will Be (An Everlasting Love),Natalie Cole,70's,euphoric,0.62,127,0.9,0.69,0.23
+281,This Will Be (An Everlasting Love) - 2003 Remaster,Natalie Cole,70's,euphoric,0.61,126,0.91,0.68,0.19
+282,Laughter In The Rain,Neil Sedaka,70's,euphoric,0.61,101,0.92,0.5,0.35
+283,Electricity - Remastered 2003,Orchestral Manoeuvres In The Dark,70's,euphoric,0.62,175,0.96,0.66,0.17
+284,Because the Night,Patti Smith,70's,energetic,0.76,124,0.47,0.47,0.05
+285,Kodachrome,Paul Simon,70's,euphoric,0.69,136,0.92,0.59,0.02
+286,Me and Julio Down by the Schoolyard,Paul Simon,70's,euphoric,0.64,120,0.82,0.76,0.07
+287,Solsbury Hill,Peter Gabriel,70's,energetic,0.63,102,0.48,0.68,0.36
+288,"Another Brick in the Wall, Pt. 2",Pink Floyd,70's,happy,0.58,112,0.98,0.7,0.38
+289,Bohemian Rhapsody - Remastered 2011,Queen,70's,energetic,0.66,144,0.51,0.6,0.01
+290,Don't Stop Me Now - Remastered 2011,Queen,70's,energetic,0.74,135,0.49,0.74,0.01
+291,Crazy Little Thing Called Love - Remastered 2011,Queen,70's,energetic,0.86,146,0.5,0.46,0.0
+292,Black Betty,Ram Jam,70's,euphoric,0.91,117,0.68,0.47,0.02
+293,Come and Get Your Love - Single Version,Redbone,70's,euphoric,0.8,107,0.96,0.73,0.17
+294,We're All Alone,Rita Coolidge,70's,sad,0.43,128,0.24,0.33,0.36
+295,Killing Me Softly With His Song,Roberta Flack,70's,sad,0.38,122,0.33,0.48,0.73
+296,Maggie May,Rod Stewart,70's,relaxed,0.57,129,0.54,0.6,0.56
+297,Car Wash - Long Version,Rose Royce,70's,happy,0.44,118,0.8,0.65,0.2
+298,Car Wash - Single Version,Rose Royce,70's,euphoric,0.63,115,0.83,0.76,0.23
+299,Escape (The Pina Colada Song),Rupert Holmes,70's,happy,0.51,139,0.95,0.84,0.47
+300,Emotion,"Samantha Sang, Bee Gees",70's,happy,0.36,184,0.72,0.52,0.76
+301,Wham Bam Shang-A-Lang,Silver,70's,euphoric,0.76,121,0.94,0.65,0.35
+302,Cecilia,Simon & Garfunkel,70's,euphoric,0.88,103,0.95,0.76,0.36
+303,Bridge Over Troubled Water,Simon & Garfunkel,70's,sad,0.21,80,0.26,0.15,0.82
+304,Hong Kong Garden,Siouxsie and the Banshees,70's,happy,0.56,122,0.82,0.76,0.63
+305,The Tears Of A Clown,Smokey Robinson & The Miracles,70's,euphoric,0.61,128,0.95,0.59,0.15
+306,Reelin' In The Years,Steely Dan,70's,euphoric,0.76,135,0.77,0.52,0.13
+307,Do It Again,Steely Dan,70's,happy,0.54,125,0.96,0.68,0.22
+308,Dirty Work,Steely Dan,70's,relaxed,0.35,73,0.52,0.63,0.8
+309,"Signed, Sealed, Delivered (I'm Yours)",Stevie Wonder,70's,euphoric,0.6,109,0.83,0.68,0.05
+310,Superstition - Single Version,Stevie Wonder,70's,euphoric,0.63,100,0.87,0.63,0.04
+311,Sir Duke,Stevie Wonder,70's,happy,0.57,107,0.95,0.59,0.16
+312,You Are The Sunshine Of My Life,Stevie Wonder,70's,happy,0.46,132,0.68,0.52,0.82
+313,I Wish,Stevie Wonder,70's,euphoric,0.72,106,0.88,0.83,0.08
+314,Psycho Killer - 2005 Remaster,Talking Heads,70's,energetic,0.87,156,0.6,0.56,0.05
+315,Rock Lobster,The B-52's,70's,euphoric,0.94,121,0.73,0.71,0.05
+316,Let Your Love Flow,The Bellamy Brothers,70's,euphoric,0.9,108,0.85,0.6,0.04
+317,Video Killed The Radio Star,The Buggles,70's,energetic,0.78,109,0.39,0.7,0.09
+318,Just What I Needed,The Cars,70's,euphoric,0.87,109,0.94,0.67,0.27
+319,London Calling - Remastered,The Clash,70's,euphoric,0.87,150,0.87,0.62,0.02
+320,What a Fool Believes,The Doobie Brothers,70's,happy,0.38,121,0.99,0.76,0.28
+321,Blame It on the Boogie,The Jacksons,70's,euphoric,0.77,113,0.9,0.76,0.07
+322,Supersonic Rocket Ship,The Kinks,70's,happy,0.43,148,0.88,0.62,0.86
+323,Love Machine - Pt. 1,The Miracles,70's,euphoric,0.83,144,0.82,0.74,0.06
+324,I'd Like to Teach the World to Sing (In Perfect Harmony),The New Seekers,70's,happy,0.48,134,0.86,0.47,0.75
+325,Free To Be...You And Me,The New Seekers,70's,relaxed,0.41,154,0.59,0.46,0.77
+326,I Think I Love You,The Partridge Family,70's,euphoric,0.6,205,0.73,0.41,0.24
+327,Message In A Bottle,The Police,70's,sad,0.25,178,0.13,0.4,0.8
+328,What I Like About You,The Romantics,70's,euphoric,0.9,121,0.92,0.74,0.11
+329,Papa Was A Rollin' Stone - Single Version,The Temptations,70's,happy,0.41,121,0.9,0.82,0.45
+330,Just My Imagination (Running Away With Me),The Temptations,70's,chill,0.24,92,0.48,0.43,0.88
+331,Joy To The World,Three Dog Night,70's,euphoric,0.68,127,0.97,0.65,0.46
+332,Mama Told Me (Not To Come) - Single Version,Three Dog Night,70's,euphoric,0.67,120,0.83,0.67,0.37
+333,Shambala - Single Version,Three Dog Night,70's,euphoric,0.62,127,0.83,0.55,0.64
+334,She's A Lady,Tom Jones,70's,energetic,0.88,120,0.62,0.51,0.21
+335,American Girl,Tom Petty and the Heartbreakers,70's,euphoric,0.82,115,0.78,0.55,0.45
+336,Hold the Line,TOTO,70's,euphoric,0.84,96,0.78,0.48,0.02
+337,Moondance - 2013 Remaster,Van Morrison,70's,chill,0.28,67,0.57,0.62,0.5
+338,Crazy Love - 2013 Remaster,Van Morrison,70's,sad,0.19,77,0.32,0.58,0.84
+339,Play That Funky Music - Single Version,Wild Cherry,70's,euphoric,0.73,109,0.9,0.79,0.07
+340,Silly Love Songs - 2014 Remaster,Wings,70's,happy,0.47,125,0.82,0.74,0.13
+341,Silly Love Songs,Wings,70's,happy,0.49,125,0.88,0.74,0.12
+342,Wild World,Yusuf / Cat Stevens,70's,relaxed,0.51,152,0.55,0.48,0.38
+343,I Ran (So Far Away),A Flock Of Seagulls,80's,energetic,0.96,131,0.38,0.45,0.02
+344,The Winner Takes It All,ABBA,80's,energetic,0.6,114,0.6,0.6,0.01
+345,Poison Arrow,ABC,80's,euphoric,0.9,84,0.88,0.57,0.02
+346,"The Look Of Love, Pt.1",ABC,80's,energetic,0.81,112,0.55,0.64,0.36
+347,Be Near Me,ABC,80's,euphoric,0.71,125,0.88,0.69,0.23
+348,When Smokey Sings,ABC,80's,happy,0.53,159,0.84,0.62,0.09
+349,Thunderstruck,AC/DC,80's,energetic,0.91,174,0.58,0.56,0.16
+350,Take on Me,a-ha,80's,energetic,0.78,119,0.46,0.5,0.25
+351,All Out of Love,Air Supply,80's,euphoric,0.85,121,0.74,0.71,0.41
+352,Making Love Out of Nothing at All,Air Supply,80's,euphoric,0.79,107,0.89,0.75,0.05
+353,Forever Young - 2019 Remaster,Alphaville,80's,happy,0.4,145,0.7,0.57,0.44
+354,Obsession,Animotion,80's,euphoric,0.82,119,0.87,0.71,0.21
+355,Freeway of Love - Single Mix,Aretha Franklin,80's,happy,0.55,92,0.93,0.66,0.21
+356,Heat Of The Moment,Asia,80's,energetic,0.6,109,0.55,0.82,0.13
+357,Tarzan Boy,Baltimora,80's,euphoric,0.92,172,0.8,0.46,0.41
+358,Cruel Summer,Bananarama,80's,euphoric,0.81,150,0.87,0.58,0.02
+359,Venus,Bananarama,80's,euphoric,0.89,130,0.95,0.68,0.0
+360,Woman in Love,Barbra Streisand,80's,sad,0.28,170,0.33,0.47,0.25
+361,Guilty (feat. Barry Gibb),"Barbra Streisand, Barry Gibb",80's,happy,0.43,151,0.95,0.63,0.23
+362,Mad About You,Belinda Carlisle,80's,energetic,0.73,122,0.6,0.53,0.38
+363,Heaven Is A Place On Earth,Belinda Carlisle,80's,euphoric,0.8,121,0.71,0.52,0.03
+364,Take My Breath Away,Berlin,80's,euphoric,0.78,177,0.86,0.52,0.4
+365,(I've Had) The Time of My Life - From  Dirty Dancing  Soundtrack,"Bill Medley, Jennifer Warnes",80's,euphoric,0.81,122,0.88,0.79,0.16
+366,White Wedding (Pts. 1 & 2) - Shotgun Mix / Remastered 2001,Billy Idol,80's,euphoric,0.91,144,0.66,0.66,0.05
+367,Eyes Without A Face,Billy Idol,80's,energetic,0.86,118,0.35,0.54,0.03
+368,Sweet Sixteen,Billy Idol,80's,happy,0.55,132,0.81,0.85,0.15
+369,Mony Mony - Downtown Mix / Remastered 2001,Billy Idol,80's,relaxed,0.48,96,0.61,0.89,0.01
+370,Dancing with Myself - 2001 Remaster,"Billy Idol, Generation X",80's,euphoric,0.73,128,0.85,0.78,0.13
+371,It's Still Rock and Roll to Me,Billy Joel,80's,happy,0.43,117,0.72,0.83,0.45
+372,You May Be Right,Billy Joel,80's,energetic,0.87,103,0.56,0.78,0.01
+373,Uptown Girl,Billy Joel,80's,happy,0.47,89,0.84,0.86,0.0
+374,The Longest Time,Billy Joel,80's,relaxed,0.53,116,0.52,0.66,0.13
+375,Tell Her About It,Billy Joel,80's,euphoric,0.85,128,0.96,0.55,0.01
+376,A Matter of Trust,Billy Joel,80's,euphoric,0.7,132,0.84,0.69,0.07
+377,We Didn't Start the Fire,Billy Joel,80's,intense,0.61,131,0.34,0.68,0.09
+378,I Go to Extremes,Billy Joel,80's,euphoric,0.7,182,0.92,0.58,0.11
+379,The River of Dreams,Billy Joel,80's,euphoric,0.63,124,0.9,0.83,0.06
+380,Caribbean Queen (No More Love On the Run),Billy Ocean,80's,euphoric,0.66,122,0.91,0.89,0.14
+381,"When the Going Gets Tough, The Tough Get Going",Billy Ocean,80's,euphoric,0.83,119,0.96,0.77,0.1
+382,"Get Outta My Dreams, Get Into My Car",Billy Ocean,80's,euphoric,0.84,130,0.77,0.69,0.1
+383,Call Me,Blondie,80's,euphoric,0.85,133,0.72,0.62,0.12
+384,The Tide Is High,Blondie,80's,intense,0.67,102,0.31,0.58,0.31
+385,Rapture,Blondie,80's,euphoric,0.63,115,0.67,0.65,0.57
+386,Against The Wind,Bob Seger,80's,euphoric,0.77,110,0.72,0.67,0.28
+387,Total Eclipse of the Heart,Bonnie Tyler,80's,energetic,0.82,139,0.55,0.64,0.09
+388,Holding Out for a Hero - From  Footloose  Soundtrack,Bonnie Tyler,80's,euphoric,0.92,125,0.67,0.74,0.33
+389,I Want Candy,Bow Wow Wow,80's,happy,0.57,167,0.91,0.74,0.26
+390,Fools Rush In (Where Angels Fear To Tread),Bow Wow Wow,80's,euphoric,0.67,114,0.95,0.79,0.18
+391,Aphrodisiac,Bow Wow Wow,80's,euphoric,0.78,105,0.81,0.55,0.42
+392,"Baby, Oh No",Bow Wow Wow,80's,euphoric,0.71,124,0.8,0.77,0.04
+393,Do You Wanna Hold Me?,Bow Wow Wow,80's,euphoric,0.92,160,0.92,0.54,0.32
+394,Waiting for a Star to Fall,Boy Meets Girl,80's,energetic,0.8,96,0.53,0.64,0.03
+395,The Way It Is,Bruce Hornsby and the Range,80's,euphoric,0.85,113,0.8,0.74,0.08
+396,Dancing In the Dark,Bruce Springsteen,80's,energetic,0.94,149,0.5,0.53,0.01
+397,Glory Days,Bruce Springsteen,80's,euphoric,0.96,117,0.98,0.57,0.05
+398,Hungry Heart,Bruce Springsteen,80's,euphoric,0.89,110,0.97,0.64,0.09
+399,"She's A Bad Mama Jama (She's Built, She's Stacked) - Single Version",Carl Carlton,80's,euphoric,0.74,118,0.96,0.73,0.18
+400,Coming Around Again,Carly Simon,80's,sad,0.36,138,0.27,0.63,0.63
+401,Saturday Love - 12  Extended Version,"Cherrelle, Alexander O'Neal",80's,energetic,0.65,130,0.62,0.58,0.12
+402,You're the Inspiration - 2006 Remaster,Chicago,80's,happy,0.59,110,0.83,0.92,0.2
+403,Sailing,Christopher Cross,80's,euphoric,0.62,127,0.72,0.67,0.51
+404,Arthur's Theme (Best That You Can Do),Christopher Cross,80's,euphoric,0.8,134,0.9,0.7,0.05
+405,You're A Friend Of Mine,Clarence Clemons & Jackson Browne,80's,euphoric,0.72,109,0.88,0.8,0.07
+406,Nightshift,Commodores,80's,relaxed,0.56,105,0.39,0.73,0.62
+407,Sunglasses At Night,Corey Hart,80's,euphoric,0.87,130,0.87,0.8,0.29
+408,Don't Dream It's Over,Crowded House,80's,happy,0.27,111,0.74,0.9,0.01
+409,Do You Really Want To Hurt Me,Culture Club,80's,happy,0.52,108,0.88,0.79,0.66
+410,Karma Chameleon,Culture Club,80's,energetic,0.72,175,0.41,0.31,0.05
+411,Miss Me Blind - Remastered 2003,Culture Club,80's,euphoric,0.8,149,0.69,0.61,0.13
+412,(I Just) Died In Your Arms,Cutting Crew,80's,relaxed,0.55,110,0.55,0.71,0.01
+413,Girls Just Want to Have Fun,Cyndi Lauper,80's,relaxed,0.55,209,0.59,0.55,0.05
+414,She Bop,Cyndi Lauper,80's,relaxed,0.59,103,0.54,0.66,0.26
+415,When You Were Mine,Cyndi Lauper,80's,euphoric,0.69,107,0.78,0.81,0.22
+416,Witness,Cyndi Lauper,80's,energetic,0.99,152,0.48,0.59,0.16
+417,The Goonies 'R' Good Enough - From  The Goonies  Soundtrack,Cyndi Lauper,80's,euphoric,0.89,119,0.92,0.61,0.08
+418,Moonlight Shadow,Dana Winner,80's,sad,0.59,128,0.28,0.59,0.32
+419,Kiss on My List,Daryl Hall & John Oates,80's,euphoric,0.84,105,0.86,0.75,0.02
+420,You Make My Dreams (Come True),Daryl Hall & John Oates,80's,euphoric,0.83,134,0.81,0.85,0.09
+421,Private Eyes,Daryl Hall & John Oates,80's,euphoric,0.74,115,0.97,0.87,0.22
+422,I Can't Go for That (No Can Do),Daryl Hall & John Oates,80's,euphoric,0.67,111,0.92,0.78,0.02
+423,Maneater,Daryl Hall & John Oates,80's,euphoric,0.66,111,0.93,0.8,0.09
+424,Out of Touch,Daryl Hall & John Oates,80's,energetic,0.95,113,0.61,0.65,0.01
+425,Let's Dance - 2018 Remaster,David Bowie,80's,euphoric,0.88,118,0.92,0.71,0.15
+426,Let It Whip,Dazz Band,80's,euphoric,0.81,151,0.87,0.58,0.03
+427,You Spin Me Round (Like a Record),Dead Or Alive,80's,energetic,0.77,82,0.43,0.56,0.12
+428,Rhythm Of The Night,DeBarge,80's,relaxed,0.51,140,0.52,0.8,0.05
+429,Only in My Dreams,Debbie Gibson,80's,euphoric,0.91,141,0.96,0.52,0.0
+430,Let's Hear It for the Boy - From  Footloose  Original Soundtrack,Deniece Williams,80's,euphoric,0.91,117,0.92,0.67,0.09
+431,Personal Jesus - 2006 Remaster,Depeche Mode,80's,euphoric,0.76,122,0.93,0.76,0.41
+432,Enjoy the Silence - Single Mix,"Depeche Mode, Daniel Miller, Phil Legg",80's,happy,0.58,114,0.85,0.69,0.02
+433,Whip It,DEVO,80's,energetic,0.61,140,0.54,0.72,0.07
+434,Come On Eileen,Dexys Midnight Runners,80's,euphoric,0.8,134,0.78,0.65,0.12
+435,Upside Down,Diana Ross,80's,relaxed,0.38,101,0.42,0.74,0.08
+436,"That's What Friends Are For (with Elton John, Gladys Knight & Stevie Wonder)","Dionne Warwick, Elton John, Gladys Knight, Stevie Wonder",80's,euphoric,0.82,122,0.79,0.77,0.39
+437,Walk Of Life,Dire Straits,80's,euphoric,0.88,137,0.82,0.57,0.0
+438,Money for Nothing,Dire Straits,80's,energetic,0.85,127,0.5,0.7,0.35
+439,9 to 5,Dolly Parton,80's,euphoric,0.94,121,0.84,0.85,0.41
+440,The Boys Of Summer,Don Henley,80's,happy,0.44,111,0.96,0.89,0.04
+441,She Works Hard For The Money,Donna Summer,80's,euphoric,0.64,137,0.98,0.76,0.0
+442,This Time I Know It's for Real,Donna Summer,80's,euphoric,0.88,116,0.87,0.61,0.02
+443,Girls on Film - 2010 Remaster,Duran Duran,80's,energetic,0.76,126,0.61,0.65,0.01
+444,Rio - 2009 Remaster,Duran Duran,80's,energetic,0.65,140,0.4,0.47,0.01
+445,Save a Prayer - Single Version,Duran Duran,80's,euphoric,0.87,141,0.68,0.54,0.04
+446,Hungry Like the Wolf - 2009 Remaster,Duran Duran,80's,euphoric,0.89,127,0.82,0.55,0.11
+447,The Reflex - Single Version; 2010 Remaster,Duran Duran,80's,euphoric,0.81,125,0.78,0.71,0.02
+448,A View to a Kill,Duran Duran,80's,energetic,0.66,113,0.64,0.59,0.14
+449,Ordinary World,Duran Duran,80's,euphoric,0.8,148,0.93,0.73,0.07
+450,Take Me Home Tonight,Eddie Money,80's,euphoric,0.91,132,0.73,0.61,0.04
+451,Party All the Time,Eddie Murphy,80's,euphoric,0.76,125,0.84,0.78,0.24
+452,I Love a Rainy Night,Eddie Rabbitt,80's,euphoric,0.79,125,0.84,0.71,0.22
+453,I'm Still Standing,Elton John,80's,euphoric,0.78,124,0.93,0.72,0.1
+454,A Little Respect,Erasure,80's,energetic,0.61,115,0.52,0.73,0.09
+455,Hungry Eyes - From  Dirty Dancing  Soundtrack,Eric Carmen,80's,euphoric,0.68,118,0.87,0.91,0.24
+456,The Final Countdown,Europe,80's,euphoric,0.74,119,0.88,0.68,0.17
+457,Sweet Dreams (Are Made of This) - 2005 Remaster,"Eurythmics, Annie Lennox, Dave Stewart",80's,euphoric,0.82,157,0.88,0.5,0.09
+458,Here Comes the Rain Again - Remastered Version,"Eurythmics, Annie Lennox, Dave Stewart",80's,euphoric,0.81,157,0.93,0.56,0.07
+459,Would I Lie to You? - Remastered Version,"Eurythmics, Annie Lennox, Dave Stewart",80's,relaxed,0.53,101,0.52,0.64,0.07
+460,Everywhere - 2017 Remaster,Fleetwood Mac,80's,euphoric,0.97,116,0.9,0.68,0.07
+461,Waiting for a Girl like You,Foreigner,80's,euphoric,0.9,157,0.65,0.54,0.24
+462,I Want to Know What Love Is - 1999 Remaster,Foreigner,80's,intense,0.64,130,0.27,0.39,0.1
+463,Relax (Come Fighting),Frankie Goes To Hollywood,80's,sad,0.4,117,0.33,0.64,0.09
+464,Got My Mind Set on You,George Harrison,80's,euphoric,0.77,133,0.73,0.7,0.12
+465,Careless Whisper,George Michael,80's,euphoric,0.92,129,0.79,0.74,0.23
+466,Faith - Remastered,George Michael,80's,energetic,0.97,156,0.6,0.31,0.12
+467,I Knew You Were Waiting (For Me),"George Michael, Aretha Franklin",80's,happy,0.48,128,0.96,0.81,0.06
+468,Don't Forget Me (When I'm Gone),Glass Tiger,80's,energetic,0.81,139,0.59,0.65,0.09
+469,The Heat Is On - From  Beverly Hills Cop  Soundtrack,Glenn Frey,80's,euphoric,0.9,116,0.75,0.75,0.1
+470,Dr. Beat,Gloria Estefan,80's,euphoric,0.88,119,0.96,0.72,0.2
+471,Get on Your Feet,Gloria Estefan,80's,euphoric,0.91,162,0.76,0.37,0.0
+472,Oye Mi Canto,Gloria Estefan,80's,euphoric,0.67,121,0.91,0.76,0.21
+473,Live For Loving You,Gloria Estefan,80's,euphoric,0.82,105,0.8,0.63,0.24
+474,Turn the Beat Around,Gloria Estefan,80's,energetic,0.73,119,0.63,0.87,0.14
+475,Conga,"Gloria Estefan, Miami Sound Machine",80's,euphoric,0.63,119,0.74,0.82,0.37
+476,Rhythm Is Gonna Get You,"Gloria Estefan, Miami Sound Machine",80's,euphoric,0.7,107,0.96,0.72,0.11
+477,The King of Wishful Thinking,Go West,80's,euphoric,0.6,127,0.96,0.62,0.71
+478,Any Way You Want It,Great White,80's,energetic,0.76,119,0.41,0.54,0.03
+479,Axel F,Harold Faltermeyer,80's,euphoric,0.62,112,0.7,0.78,0.11
+480,These Dreams,Heart,80's,euphoric,0.8,140,0.7,0.48,0.0
+481,Alone,Heart,80's,happy,0.52,123,0.94,0.72,0.07
+482,Things Can Only Get Better,Howard Jones,80's,euphoric,0.92,117,0.87,0.64,0.18
+483,The Power Of Love,Huey Lewis & The News,80's,euphoric,0.63,126,0.97,0.76,0.01
+484,Back In Time,Huey Lewis & The News,80's,euphoric,0.9,97,0.81,0.47,0.01
+485,What's on Your Mind (Pure Energy),Information Society,80's,euphoric,0.61,174,0.86,0.76,0.08
+486,Need You Tonight,INXS,80's,happy,0.41,81,0.94,0.87,0.23
+487,New Sensation,INXS,80's,euphoric,0.62,129,0.75,0.73,0.09
+488,Never Tear Us Apart,INXS,80's,happy,0.46,115,0.96,0.9,0.32
+489,Fame - Rerecorded,Irene Cara,80's,energetic,0.79,127,0.51,0.46,0.54
+490,What A Feeling,Irene Cara,80's,euphoric,0.96,126,0.91,0.72,0.09
+491,The Pleasure Principle,Janet Jackson,80's,happy,0.57,122,0.87,0.69,0.34
+492,Some Kind Of Lover,Jody Watley,80's,euphoric,0.81,104,0.82,0.68,0.02
+493,Looking For A New Love - Radio Edit,"Jody Watley, Louil Silas Jr.",80's,euphoric,0.76,77,0.71,0.6,0.71
+494,Real Love,"Jody Watley, Louil Silas Jr.",80's,euphoric,0.94,98,0.76,0.62,0.03
+495,Don't You Want Me,"Jody Watley, Michael Hutchinson, Francois Kevorkian",80's,intense,0.61,145,0.33,0.52,0.08
+496,Steppin' Out,Joe Jackson,80's,sad,0.35,125,0.23,0.6,0.27
+497,Believe It or Not (Theme from  Greatest American Hero ),Joey Scarbury,80's,euphoric,0.85,123,0.79,0.64,0.02
+498,(Just Like) Starting Over - Remastered 2010,John Lennon,80's,happy,0.49,123,0.71,0.81,0.08
+499,Jack & Diane,John Mellencamp,80's,relaxed,0.56,95,0.5,0.57,0.1
+500,Hurts So Good,John Mellencamp,80's,euphoric,0.74,129,0.95,0.75,0.06
+501,Small Town,John Mellencamp,80's,euphoric,0.8,93,0.75,0.59,0.05
+502,St. Elmos Fire (Man in Motion),John Parr,80's,relaxed,0.57,105,0.58,0.58,0.03
+503,Missing You,John Waite,80's,euphoric,0.61,164,0.86,0.57,0.2
+504,Shattered Dreams - Remastered 2008,Johnny Hates Jazz,80's,euphoric,0.94,129,0.83,0.7,0.07
+505,Turn Back The Clock,Johnny Hates Jazz,80's,relaxed,0.55,178,0.43,0.33,0.61
+506,Just Got Paid - Single Version,Johnny Kemp,80's,chill,0.32,177,0.38,0.29,0.8
+507,Any Way You Want It,Journey,80's,euphoric,0.87,76,0.76,0.58,0.16
+508,Don't Stop Believin',Journey,80's,relaxed,0.45,139,0.51,0.59,0.7
+509,Separate Ways (Worlds Apart),Journey,80's,sad,0.5,125,0.31,0.53,0.66
+510,Faithfully,Journey,80's,energetic,0.68,141,0.54,0.75,0.1
+511,Running Up That Hill (A Deal With God),Kate Bush,80's,chill,0.33,84,0.59,0.64,0.18
+512,This Woman's Work,Kate Bush,80's,euphoric,0.91,101,0.79,0.6,0.08
+513,Walking On Sunshine,Katrina & The Waves,80's,euphoric,0.89,134,0.89,0.67,0.45
+514,I'm Alright - Theme from  Caddyshack,Kenny Loggins,80's,euphoric,0.77,110,0.87,0.72,0.07
+515,Footloose - From  Footloose  Soundtrack,Kenny Loggins,80's,euphoric,0.65,131,0.8,0.74,0.11
+516,Danger Zone - From  Top Gun  Original Soundtrack,Kenny Loggins,80's,euphoric,0.98,150,0.96,0.56,0.22
+517,Meet Me Half Way - From  Over The Top  Soundtrack,Kenny Loggins,80's,euphoric,0.91,91,0.78,0.69,0.01
+518,Bette Davis Eyes - Radio Edit; 1997 Remastered Version,"Kim Carnes, Donald Lynch, Marc Andrews",80's,euphoric,0.97,145,0.9,0.71,0.1
+519,Kids In America,Kim Wilde,80's,energetic,0.83,90,0.48,0.61,0.16
+520,You Keep Me Hangin On,Kim Wilde,80's,energetic,0.93,127,0.6,0.58,0.03
+521,Celebration,Kool & The Gang,80's,euphoric,0.89,176,0.76,0.39,0.0
+522,Cherish,Kool & The Gang,80's,energetic,0.6,95,0.43,0.64,0.33
+523,Get Down On It - Single Version,Kool & The Gang,80's,euphoric,0.63,111,0.97,0.88,0.21
+524,Gloria,Laura Branigan,80's,euphoric,0.88,126,0.77,0.73,0.22
+525,Self Control,Laura Branigan,80's,happy,0.59,156,0.7,0.6,0.56
+526,Something About You,Level 42,80's,euphoric,0.64,126,0.92,0.73,0.12
+527,Something About You - 7  Version,Level 42,80's,euphoric,0.61,118,0.67,0.71,0.38
+528,Never Ending Story,Limahl,80's,euphoric,0.87,120,0.86,0.63,0.07
+529,Sending All My Love,Linear,80's,energetic,0.91,162,0.53,0.47,0.01
+530,All Night Long (All Night) - Single Version,Lionel Richie,80's,euphoric,0.72,104,0.93,0.69,0.3
+531,Dancing On The Ceiling,Lionel Richie,80's,euphoric,0.72,121,0.75,0.66,0.03
+532,You Are,Lionel Richie,80's,happy,0.46,112,0.73,0.78,0.2
+533,Funkytown,Lipps Inc.,80's,happy,0.31,115,0.71,0.65,0.05
+534,Working for the Weekend,Loverboy,80's,happy,0.56,105,0.8,0.72,0.05
+535,Never Too Much,Luther Vandross,80's,euphoric,0.69,135,0.68,0.7,0.01
+536,Our House - 2009 - Remaster,Madness,80's,euphoric,0.92,147,0.79,0.53,0.03
+537,House Of Fun,Madness,80's,euphoric,0.7,144,0.88,0.42,0.25
+538,Holiday,Madonna,80's,relaxed,0.49,97,0.57,0.71,0.07
+539,Borderline,Madonna,80's,happy,0.57,96,0.97,0.81,0.28
+540,Lucky Star,Madonna,80's,euphoric,0.65,117,0.85,0.92,0.02
+541,Material Girl,Madonna,80's,euphoric,0.81,113,0.82,0.64,0.16
+542,Cherish,Madonna,80's,happy,0.5,89,0.82,0.72,0.04
+543,Sexual Healing,Marvin Gaye,80's,euphoric,0.6,94,0.74,0.81,0.12
+544,Break My Stride,Matthew Wilder,80's,happy,0.39,104,0.72,0.69,0.08
+545,Down Under,Men At Work,80's,sad,0.45,122,0.26,0.9,0.0
+546,Who Can It Be Now?,Men At Work,80's,sad,0.38,150,0.18,0.47,0.36
+547,Overkill,Men At Work,80's,euphoric,0.77,129,0.88,0.82,0.46
+548,The Safety Dance - Video Version,Men Without Hats,80's,energetic,0.79,99,0.42,0.7,0.3
+549,The Safety Dance - Extended Dance Version,Men Without Hats,80's,euphoric,0.72,131,0.96,0.69,0.12
+550,Billie Jean,Michael Jackson,80's,chill,0.26,108,0.36,0.51,0.31
+551,Thriller - 2003 Edit,Michael Jackson,80's,sad,0.44,136,0.04,0.46,0.05
+552,Beat It,Michael Jackson,80's,energetic,0.72,141,0.55,0.39,0.2
+553,P.Y.T. (Pretty Young Thing),Michael Jackson,80's,euphoric,0.68,114,0.89,0.65,0.25
+554,Bad - 2012 Remaster,Michael Jackson,80's,relaxed,0.52,137,0.52,0.53,0.17
+555,Maniac,Michael Sembello,80's,euphoric,0.93,150,0.98,0.6,0.06
+556,I Melt with You (7  Mix),Modern English,80's,happy,0.37,93,0.73,0.67,0.26
+557,Suedehead - 2011 Remaster,Morrissey,80's,happy,0.5,90,0.7,0.63,0.55
+558,Everyday Is Like Sunday - 2011 Remaster,Morrissey,80's,euphoric,0.8,139,0.9,0.76,0.03
+559,Broken Wings - Single Version,Mr. Mister,80's,energetic,0.74,115,0.63,0.65,0.01
+560,Always Something There to Remind Me,Naked Eyes,80's,happy,0.45,117,0.74,0.82,0.54
+561,"Promises, Promises - US Single Version / 2018 Remaster",Naked Eyes,80's,happy,0.58,109,0.78,0.74,0.12
+562,Miss You Like Crazy,Natalie Cole,80's,sad,0.5,116,0.11,0.58,0.2
+563,99 Luftballons,Nena,80's,energetic,0.93,196,0.38,0.31,0.02
+564,99 Red Balloons,Nena,80's,happy,0.57,82,0.9,0.62,0.27
+565,Age of Consent - 2015 Remaster,New Order,80's,euphoric,0.82,111,0.68,0.66,0.17
+566,Bizarre Love Triangle,New Order,80's,relaxed,0.47,81,0.42,0.48,0.19
+567,Blue Monday '88,New Order,80's,euphoric,0.65,115,0.9,0.81,0.04
+568,Sister Christian,Night Ranger,80's,euphoric,0.64,164,0.72,0.61,0.18
+569,Physical,Olivia Newton-John,80's,euphoric,0.66,134,0.66,0.67,0.05
+570,If You Leave - Remastered 2019,Orchestral Manoeuvres In The Dark,80's,happy,0.58,129,0.84,0.8,0.02
+571,Hit Me With Your Best Shot,Pat Benatar,80's,energetic,0.89,114,0.39,0.79,0.0
+572,Love Is A Battlefield,Pat Benatar,80's,happy,0.53,118,0.84,0.81,0.05
+573,We Belong,Pat Benatar,80's,euphoric,0.78,99,0.95,0.7,0.04
+574,Invincible,Pat Benatar,80's,sad,0.29,120,0.2,0.67,0.29
+575,She's Like the Wind,"Patrick Swayze, Wendy Fraser",80's,euphoric,0.85,149,0.96,0.77,0.47
+576,"Baby, Come To Me","Patti Austin, James Ingram",80's,euphoric,0.65,117,0.95,0.76,0.07
+577,New Attitude,Patti LaBelle,80's,euphoric,0.64,116,0.93,0.68,0.01
+578,Stir It Up - From  Beverly Hills Cop  Soundtrack,Patti LaBelle,80's,energetic,0.88,118,0.36,0.63,0.09
+579,On My Own,"Patti LaBelle, Michael McDonald",80's,euphoric,0.73,120,0.96,0.71,0.12
+580,Coming Up - Remastered 2011,Paul McCartney,80's,euphoric,0.78,117,0.78,0.79,0.02
+581,Say Say Say,"Paul McCartney, Michael Jackson",80's,euphoric,0.71,117,0.89,0.66,0.43
+582,Late in the Evening,Paul Simon,80's,euphoric,0.67,127,0.96,0.89,0.17
+583,You Can Call Me Al,Paul Simon,80's,relaxed,0.58,114,0.63,0.88,0.12
+584,Every Time You Go Away,Paul Young,80's,euphoric,0.9,132,0.95,0.83,0.11
+585,Everytime You Go Away,Paul Young,80's,happy,0.59,110,0.76,0.73,0.13
+586,Tonight I Celebrate My Love,"Peabo Bryson, Roberta Flack",80's,relaxed,0.39,116,0.64,0.87,0.08
+587,West End Girls - 2001 Remaster,Pet Shop Boys,80's,euphoric,0.6,109,0.9,0.91,0.15
+588,Always on My Mind,Pet Shop Boys,80's,happy,0.59,112,0.87,0.88,0.07
+589,What Have I Done to Deserve This? (with Dusty Springfield) - 2001 Remaster,"Pet Shop Boys, Dusty Springfield",80's,euphoric,0.73,109,0.7,0.7,0.0
+590,Let My Love Open The Door,Pete Townshend,80's,euphoric,0.65,165,0.73,0.65,0.37
+591,Glory of Love,Peter Cetera,80's,euphoric,0.6,119,0.9,0.83,0.07
+592,In Your Eyes - 2012 Remaster,Peter Gabriel,80's,sad,0.56,177,0.28,0.35,0.0
+593,In the Air Tonight - 2015 Remaster,Phil Collins,80's,energetic,0.74,117,0.45,0.52,0.25
+594,You Can't Hurry Love - 2016 Remaster,Phil Collins,80's,happy,0.59,98,0.73,0.69,0.3
+595,Against All Odds (Take a Look at Me Now) - 2016 Remaster,Phil Collins,80's,euphoric,0.82,118,0.93,0.55,0.26
+596,Sussudio - 2016 Remaster,Phil Collins,80's,happy,0.44,118,0.76,0.48,0.0
+597,Easy Lover,"Philip Bailey, Phil Collins",80's,euphoric,0.81,128,0.69,0.69,0.04
+598,Back on the Chain Gang - 2007 Remaster,Pretenders,80's,euphoric,0.79,147,0.65,0.67,0.02
+599,1999,Prince,80's,euphoric,0.86,134,0.97,0.73,0.11
+600,Let's Go Crazy,Prince,80's,euphoric,0.63,91,0.86,0.67,0.01
+601,Raspberry Beret,Prince,80's,euphoric,0.63,108,0.72,0.87,0.6
+602,Kiss,Prince,80's,energetic,0.81,75,0.48,0.5,0.02
+603,I Want To Break Free - Single Remix,Queen,80's,euphoric,0.83,125,0.72,0.56,0.04
+604,The Show Must Go On - Remastered 2011,Queen,80's,intense,0.69,97,0.28,0.67,0.05
+605,Under Pressure - Remastered 2011,"Queen, David Bowie",80's,euphoric,0.89,125,0.65,0.73,0.08
+606,Oh Sheila,Ready For The World,80's,euphoric,0.93,130,0.97,0.7,0.0
+607,Send Me An Angel,Real Life,80's,euphoric,0.68,123,0.71,0.69,0.08
+608,Keep on Loving You,REO Speedwagon,80's,energetic,0.7,83,0.41,0.26,0.12
+609,Can't Fight This Feeling,REO Speedwagon,80's,euphoric,0.83,110,0.71,0.59,0.1
+610,Right Here Waiting,Richard Marx,80's,energetic,0.82,100,0.35,0.77,0.04
+611,Super Freak - Pt. 1,Rick James,80's,euphoric,0.75,134,0.73,0.67,0.01
+612,Give It To Me Baby,Rick James,80's,euphoric,0.69,144,0.83,0.72,0.67
+613,Jessie's Girl,Rick Springfield,80's,euphoric,0.87,96,0.67,0.54,0.0
+614,Addicted To Love,"Robert Palmer, Eric 'ET' Thorngren",80's,euphoric,0.9,140,0.67,0.5,0.01
+615,Somebody's Watching Me - Single Version,Rockwell,80's,euphoric,0.83,143,0.73,0.57,0.01
+616,The Look,Roxette,80's,euphoric,0.72,147,0.71,0.61,0.0
+617,More Than This,Roxy Music,80's,euphoric,0.91,102,0.78,0.54,0.0
+618,You Got It,Roy Orbison,80's,euphoric,0.71,138,0.97,0.84,0.07
+619,Morning Train (Nine to Five) - Edit,Sheena Easton,80's,sad,0.21,117,0.16,0.48,0.8
+620,Telefone (Long Distance Love Affair),Sheena Easton,80's,relaxed,0.4,92,0.48,0.62,0.34
+621,Don't You (Forget About Me) - Remastered,Simple Minds,80's,energetic,0.8,130,0.54,0.74,0.01
+622,Don't You (Forget About Me),Simple Minds,80's,sad,0.55,131,0.26,0.6,0.63
+623,Tainted Love,Soft Cell,80's,energetic,0.64,156,0.59,0.47,0.0
+624,True - Single Edit,Spandau Ballet,80's,energetic,0.94,98,0.5,0.51,0.17
+625,Stars On 45 - Original Single Edit,Stars On 45,80's,euphoric,0.65,123,0.97,0.78,0.35
+626,Stars On 45 - Original 12-Inch Version,Stars On 45,80's,euphoric,0.73,123,0.94,0.82,0.16
+627,Don't Stop Believin',Starship,80's,euphoric,0.69,115,0.69,0.68,0.33
+628,We Built This City,Starship,80's,euphoric,0.74,108,0.83,0.75,0.03
+629,Nothing's Gonna Stop Us Now,Starship,80's,energetic,0.86,132,0.53,0.73,0.02
+630,Bit By Bit (Theme From  Fletch ),Stephanie Mills,80's,euphoric,0.8,125,0.9,0.74,0.18
+631,Oh Sherrie,Steve Perry,80's,energetic,0.74,95,0.64,0.62,0.34
+632,Higher Love,Steve Winwood,80's,energetic,0.85,126,0.52,0.64,0.0
+633,Back In The High Life Again,Steve Winwood,80's,euphoric,0.73,118,0.75,0.77,0.01
+634,Valerie,Steve Winwood,80's,happy,0.57,105,0.88,0.71,0.03
+635,Roll With It,Steve Winwood,80's,euphoric,0.8,126,0.87,0.63,0.2
+636,Part-Time Lover,Stevie Wonder,80's,relaxed,0.42,82,0.55,0.44,0.01
+637,Mr. Roboto,Styx,80's,sad,0.47,137,0.29,0.48,0.4
+638,Eye of the Tiger,Survivor,80's,energetic,0.61,115,0.42,0.67,0.0
+639,Breakout,Swing Out Sister,80's,euphoric,0.82,86,0.66,0.54,0.02
+640,It's My Life - 1997 Remaster,Talk Talk,80's,euphoric,0.79,105,0.81,0.75,0.08
+641,Once in a Lifetime - 2005 Remaster,Talking Heads,80's,energetic,0.71,114,0.47,0.67,0.42
+642,Burning Down the House,Talking Heads,80's,sad,0.4,144,0.23,0.39,0.29
+643,And She Was,Talking Heads,80's,relaxed,0.44,109,0.6,0.8,0.08
+644,(Nothing But) Flowers - 2003 Remaster,Talking Heads,80's,intense,0.69,84,0.19,0.43,0.41
+645,Shout,Tears For Fears,80's,euphoric,0.87,108,0.91,0.67,0.03
+646,Everybody Wants To Rule The World,Tears For Fears,80's,energetic,0.86,136,0.54,0.31,0.2
+647,Head Over Heels - Dave Bascombe 7  N.Mix,"Tears For Fears, Dave Bascombe",80's,happy,0.53,116,0.73,0.72,0.57
+648,Love Shack,The B-52's,80's,energetic,0.69,111,0.53,0.58,0.61
+649,Manic Monday,The Bangles,80's,happy,0.52,105,0.77,0.7,0.0
+650,Hazy Shade of Winter,The Bangles,80's,happy,0.54,119,0.93,0.83,0.2
+651,Kokomo,The Beach Boys,80's,energetic,0.84,116,0.59,0.66,0.14
+652,The Plastic Age,The Buggles,80's,sad,0.32,135,0.31,0.71,0.53
+653,You Might Think,The Cars,80's,intense,0.78,160,0.31,0.56,0.1
+654,Drive - 2017 Remaster,The Cars,80's,energetic,0.61,96,0.58,0.48,0.19
+655,Should I Stay or Should I Go - Remastered,The Clash,80's,euphoric,0.86,131,0.95,0.61,0.04
+656,Rock the Casbah - Remastered,The Clash,80's,euphoric,0.89,139,0.95,0.71,0.16
+657,We Got The Beat,The Go-Go's,80's,sad,0.35,177,0.23,0.45,0.15
+658,Our Lips Are Sealed - Single Version,The Go-Go's,80's,energetic,0.71,138,0.56,0.58,0.03
+659,Vacation,The Go-Go's,80's,euphoric,0.77,129,0.97,0.8,0.07
+660,Head Over Heels,The Go-Go's,80's,sad,0.48,144,0.31,0.66,0.19
+661,Don't You Want Me,The Human League,80's,sad,0.24,190,0.3,0.45,0.55
+662,(Keep Feeling) Fascination - Remastered,The Human League,80's,happy,0.58,127,0.94,0.74,0.12
+663,Human - Remastered 2003,The Human League,80's,happy,0.57,107,0.72,0.68,0.32
+664,Human,The Human League,80's,sad,0.53,79,0.3,0.53,0.51
+665,Centerfold,The J. Geils Band,80's,relaxed,0.47,201,0.43,0.33,0.31
+666,Town Called Malice,The Jam,80's,sad,0.45,175,0.17,0.42,0.64
+667,Make It Real,The Jets,80's,energetic,0.93,138,0.57,0.53,0.0
+668,Only The Lonely - Remastered 1999,The Motels,80's,energetic,0.6,74,0.39,0.58,0.37
+669,Art Fails - Remastered 1999,The Motels,80's,euphoric,0.63,153,0.8,0.57,0.13
+670,Tragic Surf - Remastered 1999,The Motels,80's,euphoric,0.9,153,0.81,0.6,0.12
+671,Your Love,The Outfield,80's,happy,0.5,169,0.65,0.6,0.29
+672,He's so Shy,The Pointer Sisters,80's,euphoric,0.67,129,0.76,0.65,0.05
+673,I'm So Excited,The Pointer Sisters,80's,relaxed,0.41,104,0.63,0.81,0.04
+674,Jump (Original Mix),The Pointer Sisters,80's,euphoric,0.68,138,0.9,0.84,0.25
+675,Automatic - 12  Special Remix,The Pointer Sisters,80's,happy,0.58,127,0.69,0.62,0.02
+676,Automatic,The Pointer Sisters,80's,relaxed,0.44,126,0.61,0.78,0.34
+677,Neutron Dance,The Pointer Sisters,80's,relaxed,0.41,119,0.43,0.76,0.01
+678,Don't Stand So Close To Me,The Police,80's,relaxed,0.49,117,0.57,0.8,0.02
+679,Every Little Thing She Does Is Magic,The Police,80's,happy,0.49,115,0.73,0.73,0.26
+680,Every Breath You Take,The Police,80's,energetic,0.66,98,0.55,0.68,0.4
+681,Some Like It Hot - 2005 Remaster,The Power Station,80's,intense,0.72,130,0.19,0.43,0.14
+682,I'm Gonna Be (500 Miles),The Proclaimers,80's,relaxed,0.57,101,0.36,0.63,0.05
+683,I'm on My Way,The Proclaimers,80's,happy,0.59,125,0.82,0.72,0.13
+684,Love My Way,The Psychedelic Furs,80's,euphoric,0.62,122,0.85,0.6,0.36
+685,Start Me Up - Remastered 2009,The Rolling Stones,80's,energetic,0.66,98,0.37,0.28,0.08
+686,Talking In Your Sleep (2023 Remaster),The Romantics,80's,euphoric,0.84,108,0.68,0.72,0.27
+687,Jungle Love,The Time,80's,euphoric,0.88,137,0.98,0.74,0.34
+688,She Blinded Me With Science - 2009 Remastered Version,Thomas Dolby,80's,euphoric,0.8,116,0.95,0.85,0.05
+689,Hold Me Now,Thompson Twins,80's,energetic,0.77,120,0.37,0.81,0.08
+690,Hold Me Now (Extended Short),Thompson Twins,80's,euphoric,0.81,117,0.93,0.8,0.2
+691,I Think We're Alone Now,Tiffany,80's,euphoric,0.88,132,0.9,0.69,0.29
+692,Voices Carry,'Til Tuesday,80's,energetic,0.84,95,0.54,0.63,0.05
+693,The Best - Edit,Tina Turner,80's,euphoric,0.9,177,0.77,0.51,0.36
+694,867-5309 / Jenny,Tommy Tutone,80's,euphoric,0.77,101,0.66,0.56,0.01
+695,Hey Mickey,Toni Basil,80's,euphoric,0.8,131,0.94,0.71,0.07
+696,Africa,TOTO,80's,energetic,0.63,102,0.48,0.68,0.36
+697,I Still Haven't Found What I'm Looking For,U2,80's,energetic,0.65,89,0.63,0.62,0.06
+698,Red Red Wine,UB40,80's,euphoric,0.85,121,0.91,0.61,0.07
+699,The Way You Do The Things You Do,UB40,80's,euphoric,0.99,142,0.67,0.53,0.0
+700,I Got You Babe,"UB40, Chrissie Hynde",80's,energetic,0.87,117,0.56,0.6,0.0
+701,Chariots Of Fire,Vangelis,80's,euphoric,0.93,122,0.97,0.63,0.04
+702,Dance Hall Days,Wang Chung,80's,energetic,0.67,116,0.56,0.7,0.52
+703,Everybody Have Fun Tonight,Wang Chung,80's,sad,0.55,108,0.2,0.63,0.72
+704,Everything She Wants,Wham!,80's,chill,0.22,160,0.53,0.58,0.04
+705,Wake Me Up Before You Go-Go,Wham!,80's,euphoric,0.74,125,0.97,0.79,0.04
+706,The Promise,When In Rome,80's,relaxed,0.39,125,0.52,0.48,0.37
+707,How Will I Know,Whitney Houston,80's,intense,0.89,134,0.26,0.5,0.0
+708,I Wanna Dance with Somebody (Who Loves Me),Whitney Houston,80's,sad,0.11,128,0.17,0.35,0.89
+709,Hold On,Wilson Phillips,80's,energetic,0.92,123,0.63,0.66,0.16
+710,Generals And Majors - Edit,XTC,80's,energetic,0.85,92,0.5,0.58,0.01
+711,Don't Go,Yaz,80's,euphoric,0.89,141,0.95,0.63,0.01
+712,Situation,Yaz,80's,euphoric,0.87,131,0.88,0.78,0.14
+713,Owner of a Lonely Heart,Yes,80's,sad,0.26,80,0.27,0.74,0.36

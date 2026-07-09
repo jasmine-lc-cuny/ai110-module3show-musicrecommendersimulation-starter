@@ -6,8 +6,8 @@ from .recommender import apply_feedback, load_songs, load_listening_history, rec
 
 
 PROFILES = {
-    "High-Energy Pop": {
-        "genre": "pop",
+    "Codepath Originals": {
+        "genre": "codepath",
         "mood": "happy",
         "energy": 0.85,
         "valence": 0.85,
@@ -15,32 +15,32 @@ PROFILES = {
         "tempo_bpm": 124,
         "acousticness": 0.15,
     },
-    "Chill Lofi": {
-        "genre": "lofi",
-        "mood": "chill",
-        "energy": 0.35,
-        "valence": 0.55,
-        "danceability": 0.55,
-        "tempo_bpm": 78,
-        "acousticness": 0.85,
+    "80's Dance Floor": {
+        "genre": "80's",
+        "mood": "euphoric",
+        "energy": 0.85,
+        "valence": 0.85,
+        "danceability": 0.80,
+        "tempo_bpm": 120,
+        "acousticness": 0.10,
     },
-    "Deep Intense Rock": {
-        "genre": "rock",
+    "70's Deep Rock": {
+        "genre": "70's",
         "mood": "intense",
         "energy": 0.95,
         "valence": 0.45,
-        "danceability": 0.60,
-        "tempo_bpm": 150,
-        "acousticness": 0.08,
+        "danceability": 0.55,
+        "tempo_bpm": 145,
+        "acousticness": 0.05,
     },
-    "Conflicted Sad Workout": {
-        "genre": "pop",
-        "mood": "sad",
+    "Starved 40's Workout": {
+        "genre": "40's",
+        "mood": "intense",
         "energy": 0.90,
-        "valence": 0.25,
+        "valence": 0.30,
         "danceability": 0.80,
         "tempo_bpm": 130,
-        "acousticness": 0.25,
+        "acousticness": 0.10,
     },
 }
 
@@ -69,12 +69,24 @@ def main() -> None:
         print_recommendations(profile_name, user_prefs, songs, k=5, scoring_mode="balanced")
 
     print("\nBonus mode: mood-first")
-    print_recommendations("High-Energy Pop (Mood-First)", PROFILES["High-Energy Pop"], songs, k=5, scoring_mode="mood-first")
+    print_recommendations(
+        "Codepath Originals (Mood-First)", PROFILES["Codepath Originals"], songs, k=5, scoring_mode="mood-first"
+    )
 
     print("\nBonus mode: collaborative filtering (simulated listeners)")
+    print("Requests a tiny genre (40's, only 4 songs) with a mood ('euphoric') none of them have.")
+    starved_forties_euphoric = {
+        "genre": "40's",
+        "mood": "euphoric",
+        "energy": 0.80,
+        "valence": 0.80,
+        "danceability": 0.85,
+        "tempo_bpm": 128,
+        "acousticness": 0.05,
+    }
     print_recommendations(
-        "High-Energy Pop (Collaborative)",
-        PROFILES["High-Energy Pop"],
+        "40's Euphoric (Collaborative)",
+        starved_forties_euphoric,
         songs,
         k=5,
         scoring_mode="balanced",
@@ -84,8 +96,8 @@ def main() -> None:
 
     print("\nBonus mode: exploration slot (reserves one discovery pick)")
     print_recommendations(
-        "High-Energy Pop (Exploration)",
-        PROFILES["High-Energy Pop"],
+        "Codepath Originals (Exploration)",
+        PROFILES["Codepath Originals"],
         songs,
         k=5,
         scoring_mode="balanced",
@@ -93,17 +105,26 @@ def main() -> None:
     )
 
     print("\nBonus mode: feedback loop (skip Library Rain, save Midnight Coding)")
+    codepath_chill = {
+        "genre": "codepath",
+        "mood": "chill",
+        "energy": 0.35,
+        "valence": 0.55,
+        "danceability": 0.55,
+        "tempo_bpm": 78,
+        "acousticness": 0.85,
+    }
     print_recommendations(
-        "Chill Lofi (Before Feedback)",
-        PROFILES["Chill Lofi"],
+        "Codepath Chill (Before Feedback)",
+        codepath_chill,
         songs,
         k=3,
         scoring_mode="balanced",
     )
     feedback = {4: "skip", 2: "save"}  # 4 = Library Rain, 2 = Midnight Coding
-    adjusted_prefs = apply_feedback(PROFILES["Chill Lofi"], songs, feedback)
+    adjusted_prefs = apply_feedback(codepath_chill, songs, feedback)
     print_recommendations(
-        "Chill Lofi (After Feedback)",
+        "Codepath Chill (After Feedback)",
         adjusted_prefs,
         songs,
         k=3,
