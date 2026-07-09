@@ -1,27 +1,29 @@
 genre,title,artist,mood,energy,valence,danceability,acousticness,tempo_bpm
-pop,Blinding Lights,The Weeknd,energetic,80,33,51,0,171
-pop,Uptown Funk,Mark Ronson ft. Bruno Mars,happy,87,93,86,0,115
-rock,Hotel California,Eagles,chill,51,25,58,1,75
-rock,Sweet Child O' Mine,Guns N' Roses,intense,78,60,46,2,125
-lofi,Aruarian Dance,Nujabes,chill,25,50,50,70,88
-lofi,Snowman,WYS,chill,30,45,55,60,80
-ambient,Weightless,Marconi Union,calm,10,30,20,70,60
-ambient,An Ending (Ascent),Brian Eno,calm,8,35,15,60,65
-jazz,Take Five,Dave Brubeck Quartet,relaxed,45,55,60,85,176
-jazz,So What,Miles Davis,relaxed,35,45,45,80,136
-synthwave,Midnight City,M83,moody,75,55,65,5,105
-synthwave,Nightcall,Kavinsky,moody,60,35,60,5,130
-folk,The Sound of Silence,Simon & Garfunkel,sad,25,20,35,75,106
-folk,Blowin' in the Wind,Bob Dylan,relaxed,30,50,40,80,105
-edm,Levels,Avicii,euphoric,90,75,70,2,126
-edm,Titanium,David Guetta ft. Sia,euphoric,82,55,60,3,126
-r&b,Adorn,Miguel,sad,45,40,55,20,100
-r&b,Location,Khalid,chill,55,45,70,10,96
-metal,Master of Puppets,Metallica,intense,97,30,40,0,220
-metal,Enter Sandman,Metallica,intense,90,35,45,0,123
-soul,Ain't No Sunshine,Bill Withers,sad,35,25,50,40,106
-soul,Respect,Aretha Franklin,happy,75,85,75,15,115
-hip hop,Lose Yourself,Eminem,intense,85,45,65,5,86
-hip hop,HUMBLE.,Kendrick Lamar,intense,62,42,82,10,150
-indie pop,Electric Feel,MGMT,chill,65,60,68,10,111
-indie pop,Dog Days Are Over,Florence + The Machine,happy,78,70,55,20,149
+40's,Introduction,Hank Williams,happy,17,77,71,97,61
+40's,I Saw The Light,"Hank Williams, Drifting Cowboys",chill,27,48,35,95,205
+40's,Lovesick Blues - Show 9,Hank Williams,happy,35,68,69,96,134
+40's,Move It On Over,Hank Williams,happy,42,90,74,93,83
+50's,A Kiss To Build A Dream On - Single Version,Louis Armstrong,chill,8,36,72,78,88
+50's,My Special Angel,Bobby Helms,chill,29,38,48,82,79
+50's,Smoke Gets In Your Eyes,The Platters,sad,30,28,20,92,171
+50's,All I Have to Do Is Dream,The Everly Brothers,relaxed,46,53,53,84,96
+50's,Lonely Teardrops,Jackie Wilson,happy,48,84,52,41,137
+50's,(We're Gonna) Rock Around The Clock,Bill Haley & His Comets,euphoric,86,78,81,21,91
+60's,Bookends Theme - Reprise,Simon & Garfunkel,chill,10,50,47,91,138
+60's,Come Together - Remastered 2009,The Beatles,sad,38,19,53,3,165
+60's,Jimmy Mack,Martha Reeves & The Vandellas,happy,52,69,70,77,127
+60's,(Love Is Like A) Heat Wave,Martha Reeves & The Vandellas,euphoric,62,76,51,51,167
+60's,"Sugar, Sugar",The Archies,euphoric,72,97,74,79,123
+60's,Your Love Is Lifting Me (Higher and Higher),Jackie Wilson,euphoric,94,84,64,5,95
+70's,Woodstock,Joni Mitchell,sad,9,21,33,99,107
+70's,Car Wash - Long Version,Rose Royce,happy,44,80,65,20,118
+70's,"Another Brick in the Wall, Pt. 2",Pink Floyd,happy,58,98,70,38,112
+70's,The Chain - 2004 Remaster,Fleetwood Mac,energetic,67,48,55,1,152
+70's,Love Will Keep Us Together,Captain & Tennille,euphoric,79,93,62,35,130
+70's,Don't Stop 'Til You Get Enough - 2003 Edit,Michael Jackson,euphoric,95,94,87,5,119
+80's,I Wanna Dance with Somebody (Who Loves Me),Whitney Houston,sad,11,17,35,89,128
+80's,Girls Just Want to Have Fun,Cyndi Lauper,relaxed,55,59,55,5,209
+80's,I Still Haven't Found What I'm Looking For,U2,energetic,65,63,62,6,89
+80's,867-5309 / Jenny,Tommy Tutone,euphoric,77,66,56,1,101
+80's,Should I Stay or Should I Go - Remastered,The Clash,euphoric,86,95,61,4,131
+80's,The Way You Do The Things You Do,UB40,euphoric,99,67,53,0,142

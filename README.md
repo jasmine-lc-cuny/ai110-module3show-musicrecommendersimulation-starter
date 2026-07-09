@@ -195,7 +195,7 @@ representing 40 fake users and which songs each one "liked."
 share the current profile's favorite genre or mood, then boosts songs that
 those "similar" users liked — even if a song's own genre doesn't match. Enable
 it with `use_collaborative=True` (CLI: see the "Bonus mode: collaborative
-filtering" block below; Streamlit: check "Use collaborative filtering").
+filtering" block below; Streamlit: open the "Collaborative Filtering" tab).
 
 **Important caveat after the real-song import:** `data/listening_history.csv`
 was generated before the 695 real songs were added, so it only contains
@@ -244,7 +244,7 @@ directly from the reasons list instead of doing the subtraction yourself.
 ## Extra Enhancement: "Surprise Me" Exploration Mode
 
 Enable with `exploration=True` (CLI: "Bonus mode: exploration slot" below;
-Streamlit: check "Reserve a 'surprise me' discovery slot"). It reserves the
+Streamlit: open the "Surprise Me" tab). It reserves the
 last recommendation slot for the highest-scoring song that is still outside
 the user's favorite genre, as a small counter to the filter-bubble problem —
 instead of filling every slot with the closest possible match, one slot is
